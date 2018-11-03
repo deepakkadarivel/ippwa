@@ -1,0 +1,28 @@
+@import "../../shared/styles/colors";
+
+.Login {
+  background-color: $blue;
+  height: 100vh;
+  padding: 10% 0;
+
+  &-container {
+    padding: 20px;
+    display: inline-block;
+
+    &__input {
+      width: 100%;
+    }
+
+    &__button {
+      width: 100%;
+      margin-top: 15px !important;
+      background-color: $blue !important;
+    }
+  }
+
+  &-footer {
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+  }
+}
