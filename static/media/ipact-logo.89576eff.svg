@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="188px" height="70px" viewBox="0 0 188 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>ipact-logo</title>
+    <desc>Created with Sketch.</desc>
+    <g id="ipact-logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="#0891D0" transform="translate(35.355339, 36.355339) rotate(-45.000000) translate(-35.355339, -36.355339) " x="10.3553391" y="11.3553391" width="50" height="50" rx="8"></rect>
+        <g id="Group" transform="translate(25.000000, 21.000000)">
+            <rect id="Rectangle" fill="#E23527" x="0" y="0" width="10" height="10"></rect>
+            <path d="M11,0 L19,0 C21.209139,-4.05812251e-16 23,1.790861 23,4 L23,10 L11,10 L11,0 Z" id="Rectangle-Copy-3" fill="#FFFFFF"></path>
+            <path d="M11,11 L23,11 L23,17 C23,19.209139 21.209139,21 19,21 L11,21 L11,11 Z" id="Rectangle-Copy-4" fill="#FFFFFF"></path>
+            <rect id="Rectangle-Copy" fill="#FFFFFF" x="0" y="11" width="10" height="10"></rect>
+            <rect id="Rectangle-Copy-2" fill="#FFFFFF" x="0" y="22" width="10" height="10"></rect>
+        </g>
+        <text id="iPact" font-family="Arial-BoldMT, Arial" font-size="46" font-weight="bold" letter-spacing="0.143750012" fill="#000000">
+            <tspan x="71" y="51">iPact</tspan>
+        </text>
+    </g>
+</svg>
