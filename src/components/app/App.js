@@ -3,6 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import {Switch, Route} from 'react-router-dom';
 import './App.scss';
 import LoginComponent from '../login/LoginComponent';
+import { withRouter } from 'react-router-dom';
 
 class App extends Component {
   render() {
@@ -21,4 +22,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
