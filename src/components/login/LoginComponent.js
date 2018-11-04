@@ -7,6 +7,9 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Fade from '@material-ui/core/Fade';
+import PropTypes from 'prop-types';
 import logo from '../../shared/images/ipact-logo.svg';
 import './login.scss';
 
@@ -17,6 +20,7 @@ class LoginComponent extends Component {
       userName: '',
       password: '',
       showPassword: false,
+      loading: false,
     }
   }
 
@@ -31,7 +35,7 @@ class LoginComponent extends Component {
           direction='column'
           justify='center'
         >
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={logo} className="App-logo" alt="logo"/>
           <TextField
             className='Login-container__input'
             id="outlined-adornment-username"
@@ -48,7 +52,9 @@ class LoginComponent extends Component {
             label="Password"
             margin="normal"
             value={this.state.password}
-            onChange={e => {this.setState({password: e.target.value})}}
+            onChange={e => {
+              this.setState({password: e.target.value})
+            }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -56,24 +62,42 @@ class LoginComponent extends Component {
                     aria-label="Toggle password visibility"
                     onClick={() => this.setState({showPassword: !this.state.showPassword})}
                   >
-                    {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                    {this.state.showPassword ? <VisibilityOff/> : <Visibility/>}
                   </IconButton>
                 </InputAdornment>
               ),
             }}
           />
-          <Button
+          {!this.state.loading && <Button
             className='Login-container__button'
             variant="contained"
             size="large"
-            color="primary">
+            color="primary"
+            disabled={this.state.username === '' || this.state.password === ''}
+            // onClick={() => this.props.login(this.state.userName, this.state.password)}>
+            onClick={() => this.setState({loading: !this.state.loading})}>
             Login
-          </Button>
+          </Button>}
+
+          <Fade
+            in={this.state.loading}
+            className='Login-container__spinner'
+            style={{
+              transitionDelay: this.state.loading ? '200ms' : '0ms',
+            }}
+            unmountOnExit
+          >
+            <CircularProgress/>
+          </Fade>
         </Grid>
       </Paper>
       <p className='Login-footer'>© iPact 2018. All rights reserved.</p>
     </div>;
   }
 }
+
+LoginComponent.propTypes = {
+  login: PropTypes.func.isRequired,
+};
 
 export default LoginComponent;

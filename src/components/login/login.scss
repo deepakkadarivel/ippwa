@@ -2,11 +2,12 @@
 
 .Login {
   background-color: $blue;
-  height: 100%;
-  padding: 10% 0;
+  height: 100vh;
   text-align: center;
+  overflow: auto;
 
   &-container {
+    margin: 10% 0;
     padding: 20px;
     display: inline-block;
 
@@ -17,14 +18,15 @@
     &__button {
       width: 100%;
       margin-top: 15px !important;
-      background-color: $blue !important;
+    }
+
+    &__spinner {
+      margin-top: 15px !important;
     }
   }
 
   &-footer {
-    position: fixed;
-    bottom: 10px;
+    position: relative;
     width: 100%;
-    z-index: -1;
   }
 }
