@@ -2,8 +2,9 @@
 
 .Login {
   background-color: $blue;
-  height: 100vh;
+  height: 100%;
   padding: 10% 0;
+  text-align: center;
 
   &-container {
     padding: 20px;
@@ -21,8 +22,9 @@
   }
 
   &-footer {
-    position: absolute;
-    width: 100%;
+    position: fixed;
     bottom: 10px;
+    width: 100%;
+    z-index: -1;
   }
 }
