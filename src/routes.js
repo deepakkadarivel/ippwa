@@ -14,9 +14,9 @@ export default function Routes() {
   return (
     <BrowserRouter history={history}>
       <Switch>
+        <Route component={() => <div>404 Not found 1</div>}/>
         <Route exact path="/" component={App}/>
         <Route path="/login" component={LoginComponent}/>
-        <Route component={() => <div>404 Not found 1</div>}/>
       </Switch>
     </BrowserRouter>
   );
