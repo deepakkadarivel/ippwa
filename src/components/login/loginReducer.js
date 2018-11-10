@@ -14,13 +14,16 @@ const loginReducer = (state = loginInitialState, action) => {
       return state.setIn(
         ['promise', 'login'],
         setPromiseState(true, false, false)
-      );
+      ).set('errorMessage', loginInitialState.errorMessage);
 
     case loginActionTypes.LOGIN.rejected:
       return state.setIn(
         ['promise', 'login'],
         setPromiseState(false, false, true)
       );
+
+    case loginActionTypes.SET_ERROR_MESSAGE:
+      return state.set('errorMessage', action.message);
 
     default:
       return state;

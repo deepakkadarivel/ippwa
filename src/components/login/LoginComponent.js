@@ -7,7 +7,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Paper from '@material-ui/core/Paper';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import Fade from '@material-ui/core/Fade';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -29,7 +28,7 @@ class LoginComponent extends Component {
   }
 
   render() {
-    const {classes, promise, login} = this.props;
+    const {classes, promise, login, errorMessage} = this.props;
     return <main className={classes.main}>
       <CssBaseline/>
       <Paper className={classes.paper}>
@@ -38,6 +37,9 @@ class LoginComponent extends Component {
           image={logo}
           title="logo"
         />
+        <Typography color='error' className={classes.message}>
+          {errorMessage || ''}
+        </Typography>
         <div className={classes.form}>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="userName">User name</InputLabel>
@@ -75,31 +77,22 @@ class LoginComponent extends Component {
               }
             />
           </FormControl>
-          {!promise.isPending && <Button
+          <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             size="large"
-            disabled={this.state.username === '' || this.state.password === ''}
+            disabled={this.state.username === '' || this.state.password === '' || promise.isPending}
             className={classes.submit}
             onClick={() => login(this.state.userName, this.state.password)}
           >
             Login
-          </Button>}
-          <Fade
-            in={promise.isPending}
-            className={classes.spinner}
-            style={{
-              transitionDelay: promise.isPending ? '200ms' : '0ms',
-            }}
-            unmountOnExit
-          >
-            <CircularProgress/>
-          </Fade>
+          </Button>
+          {promise.isPending && <CircularProgress size={24} className={classes.buttonProgress} />}
         </div>
       </Paper>
-      <Typography component="p" className={classes.footer}>
+      <Typography variant='caption' className={classes.footer}>
         © iPact 2018. All rights reserved.
       </Typography>
     </main>;
@@ -110,6 +103,7 @@ LoginComponent.propTypes = {
   login: PropTypes.func.isRequired,
   promise: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
+  errorMessage: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(LoginComponent);

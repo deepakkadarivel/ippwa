@@ -16,6 +16,10 @@ const styles = theme => ({
     width: '100%',
     backgroundSize: 'auto',
   },
+  message: {
+    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit,
+  },
   paper: {
     marginTop: theme.spacing.unit * 6,
     display: 'flex',
@@ -23,19 +27,14 @@ const styles = theme => ({
     alignItems: 'center',
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
   },
-  avatar: {
-    margin: theme.spacing.unit,
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing.unit,
-  },
   submit: {
     marginTop: theme.spacing.unit * 4,
   },
-  spinner: {
-    marginTop: theme.spacing.unit * 4,
+  buttonProgress: {
+    position: 'absolute',
+    left: '50%',
+    marginTop: 40,
+    marginLeft: -12,
   },
   footer: {
     margin: theme.spacing.unit * 3,

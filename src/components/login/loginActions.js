@@ -1,7 +1,8 @@
 import 'whatwg-fetch'
 import axios from 'axios';
-import loginActionTypes from "./loginActionTypes";
-import apiService from "../../shared/service/apiService";
+import loginActionTypes from './loginActionTypes';
+import apiService from '../../shared/service/apiService';
+import constants from '../../shared/constants';
 
 const loginPending = () => {
   return {
@@ -18,6 +19,13 @@ const loginFulfilled = () => {
 const loginRejected = () => {
   return {
     type: loginActionTypes.LOGIN.rejected
+  };
+};
+
+const setErrorMessage = message => {
+  return {
+    type: loginActionTypes.SET_ERROR_MESSAGE,
+    message,
   };
 };
 
@@ -42,8 +50,9 @@ const login = (userName, password) => {
         dispatch(loginFulfilled());
         console.log(response);
       })
-      .catch(() => {
+      .catch((error) => {
         dispatch(loginRejected());
+        dispatch(setErrorMessage(error.response ? error.response.data.message : constants.SERVER_UNAVAILABLE));
       });
   };
 };

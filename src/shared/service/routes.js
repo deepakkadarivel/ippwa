@@ -13,6 +13,7 @@ const store = configureStore();
 const theme = createMuiTheme({
   palette: {
     primary: { 500: '#0891D0' },
+    error: { 500: '#ff1744' },
   },
 });
 

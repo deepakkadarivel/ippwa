@@ -7,6 +7,7 @@ import {
 const mapStateToProps = state => {
   return {
     promise: state.login.promise.login,
+    errorMessage: state.login.errorMessage,
   };
 };
 
