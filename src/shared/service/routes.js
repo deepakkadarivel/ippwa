@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Router, Route, Switch} from 'react-router-dom';
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import {Provider} from 'react-redux';
 import {withTheme} from '@material-ui/core/styles';
@@ -7,6 +7,8 @@ import {withTheme} from '@material-ui/core/styles';
 import LoginContainer from '../../components/login/LoginContainer';
 import App from '../../components/app/App';
 import configureStore from '../store';
+import Home from '../../components/home';
+import history from './history';
 
 const store = configureStore();
 
@@ -19,16 +21,17 @@ const theme = createMuiTheme({
 
 const Routes = () => {
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <Provider store={store}>
         <MuiThemeProvider theme={theme}>
           <Switch basename={window.location.pathname || ''}>
             <Route path="/login" component={LoginContainer}/>
+            <Route path="/home" component={Home}/>
             <Route component={App}/>
           </Switch>
         </MuiThemeProvider>
       </Provider>
-    </BrowserRouter>
+    </Router>
   );
 };
 

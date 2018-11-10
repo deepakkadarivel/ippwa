@@ -25,6 +25,13 @@ const loginReducer = (state = loginInitialState, action) => {
     case loginActionTypes.SET_ERROR_MESSAGE:
       return state.set('errorMessage', action.message);
 
+    case loginActionTypes.SET_AUTH:
+      localStorage.setItem("cookie", action.auth.cookie || '');
+      localStorage.setItem("loadBalancer", action.auth.loadBalancer || '');
+      localStorage.setItem("UserId", action.auth.user.userId.toString());
+      localStorage.setItem("orgId", action.auth.user.orgUserMapping ? action.auth.user.orgUserMapping[0].orgId.toString() || '' : '');
+      return state.set('auth', action.auth);
+
     default:
       return state;
   }

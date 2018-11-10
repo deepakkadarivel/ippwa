@@ -6,6 +6,7 @@ const loginInitialState = seamlessImmutable({
     login: setPromiseState()
   },
   errorMessage: '',
+  auth: {},
 });
 
 export default loginInitialState;

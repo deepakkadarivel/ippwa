@@ -2,6 +2,7 @@ import 'whatwg-fetch'
 import axios from 'axios';
 import loginActionTypes from './loginActionTypes';
 import apiService from '../../shared/service/apiService';
+import history from '../../shared/service/history';
 import constants from '../../shared/constants';
 
 const loginPending = () => {
@@ -29,6 +30,13 @@ const setErrorMessage = message => {
   };
 };
 
+const setAuth = auth => {
+  return {
+    type: loginActionTypes.SET_AUTH,
+    auth,
+  };
+};
+
 const login = (userName, password) => {
   return (dispatch, getState) => {
     const loginUrl = apiService.endpoints.app.generateGLoginUrl();
@@ -41,16 +49,17 @@ const login = (userName, password) => {
 
     return axios
       .post(loginUrl, payload, {
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json'
         }
       })
       .then(response => {
         dispatch(loginFulfilled());
-        console.log(response);
+        dispatch(setAuth(response.data));
+        history.push('/home');
       })
       .catch((error) => {
+        console.log(error);
         dispatch(loginRejected());
         dispatch(setErrorMessage(error.response ? error.response.data.message : constants.SERVER_UNAVAILABLE));
       });
