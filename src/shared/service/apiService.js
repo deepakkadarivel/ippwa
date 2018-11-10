@@ -9,7 +9,7 @@ const apiService = {
   timeout: 1000,
   endpoints: {
     app: {
-      login: '/api/auth',
+      login: '/login',
       generateGLoginUrl() {
         return `${baseUrl}${this.login}`;
       }

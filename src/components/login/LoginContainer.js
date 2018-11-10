@@ -6,7 +6,7 @@ import {
 
 const mapStateToProps = state => {
   return {
-    promise: state.login.promise,
+    promise: state.login.promise.login,
   };
 };
 

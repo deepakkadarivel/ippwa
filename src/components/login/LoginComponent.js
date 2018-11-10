@@ -1,17 +1,22 @@
 import React, {Component} from 'react';
-import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
 import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+import Fade from '@material-ui/core/Fade';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import IconButton from '@material-ui/core/IconButton';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Fade from '@material-ui/core/Fade';
-import PropTypes from 'prop-types';
+import withStyles from '@material-ui/core/styles/withStyles';
+import InputAdornment from '@material-ui/core/InputAdornment/InputAdornment';
+import IconButton from '@material-ui/core/IconButton/IconButton';
 import logo from '../../shared/images/ipact-logo.svg';
-import './login.scss';
+import PropTypes from 'prop-types';
+import styles from './styles';
 
 class LoginComponent extends Component {
   constructor(props) {
@@ -20,43 +25,45 @@ class LoginComponent extends Component {
       userName: '',
       password: '',
       showPassword: false,
-      loading: false,
     }
   }
 
   render() {
-    return <div className='Login'>
-      <Paper
-        className='Login-container'
-      >
-        <Grid
-          container
-          alignItems='center'
-          direction='column'
-          justify='center'
-        >
-          <img src={logo} className="App-logo" alt="logo"/>
-          <TextField
-            className='Login-container__input'
-            id="outlined-adornment-username"
-            variant="outlined"
-            label="User Name"
-            margin="normal"
-            value={this.state.userName}
-            onChange={e => this.setState({userName: e.target.value})}
-          />
-          <TextField
-            id="outlined-adornment-password"
-            variant="outlined"
-            type={this.state.showPassword ? 'text' : 'password'}
-            label="Password"
-            margin="normal"
-            value={this.state.password}
-            onChange={e => {
-              this.setState({password: e.target.value})
-            }}
-            InputProps={{
-              endAdornment: (
+    const {classes, promise, login} = this.props;
+    return <main className={classes.main}>
+      <CssBaseline/>
+      <Paper className={classes.paper}>
+        <CardMedia
+          className={classes.logo}
+          image={logo}
+          title="logo"
+        />
+        <div className={classes.form}>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="userName">User name</InputLabel>
+            <Input
+              id="userName"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              value={this.state.userName}
+              onChange={e => {
+                this.setState({userName: e.target.value})
+              }}
+            />
+          </FormControl>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="password">Password</InputLabel>
+            <Input
+              name="password"
+              type={this.state.showPassword ? 'text' : 'password'}
+              id="password"
+              autoComplete="current-password"
+              value={this.state.password}
+              onChange={e => {
+                this.setState({password: e.target.value})
+              }}
+              endAdornment={
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="Toggle password visibility"
@@ -65,39 +72,44 @@ class LoginComponent extends Component {
                     {this.state.showPassword ? <VisibilityOff/> : <Visibility/>}
                   </IconButton>
                 </InputAdornment>
-              ),
-            }}
-          />
-          {!this.state.loading && <Button
-            className='Login-container__button'
+              }
+            />
+          </FormControl>
+          {!promise.isPending && <Button
+            type="submit"
+            fullWidth
             variant="contained"
-            size="large"
             color="primary"
+            size="large"
             disabled={this.state.username === '' || this.state.password === ''}
-            // onClick={() => this.props.login(this.state.userName, this.state.password)}>
-            onClick={() => this.setState({loading: !this.state.loading})}>
+            className={classes.submit}
+            onClick={() => login(this.state.userName, this.state.password)}
+          >
             Login
           </Button>}
-
           <Fade
-            in={this.state.loading}
-            className='Login-container__spinner'
+            in={promise.isPending}
+            className={classes.spinner}
             style={{
-              transitionDelay: this.state.loading ? '200ms' : '0ms',
+              transitionDelay: promise.isPending ? '200ms' : '0ms',
             }}
             unmountOnExit
           >
             <CircularProgress/>
           </Fade>
-        </Grid>
+        </div>
       </Paper>
-      <p className='Login-footer'>© iPact 2018. All rights reserved.</p>
-    </div>;
+      <Typography component="p" className={classes.footer}>
+        © iPact 2018. All rights reserved.
+      </Typography>
+    </main>;
   }
 }
 
 LoginComponent.propTypes = {
   login: PropTypes.func.isRequired,
+  promise: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 };
 
-export default LoginComponent;
+export default withStyles(styles)(LoginComponent);

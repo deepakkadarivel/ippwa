@@ -1,3 +1,4 @@
+import 'whatwg-fetch'
 import axios from 'axios';
 import loginActionTypes from "./loginActionTypes";
 import apiService from "../../shared/service/apiService";
@@ -32,6 +33,7 @@ const login = (userName, password) => {
 
     return axios
       .post(loginUrl, payload, {
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json'
         }
