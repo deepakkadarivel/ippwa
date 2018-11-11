@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom'
 import {withStyles} from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
@@ -11,7 +12,7 @@ import ListAlt from '@material-ui/icons/ListAlt';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import CardHeader from '@material-ui/core/CardHeader';
+import AttachMoney from '@material-ui/icons/AttachMoney';
 import styles from './styles';
 import constants from '../../shared/constants';
 import menuConstants from './constants';
@@ -24,27 +25,49 @@ const Drawer = props => {
   const sideList = (
     <div className={classes.list}>
       <List>
-        <div className={classes.header}>
-          <div className={classes.headerLogo}/>
-          <CardHeader className={classes.headerDetail}
-            avatar={<AccountCircle color="primary" fontSize="large" />}
-            title={` ${getValue(constants.LOCAL_STORAGE.FIRST_NAME)} ${getValue(constants.LOCAL_STORAGE.LAST_NAME)}`}
-            subheader={getValue(constants.LOCAL_STORAGE.ORG_NAME)}
-          />
-        </div>
-        <Divider/>
-        <ListItem button>
-          <ListItemIcon>{<ListAlt/>}</ListItemIcon>
-          <ListItemText primary={menuConstants.MY_TASKS}/>
+        {/*<ListItem button={false}>*/}
+        {/*<div className={classes.header}>*/}
+        {/*<div className={classes.headerLogo}/>*/}
+        {/*<CardHeader className={classes.headerDetail}*/}
+        {/*avatar={<AccountCircle color="primary" fontSize="large"/>}*/}
+        {/*title={` ${getValue(constants.LOCAL_STORAGE.FIRST_NAME)} ${getValue(constants.LOCAL_STORAGE.LAST_NAME)}`}*/}
+        {/*subheader={getValue(constants.LOCAL_STORAGE.ORG_NAME)}*/}
+        {/*/>*/}
+        {/*</div>*/}
+        {/*</ListItem>*/}
+
+        {/*<Divider/>*/}
+
+        <ListItem button={false} key={'User'}>
+          <ListItemIcon>{<AccountCircle color="primary" fontSize="large"/>}</ListItemIcon>
+          <ListItemText
+            primary={`${getValue(constants.LOCAL_STORAGE.FIRST_NAME)} ${getValue(constants.LOCAL_STORAGE.LAST_NAME)}`}/>
         </ListItem>
-        <ListItem button>
+        <Divider/>
+
+        <Link to='/home/tasks' className={classes.link}>
+          <ListItem button key={menuConstants.MY_TASKS}>
+            <ListItemIcon>{<ListAlt/>}</ListItemIcon>
+            <ListItemText primary={menuConstants.MY_TASKS}/>
+          </ListItem>
+        </Link>
+        <Link to='/home/expense' className={classes.link}>
+        <ListItem button key={menuConstants.EXPENSE}>
+          <ListItemIcon>{<AttachMoney/>}</ListItemIcon>
+          <ListItemText primary={menuConstants.EXPENSE}/>
+        </ListItem>
+        </Link>
+        <Link to='/home/reports' className={classes.link}>
+        <ListItem button key={menuConstants.REPORTS}>
           <ListItemIcon>{<BarChartIcon/>}</ListItemIcon>
           <ListItemText primary={menuConstants.REPORTS}/>
         </ListItem>
+        </Link>
       </List>
       <Divider/>
+
       <List>
-        <ListItem button>
+        <ListItem button key={menuConstants.LOG_OUT}>
           <ListItemIcon>{<ExitToApp/>}</ListItemIcon>
           <ListItemText primary={menuConstants.LOG_OUT}/>
         </ListItem>

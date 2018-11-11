@@ -2,7 +2,7 @@ import logo from "../../shared/images/ipact-logo.svg";
 
 const styles = theme => ({
   header: {
-    height: 150,
+    // height: 150,
   },
   headerLogo: {
     width: '100%',
@@ -18,6 +18,9 @@ const styles = theme => ({
   },
   list: {
     width: 250,
+  },
+  link: {
+    textDecoration: 'none',
   },
   fullList: {
     width: 'auto',
