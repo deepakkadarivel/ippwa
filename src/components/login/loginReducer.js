@@ -1,6 +1,8 @@
 import loginActionTypes from './loginActionTypes';
 import loginInitialState from './loginInitialState';
 import setPromiseState from '../../shared/service/promiseState';
+import constants from '../../shared/constants';
+import {setValue} from '../../shared/service/localStorage';
 
 const loginReducer = (state = loginInitialState, action) => {
   switch (action.type) {
@@ -26,10 +28,13 @@ const loginReducer = (state = loginInitialState, action) => {
       return state.set('errorMessage', action.message);
 
     case loginActionTypes.SET_AUTH:
-      localStorage.setItem("cookie", action.auth.cookie || '');
-      localStorage.setItem("loadBalancer", action.auth.loadBalancer || '');
-      localStorage.setItem("UserId", action.auth.user.userId.toString());
-      localStorage.setItem("orgId", action.auth.user.orgUserMapping ? action.auth.user.orgUserMapping[0].orgId.toString() || '' : '');
+      setValue(constants.LOCAL_STORAGE.COOKIE, action.auth.cookie || '');
+      setValue(constants.LOCAL_STORAGE.LOADBALANCER, action.auth.loadBalancer || '');
+      setValue(constants.LOCAL_STORAGE.USER_ID, action.auth.user.userId.toString());
+      setValue(constants.LOCAL_STORAGE.FIRST_NAME, action.auth.user.firstName);
+      setValue(constants.LOCAL_STORAGE.LAST_NAME, action.auth.user.lastName);
+      setValue(constants.LOCAL_STORAGE.ORG_NAME, action.auth.user.orgUserMapping ? action.auth.user.orgUserMapping[0].name || '' : '');
+      setValue(constants.LOCAL_STORAGE.ORG_ID, action.auth.user.orgUserMapping ? action.auth.user.orgUserMapping[0].orgId.toString() || '' : '');
       return state.set('auth', action.auth);
 
     default:
