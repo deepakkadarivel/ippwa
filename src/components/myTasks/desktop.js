@@ -16,6 +16,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import {lighten} from '@material-ui/core/styles/colorManipulator';
 import constants from './constants';
+import {getString} from '../../shared/service/helpers';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -261,27 +262,27 @@ class DesktopTable extends React.Component {
                       key={index}
                       className={classes.row}
                     >
-                      <TableCell>{task.workflowTypeName}</TableCell>
-                      <TableCell>{task.supplierName}</TableCell>
-                      <TableCell>{task.stageName}</TableCell>
-                      <TableCell>{task.contractNo}</TableCell>
-                      <TableCell>{task.contractOwner}</TableCell>
-                      <TableCell>{task.requestedBy}</TableCell>
-                      <TableCell>{task.poRequestNo}</TableCell>
-                      <TableCell>{task.poNo}</TableCell>
-                      <TableCell>{task.pickUpRequestNo}</TableCell>
-                      <TableCell>{task.invoiceNo}</TableCell>
-                      <TableCell>{task.assetRequestNo}</TableCell>
-                      <TableCell>{task.customerPONo}</TableCell>
-                      <TableCell>{task.customerInvoiceNo}</TableCell>
-                      <TableCell>{task.quoteRequestNo}</TableCell>
-                      <TableCell>{task.quoteRequestNo}</TableCell>
-                      <TableCell>{task.indentRequestNo}</TableCell>
-                      <TableCell>{task.travelRequestNo}</TableCell>
-                      <TableCell>{task.claimRequestNo}</TableCell>
-                      <TableCell>{task.createdDate}</TableCell>
-                      <TableCell>{task.dueDateString}</TableCell>
-                      <TableCell>{task.status}</TableCell>
+                      <TableCell>{getString(task.workflowTypeName)}</TableCell>
+                      <TableCell>{getString(task.supplierName)}</TableCell>
+                      <TableCell>{getString(task.stageName)}</TableCell>
+                      <TableCell>{getString(task.contractNo)}</TableCell>
+                      <TableCell>{getString(task.contractOwner)}</TableCell>
+                      <TableCell>{getString(task.requestedBy)}</TableCell>
+                      <TableCell>{getString(task.poRequestNo)}</TableCell>
+                      <TableCell>{getString(task.poNo)}</TableCell>
+                      <TableCell>{getString(task.pickUpRequestNo)}</TableCell>
+                      <TableCell>{getString(task.invoiceNo)}</TableCell>
+                      <TableCell>{getString(task.assetRequestNo)}</TableCell>
+                      <TableCell>{getString(task.customerPONo)}</TableCell>
+                      <TableCell>{getString(task.customerInvoiceNo)}</TableCell>
+                      <TableCell>{getString(task.quoteRequestNo)}</TableCell>
+                      <TableCell>{getString(task.quoteRequestNo)}</TableCell>
+                      <TableCell>{getString(task.indentRequestNo)}</TableCell>
+                      <TableCell>{getString(task.travelRequestNo)}</TableCell>
+                      <TableCell>{getString(task.claimRequestNo)}</TableCell>
+                      <TableCell>{getString(task.createdDate)}</TableCell>
+                      <TableCell>{getString(task.dueDateString)}</TableCell>
+                      <TableCell>{task.status === 0 ? 'Active' : getString(task.status.toString())}</TableCell>
                     </TableRow>
                   );
                 })}

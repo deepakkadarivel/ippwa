@@ -21,5 +21,9 @@ export default {
     createdDate: 'Created Date',
     dueDateString: 'Due Date',
     status: 'Status',
+  },
+  actions: {
+    APPROVE: 'APPROVE',
+    REJECT: 'REJECT',
   }
 };
