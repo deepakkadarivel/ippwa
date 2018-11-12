@@ -25,18 +25,6 @@ const Drawer = props => {
   const sideList = (
     <div className={classes.list}>
       <List>
-        {/*<ListItem button={false}>*/}
-        {/*<div className={classes.header}>*/}
-        {/*<div className={classes.headerLogo}/>*/}
-        {/*<CardHeader className={classes.headerDetail}*/}
-        {/*avatar={<AccountCircle color="primary" fontSize="large"/>}*/}
-        {/*title={` ${getValue(constants.LOCAL_STORAGE.FIRST_NAME)} ${getValue(constants.LOCAL_STORAGE.LAST_NAME)}`}*/}
-        {/*subheader={getValue(constants.LOCAL_STORAGE.ORG_NAME)}*/}
-        {/*/>*/}
-        {/*</div>*/}
-        {/*</ListItem>*/}
-
-        {/*<Divider/>*/}
 
         <ListItem button={false} key={'User'}>
           <ListItemIcon>{<AccountCircle color="primary" fontSize="large"/>}</ListItemIcon>

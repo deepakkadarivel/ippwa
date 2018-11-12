@@ -1,3 +1,4 @@
+import logo from '../../shared/images/ipact-logo-light.svg';
 const styles = theme => ({
   root: {
     width: '100%',
@@ -8,6 +9,13 @@ const styles = theme => ({
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
+  },
+  logo: {
+    backgroundImage: `url(${logo})`,
+    height: 40,
+    width: 110,
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
   },
   title: {
     display: 'none',

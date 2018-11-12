@@ -39,7 +39,7 @@ const setAuth = auth => {
 
 const login = (userName, password) => {
   return (dispatch, getState) => {
-    const loginUrl = apiService.endpoints.app.generateGLoginUrl();
+    const loginUrl = apiService.endpoints.app.generateLoginUrl();
     dispatch(loginPending());
 
     let payload = {
@@ -59,7 +59,6 @@ const login = (userName, password) => {
         history.push('/home');
       })
       .catch((error) => {
-        console.log(error);
         dispatch(loginRejected());
         dispatch(setErrorMessage(error.response ? error.response.data.message : constants.SERVER_UNAVAILABLE));
       });

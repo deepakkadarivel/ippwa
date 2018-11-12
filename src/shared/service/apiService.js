@@ -10,8 +10,12 @@ const apiService = {
   endpoints: {
     app: {
       login: '/login',
-      generateGLoginUrl() {
+      generateLoginUrl() {
         return `${baseUrl}${this.login}`;
+      },
+      tasks: '/tasks',
+      generateTasksUrl() {
+        return `${baseUrl}${this.tasks}`;
       }
     }
   }

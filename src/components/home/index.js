@@ -2,7 +2,7 @@ import React from 'react';
 import {Route} from 'react-router-dom';
 import NavBar from '../navBar';
 import Drawer from '../SwipeableDrawer';
-import MyTasks from '../myTasks';
+import MyTasksContainer from '../myTasks/MyTasksContainer';
 import Reports from '../reports';
 import Expense from '../expense';
 import history from '../../shared/service/history';
@@ -35,7 +35,7 @@ class Home extends React.Component {
       <NavBar isDrawerOpen={this.state.isDrawerOpen} toggleDrawer={toggleDrawer}/>
       <Drawer isDrawerOpen={this.state.isDrawerOpen} toggleDrawer={toggleDrawer}/>
       <div>
-        <Route path={`${this.props.match.url}/tasks`} render={() => <MyTasks/>}/>
+        <Route path={`${this.props.match.url}/tasks`} render={() => <MyTasksContainer/>}/>
         <Route path={`${this.props.match.url}/reports`} render={() => <Reports/>}/>
         <Route path={`${this.props.match.url}/expense`} render={() => <Expense/>}/>
       </div>
