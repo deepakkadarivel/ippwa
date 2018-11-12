@@ -48,7 +48,7 @@ class NavBar extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar>
             <IconButton
               className={classes.menuButton}
