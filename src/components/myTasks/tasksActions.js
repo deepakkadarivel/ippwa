@@ -4,6 +4,7 @@ import tasksActionTypes from './tasksActionTypes';
 import apiService from '../../shared/service/apiService';
 import constants from '../../shared/constants';
 import {getValue} from '../../shared/service/localStorage';
+import history from "../../shared/service/history";
 
 const tasksPending = () => {
   return {
@@ -67,9 +68,14 @@ const getTasks = () => {
         dispatch(tasksFulfilled());
         dispatch(setTasks(response.data));
       })
-      .catch((error) => {
+      .catch((err) => {
         dispatch(tasksRejected());
-        dispatch(setErrorMessage(error.response ? error.response.data.message : constants.SERVER_UNAVAILABLE));
+        if (err.response.status === 401) {
+          history.push('/login');
+          dispatch(setErrorMessage(constants.SESSION_EXPIRED));
+        } else {
+          dispatch(setErrorMessage(err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE));
+        }
       });
   };
 };

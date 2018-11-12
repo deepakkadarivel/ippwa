@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+
+  &-progress {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
 }
 
 .App-logo {

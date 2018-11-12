@@ -5,6 +5,7 @@ export default {
   DEFAULT_SORT: 'asc',
   DEFAULT_TASK_ROWS: 100,
   SERVER_UNAVAILABLE: 'Sorry, Server under maintenance. Try after few minutes or contact support.',
+  SESSION_EXPIRED: 'Session expired. Please login again',
   LOCAL_STORAGE: {
     COOKIE: "cookie",
     LOADBALANCER: "loadBalancer",
