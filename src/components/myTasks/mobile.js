@@ -22,8 +22,12 @@ const styles = theme => ({
     maxWidth: 400,
     marginTop: 20,
   },
+    cardContent: {
+    paddingBottom: 0,
+    },
   actions: {
     display: 'flex',
+    paddingTop: 0,
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -59,8 +63,8 @@ class MyTasksCard extends React.Component {
     return (
       <Card className={classes.card}>
         <CardActionArea>
-        <CardContent>
-          <Typography variant="h5" component="h2" color="primary">
+        <CardContent className={classes.cardContent}>
+          <Typography variant="h5" component="h2" color="secondary">
             {task.workflowTypeName}
           </Typography>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -80,12 +84,12 @@ class MyTasksCard extends React.Component {
         </CardContent>
         </CardActionArea>
         <CardActions className={classes.actions} disableActionSpacing>
-          <Button size="small" variant="outlined" color="secondary" className={classes.action}>
-            {constants.actions.REJECT}
-          </Button>
-          <Button size="small" variant="outlined" color="primary" className={classes.action}>
-            {constants.actions.APPROVE}
-          </Button>
+          {/*<Button size="small" variant="outlined" className={classes.action}>*/}
+            {/*{constants.actions.REJECT}*/}
+          {/*</Button>*/}
+          {/*<Button size="small" variant="outlined" color="secondary" className={classes.action}>*/}
+            {/*{constants.actions.APPROVE}*/}
+          {/*</Button>*/}
           <IconButton
             className={classnames(classes.expand, {
               [classes.expandOpen]: this.state.expanded,

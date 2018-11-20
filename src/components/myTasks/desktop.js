@@ -68,7 +68,7 @@ const rows = [
 
 const tableHeadStyles = theme => ({
   head: {
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: theme.palette.secondary.main,
   },
   body: {
     fontSize: 14,
@@ -133,16 +133,6 @@ const toolbarStyles = theme => ({
   root: {
     paddingRight: theme.spacing.unit,
   },
-  highlight:
-    theme.palette.type === 'light'
-      ? {
-        color: theme.palette.secondary.main,
-        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-      }
-      : {
-        color: theme.palette.text.primary,
-        backgroundColor: theme.palette.secondary.dark,
-      },
   spacer: {
     flex: '1 1 100%',
   },
@@ -207,7 +197,7 @@ class DesktopTable extends React.Component {
       order: 'asc',
       orderBy: 'calories',
       page: 0,
-      rowsPerPage: 9,
+      rowsPerPage: 13,
     };
   }
 

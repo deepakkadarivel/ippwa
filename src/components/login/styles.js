@@ -1,9 +1,12 @@
 const styles = theme => ({
+  root: {
+    backgroundColor: theme.palette.secondary.main,
+    padding: theme.spacing.unit * 3,
+    minHeight: '100vh',
+  },
   main: {
     width: 'auto',
     display: 'block', // Fix IE 11 issue.
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
     textAlign: 'center',
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
       width: 340,

@@ -14,5 +14,11 @@ export default {
     LAST_NAME: "lastName",
     ORG_NAME: "orgName",
     ORG_ID: "orgId",
-  }
+  },
+  TASKS_WORKFLOW_IDS: {
+    PO_REQUISITION_PROCESSING_TYPE: 8,
+    PICKUP_PROCESSING_TYPE: 9,
+    ASSET_PROCESSING_TYPE: 12,
+    INVOICE_PROCESSING_TYPE: 11,
+  },
 }

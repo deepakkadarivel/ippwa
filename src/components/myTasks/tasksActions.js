@@ -70,7 +70,7 @@ const getTasks = () => {
       })
       .catch((err) => {
         dispatch(tasksRejected());
-        if (err.response.status === 401) {
+        if (err.response && err.response.status === 401) {
           history.push('/login');
           dispatch(setErrorMessage(constants.SESSION_EXPIRED));
         } else {

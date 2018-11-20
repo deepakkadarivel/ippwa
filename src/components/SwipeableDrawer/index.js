@@ -27,7 +27,7 @@ const Drawer = props => {
       <List>
 
         <ListItem button={false} key={'User'}>
-          <ListItemIcon>{<AccountCircle color="primary" fontSize="large"/>}</ListItemIcon>
+          <ListItemIcon>{<AccountCircle color="secondary" fontSize="large"/>}</ListItemIcon>
           <ListItemText
             primary={`${getValue(constants.LOCAL_STORAGE.FIRST_NAME)} ${getValue(constants.LOCAL_STORAGE.LAST_NAME)}`}/>
         </ListItem>

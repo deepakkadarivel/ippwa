@@ -29,7 +29,9 @@ class LoginComponent extends Component {
 
   render() {
     const {classes, promise, login, errorMessage} = this.props;
-    return <main className={classes.main}>
+    return (
+      <div className={classes.root}>
+        <main className={classes.main}>
       <CssBaseline/>
       <Paper className={classes.paper}>
         <CardMedia
@@ -81,7 +83,7 @@ class LoginComponent extends Component {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            color="secondary"
             size="large"
             disabled={this.state.username === '' || this.state.password === '' || promise.isPending}
             className={classes.submit}
@@ -89,13 +91,14 @@ class LoginComponent extends Component {
           >
             Login
           </Button>
-          {promise.isPending && <CircularProgress size={24} className={classes.buttonProgress} />}
+          {promise.isPending && <CircularProgress size={24} className={classes.buttonProgress} color="secondary"/>}
         </div>
       </Paper>
-      <Typography variant='caption' className={classes.footer}>
+      <Typography variant='caption' className={classes.footer} color="hint">
         © iPact 2018. All rights reserved.
       </Typography>
-    </main>;
+    </main>
+    </div>);
   }
 }
 
