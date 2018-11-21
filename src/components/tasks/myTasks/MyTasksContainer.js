@@ -4,6 +4,7 @@ import { taskSelector } from './tasksSelector';
 
 import {
   getTasks,
+  setSelectedTask
 } from './tasksActions';
 
 const mapStateToProps = state => {
@@ -19,6 +20,9 @@ const mapDispatchToProps = dispatch => {
     getTasks() {
       dispatch(getTasks());
     },
+    setSelectedTask(task) {
+      dispatch(setSelectedTask(task));
+    }
   };
 };
 

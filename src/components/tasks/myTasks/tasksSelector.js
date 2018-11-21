@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import constants from "../../shared/constants";
+import constants from "../../../shared/constants";
 
 const getTasks = state => state.tasks.tasks;
 

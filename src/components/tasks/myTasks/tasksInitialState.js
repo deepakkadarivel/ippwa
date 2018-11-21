@@ -1,5 +1,5 @@
 import seamlessImmutable from 'seamless-immutable';
-import setPromiseState from '../../shared/service/promiseState';
+import setPromiseState from '../../../shared/service/promiseState';
 
 const tasksInitialState = seamlessImmutable({
   promise: {
@@ -7,6 +7,7 @@ const tasksInitialState = seamlessImmutable({
   },
   errorMessage: '',
   tasks: [],
+  selectedTask: {},
 });
 
 export default tasksInitialState;

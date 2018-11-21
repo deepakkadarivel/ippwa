@@ -18,12 +18,12 @@ class MyTasks extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, tasks, history, setSelectedTask } = this.props;
     return (<div>
       <div className={classes.root}>
-        <Desktop><DesktopTable tasks={this.props.tasks}/></Desktop>
-        <Tablet><DesktopTable tasks={this.props.tasks}/></Tablet>
-        <Mobile><MobileTable tasks={this.props.tasks}/></Mobile>
+        <Desktop><DesktopTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} /></Desktop>
+        <Tablet><DesktopTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} /></Tablet>
+        <Mobile><MobileTable tasks={tasks} setSelectedTask={setSelectedTask} /></Mobile>
         {/*<Default><DesktopTable tasks={this.props.tasks}/></Default>*/}
       </div>
     </div>);
@@ -32,6 +32,7 @@ class MyTasks extends Component {
 
 MyTasks.propTypes = {
   getTasks: PropTypes.func.isRequired,
+  setSelectedTask: PropTypes.func.isRequired,
   promise: PropTypes.object.isRequired,
   errorMessage: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,

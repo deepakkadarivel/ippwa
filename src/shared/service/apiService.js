@@ -16,6 +16,10 @@ const apiService = {
       tasks: '/tasks',
       generateTasksUrl() {
         return `${baseUrl}${this.tasks}`;
+      },
+      po: '/po',
+      generatePOUrl() {
+        return `${baseUrl}${this.po}`;
       }
     }
   }

@@ -15,8 +15,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import {lighten} from '@material-ui/core/styles/colorManipulator';
-import constants from './constants';
-import {getString} from '../../shared/service/helpers';
+import constants from '../../../shared/constants';
+import {getString} from '../../../shared/service/helpers';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -42,28 +42,30 @@ function getSorting(order, orderBy) {
   return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
+const columns = constants.tasks.columns;
+
 const rows = [
-  {id: 'workflowTypeName', numeric: false, disablePadding: false, label: constants.columns.workflowTypeName},
-  {id: 'supplierName', numeric: false, disablePadding: false, label: constants.columns.supplierName},
-  {id: 'stageName', numeric: false, disablePadding: false, label: constants.columns.stageName},
-  {id: 'contractNo', numeric: false, disablePadding: false, label: constants.columns.contractNo},
-  {id: 'contractOwner', numeric: false, disablePadding: false, label: constants.columns.contractOwner},
-  {id: 'requestedBy', numeric: false, disablePadding: false, label: constants.columns.requestedBy},
-  {id: 'poRequestNo', numeric: false, disablePadding: false, label: constants.columns.poRequestNo},
-  {id: 'poNo', numeric: false, disablePadding: false, label: constants.columns.poNo},
-  {id: 'pickUpRequestNo', numeric: false, disablePadding: false, label: constants.columns.pickUpRequestNo},
-  {id: 'invoiceNo', numeric: false, disablePadding: false, label: constants.columns.invoiceNo},
-  {id: 'assetRequestNo', numeric: false, disablePadding: false, label: constants.columns.assetRequestNo},
-  {id: 'customerPONo', numeric: false, disablePadding: false, label: constants.columns.customerPONo},
-  {id: 'customerInvoiceNo', numeric: false, disablePadding: false, label: constants.columns.customerInvoiceNo},
-  {id: 'quoteRequestNo', numeric: false, disablePadding: false, label: constants.columns.quoteRequestNo},
-  {id: 'costingRequestNo', numeric: false, disablePadding: false, label: constants.columns.costingRequestNo},
-  {id: 'indentRequestNo', numeric: false, disablePadding: false, label: constants.columns.indentRequestNo},
-  {id: 'travelRequestNo', numeric: false, disablePadding: false, label: constants.columns.travelRequestNo},
-  {id: 'claimRequestNo', numeric: false, disablePadding: false, label: constants.columns.claimRequestNo},
-  {id: 'createdDate', numeric: false, disablePadding: false, label: constants.columns.createdDate},
-  {id: 'dueDateString', numeric: false, disablePadding: false, label: constants.columns.dueDateString},
-  {id: 'status', numeric: false, disablePadding: false, label: constants.columns.status},
+  {id: 'workflowTypeName', numeric: false, disablePadding: false, label: columns.workflowTypeName},
+  {id: 'supplierName', numeric: false, disablePadding: false, label: columns.supplierName},
+  {id: 'stageName', numeric: false, disablePadding: false, label: columns.stageName},
+  {id: 'contractNo', numeric: false, disablePadding: false, label: columns.contractNo},
+  {id: 'contractOwner', numeric: false, disablePadding: false, label: columns.contractOwner},
+  {id: 'requestedBy', numeric: false, disablePadding: false, label: columns.requestedBy},
+  {id: 'poRequestNo', numeric: false, disablePadding: false, label: columns.poRequestNo},
+  {id: 'poNo', numeric: false, disablePadding: false, label: columns.poNo},
+  {id: 'pickUpRequestNo', numeric: false, disablePadding: false, label: columns.pickUpRequestNo},
+  {id: 'invoiceNo', numeric: false, disablePadding: false, label: columns.invoiceNo},
+  {id: 'assetRequestNo', numeric: false, disablePadding: false, label: columns.assetRequestNo},
+  {id: 'customerPONo', numeric: false, disablePadding: false, label: columns.customerPONo},
+  {id: 'customerInvoiceNo', numeric: false, disablePadding: false, label: columns.customerInvoiceNo},
+  {id: 'quoteRequestNo', numeric: false, disablePadding: false, label: columns.quoteRequestNo},
+  {id: 'costingRequestNo', numeric: false, disablePadding: false, label: columns.costingRequestNo},
+  {id: 'indentRequestNo', numeric: false, disablePadding: false, label: columns.indentRequestNo},
+  {id: 'travelRequestNo', numeric: false, disablePadding: false, label: columns.travelRequestNo},
+  {id: 'claimRequestNo', numeric: false, disablePadding: false, label: columns.claimRequestNo},
+  {id: 'createdDate', numeric: false, disablePadding: false, label: columns.createdDate},
+  {id: 'dueDateString', numeric: false, disablePadding: false, label: columns.dueDateString},
+  {id: 'status', numeric: false, disablePadding: false, label: columns.status},
 ];
 
 const tableHeadStyles = theme => ({
@@ -222,12 +224,19 @@ class DesktopTable extends React.Component {
   };
 
   render() {
-    const {classes, tasks} = this.props;
+    const {classes, tasks, history} = this.props;
 
     const data = tasks.asMutable({deep: true});
 
     const {order, orderBy, rowsPerPage, page} = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+
+    const handleClick = (e, task) => {
+      if ( task.workflowTypeId === constants.TASKS_WORKFLOW_IDS.PO_REQUISITION_PROCESSING_TYPE) {
+        this.props.setSelectedTask(task);
+        history.push('/home/tasks/po');
+      }
+    };
 
     return (
       <Paper className={classes.root}>
@@ -247,7 +256,7 @@ class DesktopTable extends React.Component {
                   return (
                     <TableRow
                       hover
-                      // onClick={event => this.handleClick(event, task)}
+                      onClick={event => handleClick(event, task)}
                       tabIndex={-1}
                       key={index}
                       className={classes.row}
@@ -307,6 +316,7 @@ class DesktopTable extends React.Component {
 DesktopTable.propTypes = {
   classes: PropTypes.object.isRequired,
   tasks: PropTypes.array.isRequired,
+  setSelectedTask: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(DesktopTable);

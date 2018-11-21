@@ -4,11 +4,12 @@ import {Route} from 'react-router-dom';
 
 import NavBar from '../navBar';
 import Drawer from '../SwipeableDrawer';
-import MyTasksContainer from '../myTasks/MyTasksContainer';
+import MyTasksContainer from '../tasks/myTasks/MyTasksContainer';
 import Reports from '../reports';
 import Expense from '../expense';
 import history from '../../shared/service/history';
 import styles from './styles';
+import POContainer from '../tasks/po/POContainer';
 
 class Home extends React.Component {
   constructor(props) {
@@ -39,9 +40,10 @@ class Home extends React.Component {
       <NavBar isDrawerOpen={this.state.isDrawerOpen} toggleDrawer={toggleDrawer}/>
       <Drawer isDrawerOpen={this.state.isDrawerOpen} toggleDrawer={toggleDrawer}/>
       <div>
-        <Route path={`${this.props.match.url}/tasks`} render={() => <MyTasksContainer/>}/>
-        <Route path={`${this.props.match.url}/reports`} render={() => <Reports/>}/>
-        <Route path={`${this.props.match.url}/expense`} render={() => <Expense/>}/>
+        <Route exact path={`${this.props.match.url}/tasks`} render={() => <MyTasksContainer history={history}/>}/>
+        <Route exact path={`${this.props.match.url}/reports`} render={() => <Reports history={history}/>}/>
+        <Route exacrt path={`${this.props.match.url}/expense`} render={() => <Expense history={history}/>}/>
+        <Route exacrt path={`${this.props.match.url}/tasks/po`} render={() => <POContainer history={history}/>}/>
       </div>
     </div>;
   }

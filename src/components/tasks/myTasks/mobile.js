@@ -14,8 +14,8 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
-import constants from './constants';
-import {getString} from '../../shared/service/helpers';
+import constants from '../../../shared/constants';
+import {getString} from '../../../shared/service/helpers';
 
 const styles = theme => ({
   card: {
@@ -60,6 +60,8 @@ class MyTasksCard extends React.Component {
   render() {
     const { classes, task } = this.props;
 
+    const columns = constants.tasks.columns;
+
     return (
       <Card className={classes.card}>
         <CardActionArea>
@@ -72,13 +74,13 @@ class MyTasksCard extends React.Component {
           </Typography>
           <List>
             <ListItem divider>
-              <ListItemText primary={constants.columns.stageName} secondary={getString(task.stageName)} />
+              <ListItemText primary={constants.tasks.columns.stageName} secondary={getString(task.stageName)} />
             </ListItem>
             <ListItem divider>
-              <ListItemText primary={constants.columns.requestedBy} secondary={getString(task.requestedBy)} />
+              <ListItemText primary={constants.tasks.columns.requestedBy} secondary={getString(task.requestedBy)} />
             </ListItem>
             <ListItem divider>
-              <ListItemText primary={constants.columns.supplierName} secondary={getString(task.supplierName)} />
+              <ListItemText primary={constants.tasks.columns.supplierName} secondary={getString(task.supplierName)} />
             </ListItem>
           </List>
         </CardContent>
@@ -105,52 +107,52 @@ class MyTasksCard extends React.Component {
           <CardContent>
             <List>
               <ListItem divider>
-                <ListItemText primary={constants.columns.contractNo} secondary={getString(task.contractNo)} />
+                <ListItemText primary={columns.contractNo} secondary={getString(task.contractNo)} />
               </ListItem>
               <ListItem divider>
-                <ListItemText primary={constants.columns.contractOwner} secondary={getString(task.contractOwner)} />
+                <ListItemText primary={columns.contractOwner} secondary={getString(task.contractOwner)} />
               </ListItem>
               <ListItem divider>
-                <ListItemText primary={constants.columns.poRequestNo} secondary={getString(task.poRequestNo)} />
+                <ListItemText primary={columns.poRequestNo} secondary={getString(task.poRequestNo)} />
               </ListItem>
               <ListItem divider>
-                <ListItemText primary={constants.columns.poNo} secondary={getString(task.poNo)} />
+                <ListItemText primary={columns.poNo} secondary={getString(task.poNo)} />
               </ListItem>
               <ListItem divider>
-                <ListItemText primary={constants.columns.pickUpRequestNo} secondary={getString(task.pickUpRequestNo)} />
+                <ListItemText primary={columns.pickUpRequestNo} secondary={getString(task.pickUpRequestNo)} />
               </ListItem>
               <ListItem divider>
-                <ListItemText primary={constants.columns.invoiceNo} secondary={getString(task.invoiceNo)} />
+                <ListItemText primary={columns.invoiceNo} secondary={getString(task.invoiceNo)} />
               </ListItem>
               <ListItem divider>
-                <ListItemText primary={constants.columns.assetRequestNo} secondary={getString(task.assetRequestNo)} />
+                <ListItemText primary={columns.assetRequestNo} secondary={getString(task.assetRequestNo)} />
               </ListItem>
               <ListItem divider>
-                <ListItemText primary={constants.columns.customerPONo} secondary={getString(task.customerPONo)} />
+                <ListItemText primary={columns.customerPONo} secondary={getString(task.customerPONo)} />
               </ListItem>
               <ListItem divider>
-                <ListItemText primary={constants.columns.customerInvoiceNo} secondary={getString(task.customerInvoiceNo)} />
+                <ListItemText primary={columns.customerInvoiceNo} secondary={getString(task.customerInvoiceNo)} />
               </ListItem>
               <ListItem divider>
-                <ListItemText primary={constants.columns.quoteRequestNo} secondary={getString(task.quoteRequestNo)} />
+                <ListItemText primary={columns.quoteRequestNo} secondary={getString(task.quoteRequestNo)} />
               </ListItem>
               <ListItem divider>
-                <ListItemText primary={constants.columns.costingRequestNo} secondary={getString(task.quoteRequestNo)} />
+                <ListItemText primary={columns.costingRequestNo} secondary={getString(task.quoteRequestNo)} />
               </ListItem>
               <ListItem divider>
-                <ListItemText primary={constants.columns.indentRequestNo} secondary={getString(task.indentRequestNo)} />
+                <ListItemText primary={columns.indentRequestNo} secondary={getString(task.indentRequestNo)} />
               </ListItem>
               <ListItem divider>
-                <ListItemText primary={constants.columns.quoteRequestNo} secondary={getString(task.quoteRequestNo)} />
+                <ListItemText primary={columns.quoteRequestNo} secondary={getString(task.quoteRequestNo)} />
               </ListItem>
               <ListItem divider>
-                <ListItemText primary={constants.columns.claimRequestNo} secondary={getString(task.claimRequestNo)} />
+                <ListItemText primary={columns.claimRequestNo} secondary={getString(task.claimRequestNo)} />
               </ListItem>
               <ListItem divider>
-                <ListItemText primary={constants.columns.dueDateString} secondary={getString(task.dueDateString)} />
+                <ListItemText primary={columns.dueDateString} secondary={getString(task.dueDateString)} />
               </ListItem>
               <ListItem>
-                <ListItemText primary={constants.columns.status} secondary={task.status === 0 ? 'Active' : getString(task.status.toString())} />
+                <ListItemText primary={columns.status} secondary={task.status === 0 ? 'Active' : getString(task.status.toString())} />
               </ListItem>
             </List>
           </CardContent>

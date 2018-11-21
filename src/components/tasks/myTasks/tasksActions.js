@@ -1,10 +1,10 @@
 import 'whatwg-fetch'
 import axios from 'axios';
 import tasksActionTypes from './tasksActionTypes';
-import apiService from '../../shared/service/apiService';
-import constants from '../../shared/constants';
-import {getValue} from '../../shared/service/localStorage';
-import history from "../../shared/service/history";
+import apiService from '../../../shared/service/apiService';
+import constants from '../../../shared/constants';
+import {getValue} from '../../../shared/service/localStorage';
+import history from "../../../shared/service/history";
 
 const tasksPending = () => {
   return {
@@ -35,6 +35,13 @@ const setTasks = tasks => {
   return {
     type: tasksActionTypes.SET_TASKS,
     tasks,
+  };
+};
+
+const setSelectedTask = task => {
+  return {
+    type: tasksActionTypes.SET_SELECTED_TASK,
+    task,
   };
 };
 
@@ -80,4 +87,4 @@ const getTasks = () => {
   };
 };
 
-export {getTasks};
+export {getTasks, setSelectedTask};

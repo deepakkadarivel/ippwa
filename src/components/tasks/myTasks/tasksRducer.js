@@ -1,6 +1,6 @@
 import tasksActionTypes from './tasksActionTypes';
 import tasksInitialState from './tasksInitialState';
-import setPromiseState from '../../shared/service/promiseState';
+import setPromiseState from '../../../shared/service/promiseState';
 
 const tasksReducer = (state = tasksInitialState, action) => {
   switch (action.type) {
@@ -27,6 +27,9 @@ const tasksReducer = (state = tasksInitialState, action) => {
 
     case tasksActionTypes.SET_TASKS:
       return state.set('tasks', action.tasks);
+
+    case tasksActionTypes.SET_SELECTED_TASK:
+      return state.set('selectedTask', action.task);
 
     default:
       return state;
