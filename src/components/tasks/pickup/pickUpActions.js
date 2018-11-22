@@ -1,72 +1,72 @@
 import 'whatwg-fetch'
 import axios from 'axios';
-import poActionTypes from './poActionTypes';
+import pickUpActionTypes from './pickUpActionTypes';
 import apiService from '../../../shared/service/apiService';
 import constants from '../../../shared/constants';
 import {getValue} from '../../../shared/service/localStorage';
 import history from "../../../shared/service/history";
 
-const poPending = () => {
+const pickUpPending = () => {
   return {
-    type: poActionTypes.PO.pending
+    type: pickUpActionTypes.PICK_UP.pending
   };
 };
 
-const poFulfilled = () => {
+const pickUpFulfilled = () => {
   return {
-    type: poActionTypes.PO.fulfilled
+    type: pickUpActionTypes.PICK_UP.fulfilled
   };
 };
 
-const poRejected = () => {
+const pickUpRejected = () => {
   return {
-    type: poActionTypes.PO.rejected
+    type: pickUpActionTypes.PICK_UP.rejected
   };
 };
 
 const setErrorMessage = message => {
   return {
-    type: poActionTypes.SET_ERROR_MESSAGE,
+    type: pickUpActionTypes.SET_ERROR_MESSAGE,
     message,
   };
 };
 
-const setPO = po => {
+const setPickUp = pickUp => {
   return {
-    type: poActionTypes.SET_PO,
-    po,
+    type: pickUpActionTypes.SET_PICK_UP,
+    pickUp,
   };
 };
 
-const getPO = task => {
+const getPickUp = task => {
   return (dispatch, getState) => {
-    const poUrl = apiService.endpoints.app.generatePOUrl();
-    dispatch(poPending());
+    const pickUpUrl = apiService.endpoints.app.generatePickUpUrl();
+    dispatch(pickUpPending());
 
     let payload = {
       cookie: getValue(constants.LOCAL_STORAGE.COOKIE) || constants.EMPTY_STRING,
       loadBalancer: getValue(constants.LOCAL_STORAGE.LOADBALANCER) || constants.EMPTY_STRING,
       payload: {
-        id: task.poRequestId,
+        id: task.pickUpRequestId,
         companyId: task.companyId,
         userId: getValue(constants.LOCAL_STORAGE.USER_ID) || constants.EMPTY_STRING,
-        loggedInSupplierId: constants.EMPTY_STRING,
-        apiType: task.poParentId === 0 ? constants.API_TYPES.APPROVE_PO_REQ_TYPE_API : constants.API_TYPES.EDIT_PO_AMENDMENT_TYPE_API,
+        loggedInSupplierId: task.supplierId,
+        apiType: constants.API_TYPES.APPROVE_PICK_UP_TYPE_API,
       },
     };
 
     return axios
-      .post(poUrl, payload, {
+      .post(pickUpUrl, payload, {
         headers: {
           'Content-Type': 'application/json'
         }
       })
       .then(response => {
-        dispatch(poFulfilled());
-        dispatch(setPO(response.data));
+        dispatch(pickUpFulfilled());
+        dispatch(setPickUp(response.data));
       })
       .catch((err) => {
-        dispatch(poRejected());
+        dispatch(pickUpRejected());
         if (err.response && err.response.status === 401) {
           history.push('/login');
           dispatch(setErrorMessage(constants.SESSION_EXPIRED));
@@ -77,4 +77,4 @@ const getPO = task => {
   };
 };
 
-export {getPO};
+export {getPickUp};

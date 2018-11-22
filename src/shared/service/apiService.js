@@ -20,6 +20,10 @@ const apiService = {
       po: '/po',
       generatePOUrl() {
         return `${baseUrl}${this.po}`;
+      },
+      pickUp: '/pickUp',
+      generatePickUpUrl() {
+        return `${baseUrl}${this.pickUp}`;
       }
     }
   }

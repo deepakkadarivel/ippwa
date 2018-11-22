@@ -232,9 +232,16 @@ class DesktopTable extends React.Component {
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
     const handleClick = (e, task) => {
-      if ( task.workflowTypeId === constants.TASKS_WORKFLOW_IDS.PO_REQUISITION_PROCESSING_TYPE) {
-        this.props.setSelectedTask(task);
-        history.push('/home/tasks/po');
+      this.props.setSelectedTask(task);
+      switch (task.workflowTypeId) {
+        case constants.TASKS_WORKFLOW_IDS.PO_REQUISITION_PROCESSING_TYPE:
+          history.push('/home/tasks/po');
+          break;
+        case constants.TASKS_WORKFLOW_IDS.PICKUP_PROCESSING_TYPE:
+          history.push('/home/tasks/pickUp');
+          break;
+        default:
+          break;
       }
     };
 

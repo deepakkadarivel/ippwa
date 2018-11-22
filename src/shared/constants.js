@@ -53,5 +53,6 @@ export default {
   API_TYPES: {
     APPROVE_PO_REQ_TYPE_API: 4,
     EDIT_PO_AMENDMENT_TYPE_API: 17,
+    APPROVE_PICK_UP_TYPE_API: 9,
   },
 }
