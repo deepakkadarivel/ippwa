@@ -12,6 +12,7 @@ import styles from './styles';
 import POContainer from '../tasks/po/POContainer';
 import PickUpContainer from "../tasks/pickup/PickUpContainer";
 import InvoiceContainer from "../tasks/invoice/InvoiceContainer";
+import AssetContainer from "../tasks/asset/AssetContainer";
 
 class Home extends React.Component {
   constructor(props) {
@@ -48,6 +49,7 @@ class Home extends React.Component {
         <Route exacrt path={`${this.props.match.url}/tasks/po`} render={() => <POContainer history={history}/>}/>
         <Route exacrt path={`${this.props.match.url}/tasks/pickUp`} render={() => <PickUpContainer history={history}/>}/>
         <Route exacrt path={`${this.props.match.url}/tasks/invoice`} render={() => <InvoiceContainer history={history}/>}/>
+        <Route exacrt path={`${this.props.match.url}/tasks/asset`} render={() => <AssetContainer history={history}/>}/>
       </div>
     </div>;
   }

@@ -4,6 +4,7 @@ import poReducer from '../../components/tasks/po/poReducer';
 import tasksReducer from "../../components/tasks/myTasks/tasksRducer";
 import pickUpReducer from "../../components/tasks/pickup/pickUpReducer";
 import invoiceReducer from "../../components/tasks/invoice/invoiceReducer";
+import assetReducer from "../../components/tasks/asset/assetReducer";
 
 const app = combineReducers({
   login: loginReducer,
@@ -11,6 +12,7 @@ const app = combineReducers({
   po: poReducer,
   pickUp: pickUpReducer,
   invoice: invoiceReducer,
+  asset: assetReducer,
 });
 
 export default app;

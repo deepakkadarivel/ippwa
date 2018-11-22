@@ -243,6 +243,9 @@ class DesktopTable extends React.Component {
         case constants.TASKS_WORKFLOW_IDS.INVOICE_PROCESSING_TYPE:
           history.push('/home/tasks/invoice');
           break;
+        case constants.TASKS_WORKFLOW_IDS.ASSET_PROCESSING_TYPE:
+          history.push('/home/tasks/asset');
+          break;
         default:
           break;
       }

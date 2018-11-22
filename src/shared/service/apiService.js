@@ -28,6 +28,10 @@ const apiService = {
       invoice: '/invoice',
       generateInvoiceUrl() {
         return `${baseUrl}${this.invoice}`;
+      },
+      asset: '/asset',
+      generateAssetUrl() {
+        return `${baseUrl}${this.asset}`;
       }
     }
   }
