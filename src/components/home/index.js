@@ -11,6 +11,7 @@ import history from '../../shared/service/history';
 import styles from './styles';
 import POContainer from '../tasks/po/POContainer';
 import PickUpContainer from "../tasks/pickup/PickUpContainer";
+import InvoiceContainer from "../tasks/invoice/InvoiceContainer";
 
 class Home extends React.Component {
   constructor(props) {
@@ -46,6 +47,7 @@ class Home extends React.Component {
         <Route exacrt path={`${this.props.match.url}/expense`} render={() => <Expense history={history}/>}/>
         <Route exacrt path={`${this.props.match.url}/tasks/po`} render={() => <POContainer history={history}/>}/>
         <Route exacrt path={`${this.props.match.url}/tasks/pickUp`} render={() => <PickUpContainer history={history}/>}/>
+        <Route exacrt path={`${this.props.match.url}/tasks/invoice`} render={() => <InvoiceContainer history={history}/>}/>
       </div>
     </div>;
   }

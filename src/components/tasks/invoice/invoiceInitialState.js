@@ -1,12 +1,12 @@
 import seamlessImmutable from 'seamless-immutable';
 import setPromiseState from '../../../shared/service/promiseState';
 
-const pickUpInitialState = seamlessImmutable({
+const invoiceInitialState = seamlessImmutable({
   promise: {
-    pickUp: setPromiseState()
+    invoice: setPromiseState()
   },
   errorMessage: '',
-  pickUp: {},
+  invoice: {},
 });
 
-export default pickUpInitialState;
+export default invoiceInitialState;
