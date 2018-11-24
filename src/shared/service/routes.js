@@ -7,7 +7,7 @@ import {withTheme} from '@material-ui/core/styles';
 import LoginContainer from '../../components/login/LoginContainer';
 import App from '../../components/app/App';
 import configureStore from '../store';
-import Home from '../../components/home';
+import Home from '../../components/home/HomeComponent';
 import history from './history';
 
 const store = configureStore();
@@ -24,7 +24,7 @@ const theme = createMuiTheme({
         "background":
           {
             "paper": "#fff",
-            "default": "#f1f1f1"
+            "default": "#F4F5FA"
           }
         ,
         "primary":

@@ -57,4 +57,8 @@ export default {
     APPROVE_INVOICE_TYPE_API: 13,
     APPROVE_ASSET_TYPE_API: 11,
   },
+
+  PO: {
+    PO_TITLE: 'PO Amendment',
+  }
 }

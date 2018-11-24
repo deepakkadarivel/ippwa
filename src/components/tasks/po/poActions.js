@@ -62,8 +62,8 @@ const getPO = task => {
         }
       })
       .then(response => {
-        dispatch(poFulfilled());
         dispatch(setPO(response.data));
+        dispatch(poFulfilled());
       })
       .catch((err) => {
         dispatch(poRejected());

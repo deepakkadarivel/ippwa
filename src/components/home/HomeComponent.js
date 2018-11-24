@@ -1,5 +1,4 @@
 import React from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
 import {Route} from 'react-router-dom';
 
 import NavBar from '../navBar';
@@ -8,13 +7,13 @@ import MyTasksContainer from '../tasks/myTasks/MyTasksContainer';
 import Reports from '../reports';
 import Expense from '../expense';
 import history from '../../shared/service/history';
-import styles from './styles';
 import POContainer from '../tasks/po/POContainer';
 import PickUpContainer from "../tasks/pickup/PickUpContainer";
 import InvoiceContainer from "../tasks/invoice/InvoiceContainer";
 import AssetContainer from "../tasks/asset/AssetContainer";
+import './home.scss';
 
-class Home extends React.Component {
+class HomeComponent extends React.Component {
   constructor(props) {
     super(props);
 
@@ -32,14 +31,13 @@ class Home extends React.Component {
   }
 
   render() {
-    const {classes} =this.props;
     const toggleDrawer = isDrawerOpen => {
       this.setState({
         isDrawerOpen,
       });
     };
 
-    return <div className={classes.root}>
+    return <div className='Home'>
       <NavBar isDrawerOpen={this.state.isDrawerOpen} toggleDrawer={toggleDrawer}/>
       <Drawer isDrawerOpen={this.state.isDrawerOpen} toggleDrawer={toggleDrawer}/>
       <div>
@@ -55,4 +53,4 @@ class Home extends React.Component {
   }
 }
 
-export default withStyles(styles)(Home);
+export default HomeComponent;

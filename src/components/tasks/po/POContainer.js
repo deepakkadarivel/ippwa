@@ -5,12 +5,17 @@ import {
   getPO,
 } from './poActions';
 
+import {
+  selectPO,
+  selectPOPromise,
+} from './poSelector';
+
 const mapStateToProps = state => {
   return {
     selectedTask: state.tasks.selectedTask,
-    promise: state.po.promise.po,
+    promise: selectPOPromise(state),
     errorMessage: state.po.errorMessage,
-    po: state.po.po,
+    po: selectPO(state),
   };
 };
 

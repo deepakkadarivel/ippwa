@@ -1,0 +1,1 @@
+export const getString = value => value ? value : '-';

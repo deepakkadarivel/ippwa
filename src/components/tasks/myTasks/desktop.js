@@ -16,7 +16,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import {lighten} from '@material-ui/core/styles/colorManipulator';
 import constants from '../../../shared/constants';
-import {getString} from '../../../shared/service/helpers';
+import {getString} from '../../../shared/utils/string';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
