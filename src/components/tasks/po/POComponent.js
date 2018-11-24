@@ -24,9 +24,9 @@ class POComponent extends Component {
       return po.header.map(x => {
         switch (x.type) {
           case 'text':
-            return <FormInputField x={x} className='col-s-3 col-2 col-'/>;
+            return <FormInputField x={x} className='col-s-3 col-2 col-xs-6'/>;
           case 'select':
-            return <FormSelectField x={x} className='col-s-3 col-2 col-'/>;
+            return <FormSelectField x={x} className='col-s-3 col-2 col-xs-6'/>;
           default:
             return null;
         }
