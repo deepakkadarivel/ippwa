@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import {getString} from "../../../shared/utils/string";
-import './formStyles.scss';
+import './form.scss';
 
-const FormSelectField = props => <TextField
+const FormSelect = props => <TextField
   id={getString(props.x.id)}
   select
   label={getString(props.x.label)}
@@ -16,6 +16,7 @@ const FormSelectField = props => <TextField
   onChange={props.handleChange(getString(props.x.name))}
   InputProps={{
     readOnly: props.x.readOnly,
+    // disableUnderline: props.x.readOnly,
   }}
 >
   {props.x.options.map(option => (
@@ -25,10 +26,10 @@ const FormSelectField = props => <TextField
   ))}
 </TextField>;
 
-FormSelectField.propTypes = {
+FormSelect.propTypes = {
   x: PropTypes.object.isRequired,
   className: PropTypes.string,
   handleChange: PropTypes.func,
 };
 
-export default FormSelectField;
+export default FormSelect;

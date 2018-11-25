@@ -5,8 +5,9 @@ import Typography from "@material-ui/core/Typography/Typography";
 import Divider from "@material-ui/core/Divider/Divider";
 import Card from "@material-ui/core/Card/Card";
 import './header.scss';
-import FormInputField from "../../../common/form/FormInputField";
-import FormSelectField from "../../../common/form/FormSelectField";
+import FormInput from "../../../common/form/FormInput";
+import FormSelect from "../../../common/form/FormSelect";
+import FormTextArea from "../../../common/form/FormTextArea";
 
 const renderHeaders = props => {
   const {
@@ -16,9 +17,11 @@ const renderHeaders = props => {
   return header.map(x => {
     switch (x.type) {
       case 'text':
-        return <FormInputField key={x.id} x={x} className='col-s-4 col-3 col-'/>;
+        return <FormInput key={x.id} x={x} className='col-s-4 col-3 col-' handleChange={handleChange}/>;
       case 'select':
-        return <FormSelectField key={x.id} x={x} className='col-s-4 col-3 col-' handleChange={handleChange}/>;
+        return <FormSelect key={x.id} x={x} className='col-s-4 col-3 col-' handleChange={handleChange}/>;
+      case 'textArea':
+        return <FormTextArea key={x.id} x={x} className='col-s-4 col-3 col-' handleChange={handleChange}/>;
       default:
         return null;
     }
