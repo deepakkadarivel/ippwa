@@ -1,6 +1,10 @@
 .Form {
   &-Field {
     margin: 2% 2% !important;
+
+    &__line {
+      margin: 2% 0 !important;
+    }
   }
 }
 

@@ -4,6 +4,7 @@ import POComponent from './POComponent';
 import {
   getPO,
   updateFieldValue,
+  updateLineFieldValue,
 } from './poActions';
 
 import {
@@ -27,6 +28,9 @@ const mapDispatchToProps = dispatch => {
     },
     updateFieldValue(item) {
       dispatch(updateFieldValue(item));
+    },
+    updateLineFieldValue(item) {
+      dispatch(updateLineFieldValue(item));
     },
   };
 };

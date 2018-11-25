@@ -38,6 +38,20 @@ const poReducer = (state = poInitialState, action) => {
       });
       return state.setIn(['po', 'header'], updatedHeader);
 
+    case poActionTypes.UPDATE_PO_LINE_FIELD_VALUE:
+      const updatedLines = action.po.poLineItems.map(x => {
+        if (x.header.label === action.item.header) {
+          x.map(y => {
+            if (y.header === action.item.key) {
+              return {...y, value: action.item.value};
+            }
+            return y;
+          })
+        }
+        return x;
+      });
+      return state.setIn(['po', 'poLineItems', 'lines'], updatedLines);
+
     default:
       return state;
   }

@@ -50,6 +50,17 @@ const updateFieldValue = item => {
   };
 };
 
+const updateLineFieldValue = item => {
+  return (dispatch, getState) => {
+    const po = selectPO(getState());
+    dispatch({
+      type: poActionTypes.UPDATE_PO_LINE_FIELD_VALUE,
+      item,
+      po,
+    });
+  };
+};
+
 const getPO = task => {
   return (dispatch, getState) => {
     const poUrl = apiService.endpoints.app.generatePOUrl();
@@ -89,4 +100,4 @@ const getPO = task => {
   };
 };
 
-export {getPO, updateFieldValue};
+export {getPO, updateFieldValue, updateLineFieldValue};
