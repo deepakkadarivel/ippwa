@@ -19,8 +19,8 @@ const renderLines = props => {
   return item.lines.map(x => {
     switch (x.type) {
       case 'text':
-        return x.readOnly ? <FormText key={x.id} x={x} className='col-s-2 col-2 col-xs-3 Form-Field__line' handleChange={handleChange}/> :
-          <FormInput key={x.id} x={x} className='col-s-2 col-2 col- Form-Field__line' handleChange={prop => handleChange({field: prop, key: item.header.label})}/>;
+        return x.readOnly ? <FormText key={x.id} x={x} className='col-s-2 col-1 col-xs-3 Form-Field__line' handleChange={handleChange}/> :
+          <FormInput key={x.id} x={x} className='col-s-2 col-1 col- Form-Field__line' handleChange={prop => handleChange({field: prop, key: item.header.label})}/>;
       case 'select':
         return <FormSelect key={x.id} x={x} className='col-s-4 col-3 col-xs-3' handleChange={handleChange}/>;
       case 'textArea':
@@ -45,7 +45,7 @@ const Line = props => {
         </Typography>
         <Divider variant="inset"/>
         {renderLines(props)}
-        <Divider variant="inset"/>
+        {/*<Divider variant="inset"/>*/}
       </CardContent>
     </Card>
   );
