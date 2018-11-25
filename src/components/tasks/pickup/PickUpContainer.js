@@ -4,13 +4,14 @@ import PickUpComponent from './PickUpComponent';
 import {
   getPickUp,
 } from './pickUpActions';
+import {selectPickUp, selectPickUpPromise} from "./pickUpSelector";
 
 const mapStateToProps = state => {
   return {
     selectedTask: state.tasks.selectedTask,
-    promise: state.pickUp.promise.pickUp,
+    promise: selectPickUpPromise(state),
     errorMessage: state.pickUp.errorMessage,
-    pickUp: state.pickUp.pickUp,
+    pickUp: selectPickUp(state),
   };
 };
 

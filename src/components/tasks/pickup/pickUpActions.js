@@ -62,8 +62,8 @@ const getPickUp = task => {
         }
       })
       .then(response => {
-        dispatch(pickUpFulfilled());
         dispatch(setPickUp(response.data));
+        dispatch(pickUpFulfilled());
       })
       .catch((err) => {
         dispatch(pickUpRejected());
