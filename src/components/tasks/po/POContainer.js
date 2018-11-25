@@ -3,6 +3,7 @@ import POComponent from './POComponent';
 
 import {
   getPO,
+  updateFieldValue,
 } from './poActions';
 
 import {
@@ -23,6 +24,9 @@ const mapDispatchToProps = dispatch => {
   return {
     getPO(task) {
       dispatch(getPO(task));
+    },
+    updateFieldValue(item) {
+      dispatch(updateFieldValue(item));
     },
   };
 };

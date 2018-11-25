@@ -5,6 +5,7 @@ import apiService from '../../../shared/service/apiService';
 import constants from '../../../shared/constants';
 import {getValue} from '../../../shared/service/localStorage';
 import history from "../../../shared/service/history";
+import {selectPickUp} from "./pickUpSelector";
 
 const pickUpPending = () => {
   return {
@@ -35,6 +36,17 @@ const setPickUp = pickUp => {
   return {
     type: pickUpActionTypes.SET_PICK_UP,
     pickUp,
+  };
+};
+
+const updateFieldValue = item => {
+  return (dispatch, getState) => {
+    const pickUp = selectPickUp(getState());
+    dispatch({
+      type: pickUpActionTypes.UPDATE_PICK_UP_HEADER_FIELD_VALUE,
+      item,
+      pickUp,
+    });
   };
 };
 
@@ -77,4 +89,4 @@ const getPickUp = task => {
   };
 };
 
-export {getPickUp};
+export {getPickUp, updateFieldValue};

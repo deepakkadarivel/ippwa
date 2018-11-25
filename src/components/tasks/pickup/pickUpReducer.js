@@ -28,6 +28,15 @@ const pickUpReducer = (state = pickUpInitialState, action) => {
     case pickUpActionTypes.SET_PICK_UP:
       return state.set('pickUp', action.pickUp);
 
+    case pickUpActionTypes.UPDATE_PICK_UP_HEADER_FIELD_VALUE:
+        const updatedHeader = action.pickUp.header.map(x => {
+          if (x.name === action.item.key) {
+            return {...x, value: action.item.value};
+          }
+          return x;
+        });
+      return state.setIn(['pickUp', 'header'], updatedHeader);
+
     default:
       return state;
   }

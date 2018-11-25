@@ -3,6 +3,7 @@ import PickUpComponent from './PickUpComponent';
 
 import {
   getPickUp,
+  updateFieldValue,
 } from './pickUpActions';
 import {selectPickUp, selectPickUpPromise} from "./pickUpSelector";
 
@@ -19,6 +20,9 @@ const mapDispatchToProps = dispatch => {
   return {
     getPickUp(task) {
       dispatch(getPickUp(task));
+    },
+    updateFieldValue(item) {
+      dispatch(updateFieldValue(item));
     },
   };
 };

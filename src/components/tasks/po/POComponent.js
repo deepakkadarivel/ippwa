@@ -13,16 +13,17 @@ class POComponent extends Component {
     const {
       po,
       promise,
+      updateFieldValue,
     } = this.props;
 
-    const handleSelectChange = prop => event => {
-      this.setState({[prop]: event.target.value});
+    const handleChange = prop => event => {
+      updateFieldValue({key: prop, value: event.target.value});
     };
 
     return (
       <div className='PO container'>
         {/* Header */}
-        {promise.isFulfilled && <Header header={po.header} title={constants.PO.PO_TITLE} handleSelectChange={handleSelectChange}/>}
+        {promise.isFulfilled && <Header header={po.header} title={constants.PO.PO_TITLE} handleChange={handleChange}/>}
       </div>
     )
   }
@@ -30,6 +31,7 @@ class POComponent extends Component {
 
 POComponent.propTypes = {
   getPO: PropTypes.func.isRequired,
+  updateFieldValue: PropTypes.func.isRequired,
   selectedTask: PropTypes.object.isRequired,
   po: PropTypes.object.isRequired,
   promise: PropTypes.object.isRequired,

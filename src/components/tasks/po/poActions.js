@@ -5,6 +5,7 @@ import apiService from '../../../shared/service/apiService';
 import constants from '../../../shared/constants';
 import {getValue} from '../../../shared/service/localStorage';
 import history from "../../../shared/service/history";
+import {selectPO} from "./poSelector";
 
 const poPending = () => {
   return {
@@ -35,6 +36,17 @@ const setPO = po => {
   return {
     type: poActionTypes.SET_PO,
     po,
+  };
+};
+
+const updateFieldValue = item => {
+  return (dispatch, getState) => {
+    const po = selectPO(getState());
+    dispatch({
+      type: poActionTypes.UPDATE_PO_HEADER_FIELD_VALUE,
+      item,
+      po,
+    });
   };
 };
 
@@ -77,4 +89,4 @@ const getPO = task => {
   };
 };
 
-export {getPO};
+export {getPO, updateFieldValue};
