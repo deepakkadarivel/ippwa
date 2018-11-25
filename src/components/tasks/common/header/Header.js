@@ -8,6 +8,7 @@ import './header.scss';
 import FormInput from "../../../common/form/FormInput";
 import FormSelect from "../../../common/form/FormSelect";
 import FormTextArea from "../../../common/form/FormTextArea";
+import FormDate from "../../../common/form/FormDate";
 
 const renderHeaders = props => {
   const {
@@ -22,6 +23,8 @@ const renderHeaders = props => {
         return <FormSelect key={x.id} x={x} className='col-s-4 col-3 col-' handleChange={handleChange}/>;
       case 'textArea':
         return <FormTextArea key={x.id} x={x} className='col-s-4 col-3 col-' handleChange={handleChange}/>;
+      case 'date':
+        return <FormDate key={x.id} x={x} className='col-s-4 col-3 col-' handleChange={handleChange}/>;
       default:
         return null;
     }

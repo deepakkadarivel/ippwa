@@ -10,7 +10,7 @@ const FormTextArea = props => <TextField
   value={props.x.readOnly ? getString(props.x.value) : getExactString(props.x.value)}
   name={getString(props.x.name)}
   className={`Form-Field ${props.className}`}
-  onChange={props.handleChange(getString(props.x.name))}
+  onChange={props.handleChange(props.x.name)}
   margin="normal"
   multiline={true}
   rowsMax={props.x.rowsMax}

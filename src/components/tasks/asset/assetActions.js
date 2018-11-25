@@ -5,6 +5,7 @@ import apiService from '../../../shared/service/apiService';
 import constants from '../../../shared/constants';
 import {getValue} from '../../../shared/service/localStorage';
 import history from "../../../shared/service/history";
+import {selectAsset} from "./assetSelector";
 
 const assetPending = () => {
   return {
@@ -38,6 +39,17 @@ const setAsset = asset => {
   };
 };
 
+const updateFieldValue = item => {
+  return (dispatch, getState) => {
+    const asset = selectAsset(getState());
+    dispatch({
+      type: assetActionTypes.UPDATE_ASSET_HEADER_FIELD_VALUE,
+      item,
+      asset,
+    });
+  };
+};
+
 const getAsset = task => {
   return (dispatch, getState) => {
     const assetUrl = apiService.endpoints.app.generateAssetUrl();
@@ -62,8 +74,8 @@ const getAsset = task => {
         }
       })
       .then(response => {
-        dispatch(assetFulfilled());
         dispatch(setAsset(response.data));
+        dispatch(assetFulfilled());
       })
       .catch((err) => {
         dispatch(assetRejected());
@@ -77,4 +89,4 @@ const getAsset = task => {
   };
 };
 
-export {getAsset};
+export {getAsset, updateFieldValue};

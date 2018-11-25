@@ -60,5 +60,6 @@ export default {
 
   PO: {
     PO_TITLE: 'PO Amendment',
+    ASSET_TRACKING: 'Asset Tracking',
   }
 }
