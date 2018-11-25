@@ -5,6 +5,7 @@ import apiService from '../../../shared/service/apiService';
 import constants from '../../../shared/constants';
 import {getValue} from '../../../shared/service/localStorage';
 import history from "../../../shared/service/history";
+import {selectInvoice} from "./invoiceSelector";
 
 const invoicePending = () => {
   return {
@@ -38,6 +39,17 @@ const setInvoice = invoice => {
   };
 };
 
+const updateFieldValue = item => {
+  return (dispatch, getState) => {
+    const invoice = selectInvoice(getState());
+    dispatch({
+      type: invoiceActionTypes.UPDATE_INVOICE_HEADER_FIELD_VALUE,
+      item,
+      invoice,
+    });
+  };
+};
+
 const getInvoice = task => {
   return (dispatch, getState) => {
     const invoiceUrl = apiService.endpoints.app.generateInvoiceUrl();
@@ -62,8 +74,8 @@ const getInvoice = task => {
         }
       })
       .then(response => {
-        dispatch(invoiceFulfilled());
         dispatch(setInvoice(response.data));
+        dispatch(invoiceFulfilled());
       })
       .catch((err) => {
         dispatch(invoiceRejected());
@@ -77,4 +89,4 @@ const getInvoice = task => {
   };
 };
 
-export {getInvoice};
+export {getInvoice, updateFieldValue};

@@ -25,7 +25,7 @@ class PickUpComponent extends Component {
       <div className='PickUp container'>
         {/* Header */}
         {promise.isFulfilled &&
-        <Header header={pickUp.header} title={constants.PO.PO_TITLE} handleChange={handleChange}/>}
+        <Header header={pickUp.header} title={constants.TASK.PICK_UP_TITLE} handleChange={handleChange}/>}
       </div>
     )
   }

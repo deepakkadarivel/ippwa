@@ -58,8 +58,10 @@ export default {
     APPROVE_ASSET_TYPE_API: 11,
   },
 
-  PO: {
-    PO_TITLE: 'PO Amendment',
-    ASSET_TRACKING: 'Asset Tracking',
+  TASK: {
+    PO_AMENDMENT_TITLE: 'PO Amendment',
+    PICK_UP_TITLE: 'Pickup - Edit Request Item',
+    ASSET_TITLE: 'Edit Asset',
+    INVOICE_TITLE: 'Edit Invoice',
   }
 }

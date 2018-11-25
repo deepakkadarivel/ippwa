@@ -28,6 +28,15 @@ const invoiceReducer = (state = invoiceInitialState, action) => {
     case invoiceActionTypes.SET_INVOICE:
       return state.set('invoice', action.invoice);
 
+    case invoiceActionTypes.UPDATE_INVOICE_HEADER_FIELD_VALUE:
+      const updatedHeader = action.invoice.header.map(x => {
+        if (x.name === action.item.key) {
+          return {...x, value: action.item.value};
+        }
+        return x;
+      });
+      return state.setIn(['invoice', 'header'], updatedHeader);
+
     default:
       return state;
   }

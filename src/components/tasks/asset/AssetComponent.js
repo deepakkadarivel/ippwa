@@ -23,7 +23,7 @@ class AssetComponent extends Component {
       <div className='Asset container'>
         {/* Header */}
         {promise.isFulfilled &&
-        <Header header={asset.header} title={constants.PO.ASSET_TRACKING} handleChange={handleChange}/>}
+        <Header header={asset.header} title={constants.TASK.ASSET_TITLE} handleChange={handleChange}/>}
       </div>
     )
   }

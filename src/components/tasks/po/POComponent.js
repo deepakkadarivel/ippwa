@@ -23,7 +23,7 @@ class POComponent extends Component {
     return (
       <div className='PO container'>
         {/* Header */}
-        {promise.isFulfilled && <Header header={po.header} title={constants.PO.PO_TITLE} handleChange={handleChange}/>}
+        {promise.isFulfilled && <Header header={po.header} title={constants.TASK.PO_AMENDMENT_TITLE} handleChange={handleChange}/>}
       </div>
     )
   }
