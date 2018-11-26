@@ -37,6 +37,20 @@ const invoiceReducer = (state = invoiceInitialState, action) => {
       });
       return state.setIn(['invoice', 'header'], updatedHeader);
 
+    case invoiceActionTypes.UPDATE_INVOICE_LINE_FIELD_VALUE:
+      const updatedLines = action.invoice.invoiceLineItems.map(x => {
+        if (x.header.label === action.item.header) {
+          x.map(y => {
+            if (y.header === action.item.key) {
+              return {...y, value: action.item.value};
+            }
+            return y;
+          })
+        }
+        return x;
+      });
+      return state.setIn(['invoice', 'invoiceLineItems', 'lines'], updatedLines);
+
     default:
       return state;
   }

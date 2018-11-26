@@ -4,7 +4,8 @@ import {selectInvoice, selectInvoicePromise} from "./invoiceSelector";
 
 import {
   getInvoice,
-  updateFieldValue
+  updateFieldValue,
+  updateLineFieldValue,
 } from './invoiceActions';
 
 const mapStateToProps = state => {
@@ -23,6 +24,9 @@ const mapDispatchToProps = dispatch => {
     },
     updateFieldValue(item) {
       dispatch(updateFieldValue(item));
+    },
+    updateLineFieldValue(item) {
+      dispatch(updateLineFieldValue(item));
     },
   };
 };

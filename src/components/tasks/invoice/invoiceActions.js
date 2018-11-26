@@ -50,6 +50,17 @@ const updateFieldValue = item => {
   };
 };
 
+const updateLineFieldValue = item => {
+  return (dispatch, getState) => {
+    const invoice = selectInvoice(getState());
+    dispatch({
+      type: invoiceActionTypes.UPDATE_INVOICE_LINE_FIELD_VALUE,
+      item,
+      invoice,
+    });
+  };
+};
+
 const getInvoice = task => {
   return (dispatch, getState) => {
     const invoiceUrl = apiService.endpoints.app.generateInvoiceUrl();
@@ -89,4 +100,4 @@ const getInvoice = task => {
   };
 };
 
-export {getInvoice, updateFieldValue};
+export {getInvoice, updateFieldValue, updateLineFieldValue};
