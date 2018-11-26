@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from "prop-types";
 import Header from "../common/header/Header";
 import constants from "../../../shared/constants";
-import {updateFieldValue} from "./pickUpActions";
+import Line from "../common/line/Line";
 
 class PickUpComponent extends Component {
 
@@ -15,10 +15,15 @@ class PickUpComponent extends Component {
       pickUp,
       promise,
       updateFieldValue,
+      updateLineFieldValue,
     } = this.props;
 
     const handleChange = prop => event => {
       updateFieldValue({key: prop, value: event.target.value});
+    };
+
+    const handleLineChange = prop => event => {
+      updateLineFieldValue({header: prop.header, key: prop.field, value: event.target.value});
     };
 
     return (
@@ -26,6 +31,7 @@ class PickUpComponent extends Component {
         {/* Header */}
         {promise.isFulfilled &&
         <Header header={pickUp.header} title={constants.TASK.PICK_UP_TITLE} handleChange={handleChange}/>}
+        {promise.isFulfilled && pickUp.pickUpLineItems.map(x => <Line item={x} handleChange={handleLineChange}/>)}
       </div>
     )
   }
@@ -34,6 +40,7 @@ class PickUpComponent extends Component {
 PickUpComponent.propTypes = {
   getPickUp: PropTypes.func.isRequired,
   updateFieldValue: PropTypes.func.isRequired,
+  updateLineFieldValue: PropTypes.func.isRequired,
   selectedTask: PropTypes.object.isRequired,
   pickUp: PropTypes.object.isRequired,
   promise: PropTypes.object.isRequired,

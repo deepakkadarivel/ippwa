@@ -15,6 +15,7 @@ class POComponent extends Component {
       po,
       promise,
       updateFieldValue,
+      updateLineFieldValue,
     } = this.props;
 
     const handleChange = prop => event => {
@@ -22,7 +23,7 @@ class POComponent extends Component {
     };
 
     const handleLineChange = prop => event => {
-      updateFieldValue({header: prop.header, key: prop.field, value: event.target.value});
+      updateLineFieldValue({header: prop.header, key: prop.field, value: event.target.value});
     };
 
     return (

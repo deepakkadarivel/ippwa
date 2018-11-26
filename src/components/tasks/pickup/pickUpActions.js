@@ -50,6 +50,17 @@ const updateFieldValue = item => {
   };
 };
 
+const updateLineFieldValue = item => {
+  return (dispatch, getState) => {
+    const pickUp = selectPickUp(getState());
+    dispatch({
+      type: pickUpActionTypes.UPDATE_PICK_UP_LINE_FIELD_VALUE,
+      item,
+      pickUp,
+    });
+  };
+};
+
 const getPickUp = task => {
   return (dispatch, getState) => {
     const pickUpUrl = apiService.endpoints.app.generatePickUpUrl();
@@ -89,4 +100,4 @@ const getPickUp = task => {
   };
 };
 
-export {getPickUp, updateFieldValue};
+export {getPickUp, updateFieldValue, updateLineFieldValue};

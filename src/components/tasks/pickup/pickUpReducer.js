@@ -1,6 +1,7 @@
 import pickUpActionTypes from './pickUpActionTypes';
 import pickUpInitialState from './pickUpInitialState';
 import setPromiseState from '../../../shared/service/promiseState';
+import poActionTypes from "../po/poActionTypes";
 
 const pickUpReducer = (state = pickUpInitialState, action) => {
   switch (action.type) {
@@ -36,6 +37,20 @@ const pickUpReducer = (state = pickUpInitialState, action) => {
           return x;
         });
       return state.setIn(['pickUp', 'header'], updatedHeader);
+
+    case pickUpActionTypes.UPDATE_PICK_UP_LINE_FIELD_VALUE:
+      const updatedLines = action.pickUp.pickUpLineItems.map(x => {
+        if (x.header.label === action.item.header) {
+          x.map(y => {
+            if (y.header === action.item.key) {
+              return {...y, value: action.item.value};
+            }
+            return y;
+          })
+        }
+        return x;
+      });
+      return state.setIn(['pickUp', 'pickUpLineItems', 'lines'], updatedLines);
 
     default:
       return state;
