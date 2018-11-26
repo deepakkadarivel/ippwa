@@ -1,7 +1,6 @@
 import assetActionTypes from './assetActionTypes';
 import assetInitialState from './assetInitialState';
 import setPromiseState from '../../../shared/service/promiseState';
-import pickUpActionTypes from "../pickup/pickUpActionTypes";
 
 const assetReducer = (state = assetInitialState, action) => {
   switch (action.type) {
@@ -37,6 +36,20 @@ const assetReducer = (state = assetInitialState, action) => {
         return x;
       });
       return state.setIn(['asset', 'header'], updatedHeader);
+
+    case assetActionTypes.UPDATE_ASSET_LINE_FIELD_VALUE:
+      const updatedLines = action.asset.assetLineItems.map(x => {
+        if (x.header.label === action.item.header) {
+          x.map(y => {
+            if (y.header === action.item.key) {
+              return {...y, value: action.item.value};
+            }
+            return y;
+          })
+        }
+        return x;
+      });
+      return state.setIn(['asset', 'assetLineItems', 'lines'], updatedLines);
 
     default:
       return state;

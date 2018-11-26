@@ -3,7 +3,8 @@ import AssetComponent from './AssetComponent';
 
 import {
   getAsset,
-  updateFieldValue
+  updateFieldValue,
+  updateLineFieldValue,
 } from './assetActions';
 import {selectAsset, selectAssetPromise} from "./assetSelector";
 
@@ -23,6 +24,9 @@ const mapDispatchToProps = dispatch => {
     },
     updateFieldValue(item) {
       dispatch(updateFieldValue(item));
+    },
+    updateLineFieldValue(item) {
+      dispatch(updateLineFieldValue(item));
     },
   };
 };

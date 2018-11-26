@@ -50,6 +50,17 @@ const updateFieldValue = item => {
   };
 };
 
+const updateLineFieldValue = item => {
+  return (dispatch, getState) => {
+    const asset = selectAsset(getState());
+    dispatch({
+      type: assetActionTypes.UPDATE_ASSET_LINE_FIELD_VALUE,
+      item,
+      asset,
+    });
+  };
+};
+
 const getAsset = task => {
   return (dispatch, getState) => {
     const assetUrl = apiService.endpoints.app.generateAssetUrl();
@@ -89,4 +100,4 @@ const getAsset = task => {
   };
 };
 
-export {getAsset, updateFieldValue};
+export {getAsset, updateFieldValue, updateLineFieldValue};
