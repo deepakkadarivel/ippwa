@@ -53,7 +53,7 @@ const updateFieldValue = item => {
 const updateLineFieldValue = item => {
   return (dispatch, getState) => {
     const po = selectPO(getState());
-    dispatch({
+    return dispatch({
       type: poActionTypes.UPDATE_PO_LINE_FIELD_VALUE,
       item,
       po,

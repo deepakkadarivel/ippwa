@@ -1,7 +1,6 @@
 import poActionTypes from './poActionTypes';
 import poInitialState from './poInitialState';
 import setPromiseState from '../../../shared/service/promiseState';
-import pickUpActionTypes from "../pickup/pickUpActionTypes";
 
 const poReducer = (state = poInitialState, action) => {
   switch (action.type) {
@@ -39,18 +38,20 @@ const poReducer = (state = poInitialState, action) => {
       return state.setIn(['po', 'header'], updatedHeader);
 
     case poActionTypes.UPDATE_PO_LINE_FIELD_VALUE:
-      const updatedLines = action.po.poLineItems.map(x => {
-        if (x.header.label === action.item.header) {
-          x.map(y => {
-            if (y.header === action.item.key) {
-              return {...y, value: action.item.value};
-            }
-            return y;
-          })
+      const items = action.po.poLineItems[action.item.index];
+      const lines = items.lines.map(x => {
+        if (x.name === action.item.key) {
+          return {...x, value: action.item.value};
         }
         return x;
       });
-      return state.setIn(['po', 'poLineItems', 'lines'], updatedLines);
+      const updatedLines = action.po.poLineItems.map((line, i) => {
+        if (i === action.item.index) {
+          return {header: line.header, lines}
+        }
+        return line;
+      });
+      return state.setIn(['po', 'poLineItems'], updatedLines);
 
     default:
       return state;

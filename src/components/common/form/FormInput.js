@@ -10,12 +10,14 @@ const FormInput = props => <TextField
     value={props.x.readOnly ? getString(props.x.value) : getExactString(props.x.value)}
     name={getString(props.x.name)}
     className={`Form-Field ${props.className}`}
-    onChange={props.handleChange(props.x.name)}
+    // onChange={props.handleChange(props.x.name)}
+    onChange={props.handleChange}
     margin="normal"
     InputProps={{
       readOnly: props.x.readOnly,
       // disableUnderline: props.x.readOnly,
     }}
+    variant={props.x.variant}
   />;
 
 FormInput.propTypes = {

@@ -12,7 +12,7 @@ const FormDate = props => <TextField
     value={getDateString(props.x.value)}
     className={`Form-Field ${props.className}`}
     margin="normal"
-    onChange={props.handleChange(props.x.name)}
+    onChange={props.handleChange}
     InputLabelProps={{
       shrink: true,
       readOnly: props.x.readOnly,

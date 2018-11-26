@@ -13,7 +13,7 @@ const FormSelect = props => <TextField
   name={getString(props.x.name)}
   className={`Form-Field ${props.className}`}
   margin="normal"
-  onChange={props.handleChange(props.x.name)}
+  onChange={props.handleChange}
   InputProps={{
     readOnly: props.x.readOnly,
     // disableUnderline: props.x.readOnly,

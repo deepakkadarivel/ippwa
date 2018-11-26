@@ -1,6 +1,7 @@
 import invoiceActionTypes from './invoiceActionTypes';
 import invoiceInitialState from './invoiceInitialState';
 import setPromiseState from '../../../shared/service/promiseState';
+import assetActionTypes from "../asset/assetActionTypes";
 
 const invoiceReducer = (state = invoiceInitialState, action) => {
   switch (action.type) {
@@ -38,18 +39,20 @@ const invoiceReducer = (state = invoiceInitialState, action) => {
       return state.setIn(['invoice', 'header'], updatedHeader);
 
     case invoiceActionTypes.UPDATE_INVOICE_LINE_FIELD_VALUE:
-      const updatedLines = action.invoice.invoiceLineItems.map(x => {
-        if (x.header.label === action.item.header) {
-          x.map(y => {
-            if (y.header === action.item.key) {
-              return {...y, value: action.item.value};
-            }
-            return y;
-          })
+      const items = action.invoice.invoiceLineItems[action.item.index];
+      const lines = items.lines.map(x => {
+        if (x.name === action.item.key) {
+          return {...x, value: action.item.value};
         }
         return x;
       });
-      return state.setIn(['invoice', 'invoiceLineItems', 'lines'], updatedLines);
+      const updatedLines = action.invoice.invoiceLineItems.map((line, i) => {
+        if (i === action.item.index) {
+          return {header: line.header, lines}
+        }
+        return line;
+      });
+      return state.setIn(['invoice', 'invoiceLineItems'], updatedLines);
 
     default:
       return state;

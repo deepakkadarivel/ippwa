@@ -17,12 +17,12 @@ class InvoiceComponent extends Component {
       updateLineFieldValue
     } = this.props;
 
-    const handleChange = prop => event => {
-      updateFieldValue({key: prop, value: event.target.value});
+    const handleChange = event => {
+      updateFieldValue({key: event.target.name, value: event.target.value});
     };
 
-    const handleLineChange = prop => event => {
-      updateLineFieldValue({header: prop.header, key: prop.field, value: event.target.value});
+    const handleLineChange = y => event => {
+      updateLineFieldValue({index: y, key: event.target.name, value: event.target.value});
     };
 
     return (
@@ -30,7 +30,7 @@ class InvoiceComponent extends Component {
         {/* Header */}
         {promise.isFulfilled &&
         <Header header={invoice.header} title={constants.TASK.INVOICE_TITLE} handleChange={handleChange}/>}
-        {promise.isFulfilled && invoice.invoiceLineItems.map(x => <Line item={x} handleChange={handleLineChange}/>)}
+        {promise.isFulfilled && invoice.invoiceLineItems.map((x, y) => <Line key={y} item={x} handleChange={handleLineChange(y)}/>)}
       </div>
     )
   }
