@@ -8,7 +8,6 @@ import Price from "../common/price/Price";
 import Footer from "../common/footer/Footer";
 import Divider from "@material-ui/core/Divider/Divider";
 import Actions from "../common/actions/Actions";
-import history from "../../../shared/service/history";
 
 class POComponent extends Component {
   componentDidMount() {

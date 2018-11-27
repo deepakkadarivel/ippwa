@@ -23,7 +23,7 @@ class MyTasks extends Component {
       <div className={classes.root}>
         <Desktop><DesktopTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} /></Desktop>
         <Tablet><DesktopTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} /></Tablet>
-        <Mobile><MobileTable tasks={tasks} setSelectedTask={setSelectedTask} /></Mobile>
+        <Mobile><MobileTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} /></Mobile>
         {/*<Default><DesktopTable tasks={this.props.tasks}/></Default>*/}
       </div>
     </div>);

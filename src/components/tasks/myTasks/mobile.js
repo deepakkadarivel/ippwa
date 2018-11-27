@@ -58,13 +58,33 @@ class MyTasksCard extends React.Component {
   };
 
   render() {
-    const { classes, task } = this.props;
+    const { classes, task, history, setSelectedTask } = this.props;
 
     const columns = constants.tasks.columns;
 
+    const handleClick = () => {
+      setSelectedTask(task);
+      switch (task.workflowTypeId) {
+        case constants.TASKS_WORKFLOW_IDS.PO_REQUISITION_PROCESSING_TYPE:
+          history.push('/home/tasks/po');
+          break;
+        case constants.TASKS_WORKFLOW_IDS.PICKUP_PROCESSING_TYPE:
+          history.push('/home/tasks/pickUp');
+          break;
+        case constants.TASKS_WORKFLOW_IDS.INVOICE_PROCESSING_TYPE:
+          history.push('/home/tasks/invoice');
+          break;
+        case constants.TASKS_WORKFLOW_IDS.ASSET_PROCESSING_TYPE:
+          history.push('/home/tasks/asset');
+          break;
+        default:
+          break;
+      }
+    };
+
     return (
       <Card className={classes.card}>
-        <CardActionArea>
+        <CardActionArea onClick={() => handleClick()}>
         <CardContent className={classes.cardContent}>
           <Typography variant="h5" component="h2" color="secondary">
             {task.workflowTypeName}
@@ -171,7 +191,7 @@ MyTasksCard = withStyles(styles)(MyTasksCard);
 
 const MobileTable = props => {
   return (<div>
-    {props.tasks.map((task, index) => <MyTasksCard key={index} task={task} />)}
+    {props.tasks.map((task, index) => <MyTasksCard key={index} task={task} history={props.history} setSelectedTask={props.setSelectedTask} />)}
   </div>);
 };
 
