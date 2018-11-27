@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import Header from "../common/header/Header";
 import constants from "../../../shared/constants";
 import Line from "../common/line/Line";
+import Divider from "@material-ui/core/Divider/Divider";
+import Footer from "../common/footer/Footer";
+import Actions from "../common/actions/Actions";
 
 class InvoiceComponent extends Component {
   componentDidMount() {
@@ -14,7 +17,8 @@ class InvoiceComponent extends Component {
       invoice,
       promise,
       updateFieldValue,
-      updateLineFieldValue
+      updateLineFieldValue,
+      history,
     } = this.props;
 
     const handleChange = event => {
@@ -31,6 +35,10 @@ class InvoiceComponent extends Component {
         {promise.isFulfilled &&
         <Header header={invoice.header} title={constants.TASK.INVOICE_TITLE} handleChange={handleChange}/>}
         {promise.isFulfilled && invoice.invoiceLineItems.map((x, y) => <Line key={y} item={x} handleChange={handleLineChange(y)}/>)}
+        <Divider variant="inset"/>
+        {promise.isFulfilled && <Footer items={invoice.footer}/>}
+        <Divider variant="inset"/>
+        {promise.isFulfilled && <Actions history={history}/>}
       </div>
     )
   }

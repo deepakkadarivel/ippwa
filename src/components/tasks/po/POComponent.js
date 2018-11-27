@@ -5,6 +5,10 @@ import Header from "../common/header/Header";
 import constants from "../../../shared/constants";
 import Line from "../common/line/Line";
 import Price from "../common/price/Price";
+import Footer from "../common/footer/Footer";
+import Divider from "@material-ui/core/Divider/Divider";
+import Actions from "../common/actions/Actions";
+import history from "../../../shared/service/history";
 
 class POComponent extends Component {
   componentDidMount() {
@@ -17,6 +21,7 @@ class POComponent extends Component {
       promise,
       updateFieldValue,
       updateLineFieldValue,
+      history,
     } = this.props;
 
     const handleChange = event => {
@@ -32,8 +37,13 @@ class POComponent extends Component {
         {/* Header */}
         {promise.isFulfilled &&
         <Header header={po.header} title={constants.TASK.PO_AMENDMENT_TITLE} handleChange={handleChange}/>}
-        {promise.isFulfilled && po.poLineItems.map((x, y) => <Line key={y} item={x} handleChange={handleLineChange(y)}/>)}
+        {promise.isFulfilled && po.poLineItems.map((x, y) => <Line key={y} item={x}
+                                                                   handleChange={handleLineChange(y)}/>)}
         {promise.isFulfilled && <Price items={po.prices}/>}
+        <Divider variant="inset"/>
+        {promise.isFulfilled && <Footer items={po.footer}/>}
+        <Divider variant="inset"/>
+        {promise.isFulfilled && <Actions history={history}/>}
       </div>
     )
   }

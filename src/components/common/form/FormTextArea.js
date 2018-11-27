@@ -18,6 +18,7 @@ const FormTextArea = props => <TextField
     readOnly: props.x.readOnly,
     // disableUnderline: props.x.readOnly,
   }}
+  variant={props.x.variant}
 />;
 
 FormTextArea.propTypes = {

@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import Header from "../common/header/Header";
 import constants from "../../../shared/constants";
 import Line from "../common/line/Line";
+import Divider from "@material-ui/core/Divider/Divider";
+import Footer from "../common/footer/Footer";
+import Actions from "../common/actions/Actions";
 
 class AssetComponent extends Component {
   componentDidMount() {
@@ -15,6 +18,7 @@ class AssetComponent extends Component {
       promise,
       updateFieldValue,
       updateLineFieldValue,
+      history,
     } = this.props;
 
     const handleChange = event => {
@@ -31,6 +35,10 @@ class AssetComponent extends Component {
         {promise.isFulfilled &&
         <Header header={asset.header} title={constants.TASK.ASSET_TITLE} handleChange={handleChange}/>}
         {promise.isFulfilled && asset.assetLineItems.map((x, y) => <Line key={y} item={x} handleChange={handleLineChange(y)}/>)}
+        <Divider variant="inset"/>
+        {promise.isFulfilled && <Footer items={asset.footer}/>}
+        <Divider variant="inset"/>
+        {promise.isFulfilled && <Actions history={history}/>}
       </div>
     )
   }
