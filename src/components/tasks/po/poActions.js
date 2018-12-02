@@ -25,6 +25,24 @@ const poRejected = () => {
   };
 };
 
+const updatePOPending = () => {
+  return {
+    type: poActionTypes.UPDATE_PO.pending
+  };
+};
+
+const updatePOFulfilled = () => {
+  return {
+    type: poActionTypes.UPDATE_PO.fulfilled
+  };
+};
+
+const updatePORejected = () => {
+  return {
+    type: poActionTypes.UPDATE_PO.rejected
+  };
+};
+
 const setErrorMessage = message => {
   return {
     type: poActionTypes.SET_ERROR_MESSAGE,
@@ -83,6 +101,90 @@ const getPO = task => {
 
     return axios
       .post(poUrl, payload, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        dispatch(setPO(response.data));
+        dispatch(poFulfilled());
+      })
+      .catch(err => {
+        dispatch(poRejected());
+        if (err.response && err.response.status === 401) {
+          history.push('/login');
+          dispatch(setErrorMessage(constants.SESSION_EXPIRED));
+        } else {
+          dispatch(
+            setErrorMessage(err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE)
+          );
+        }
+      });
+  };
+};
+
+const getItemJsonString = po => {
+  return '';
+};
+
+const updatePO = (po, comments => {
+  return (dispatch, getState) => {
+    const updatePOUrl = apiService.endpoints.app.generateUpdatePOUrl();
+    dispatch(updatePOPending());
+
+    let payload = {
+      cookie: getValue(constants.LOCAL_STORAGE.COOKIE) || constants.EMPTY_STRING,
+      loadBalancer: getValue(constants.LOCAL_STORAGE.LOADBALANCER) || constants.EMPTY_STRING,
+      payload: {
+        requisitionNo: po.requisitionNo,
+        workflowId: po.workflowId,
+        supplierId: po.supplierId,
+        currency: po.currency,
+        shippingAddressId: po.shippingAddressId,
+        billingAddressId: po.billingAddressId,
+        purchaseOrder: po.purchaseOrder,
+        requisitionId: po.requisitionId,
+        workflowAuditId: po.workflowAuditId,
+        taskId: po.taskId,
+        seqFlow: po.seqFlow,
+        auditTrackId: po.auditTrackId,
+        processInstanceId: po.processInstanceId,
+        submitType: submitType,
+        poFrom: po.poFrom,
+        totalAmount: totalAmount,
+        companyId: po.companyId,
+        userId: getValue(constants.LOCAL_STORAGE.USER_ID) || constants.EMPTY_STRING,
+        apiType: po.amendmentEdit ? Constants.UPDATE_PO_AMENDMENT_TYPE_API : Constants.UPDATE_PO_REQ_TYPE_API,
+        comments,
+        dynamicColumns: po.dynamicColumns || '',
+        itemJson: getItemJsonString(),
+        terms: po.terms,
+        paymentTerms: po.paymentTerms,
+        entityId: po.entityId,
+        entityName: po.entityName,
+        viewId: po.viewId,
+        viewName: po.viewName,
+        requesterId: po.requesterId,
+        parentId: po.parentId,
+        poAmendment: po.poAmendment,
+        discount: po.discount,
+        amendmentEdit: po.amendmentEdit,
+        startDate: po.startDate,
+        endDate: po.endDate,
+        email: po.email,
+        isAddressInput: po.isAddressInput,
+        isAdvance: po.isAdvance,
+        isAdvancePaid: po.isAdvancePaid,
+        advancePayment: po.advancePayment,
+        deliveryAddress: po.deliveryAddress,
+        contactNo: po.contactNo,
+        tinNo: po.tinNo,
+        vatNo: po.vatNo,
+      }
+    };
+
+    return axios
+      .post(updatePOUrl, payload, {
         headers: {
           'Content-Type': 'application/json'
         }

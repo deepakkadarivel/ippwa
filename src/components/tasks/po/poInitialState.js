@@ -3,7 +3,8 @@ import setPromiseState from '../../../shared/service/promiseState';
 
 const poInitialState = seamlessImmutable({
   promise: {
-    po: setPromiseState()
+    po: setPromiseState(),
+    updatePO: setPromiseState()
   },
   errorMessage: '',
   po: {}
