@@ -4,7 +4,7 @@ import './po.scss';
 import Header from '../common/header/Header';
 import constants from '../../../shared/constants';
 import POLine from './POLine';
-import Price from '../common/price/Price';
+import POPrice from './POPrice';
 import Footer from '../common/footer/Footer';
 import Divider from '@material-ui/core/Divider/Divider';
 import Actions from '../common/actions/Actions';
@@ -38,7 +38,7 @@ class POComponent extends Component {
             {po.poLineItems.map((x, y) => (
               <POLine key={y} line={x} handleLineItemChange={handleLineItemChange(y)} />
             ))}
-            {/* <Price items={po.prices} /> */}
+            <POPrice lines={po.poLineItems} />
             <Divider variant="inset" />
             <Footer items={po.footer} />
             <Divider variant="inset" />
