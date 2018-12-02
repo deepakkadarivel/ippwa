@@ -21,6 +21,10 @@ const apiService = {
       generatePOUrl() {
         return `${baseUrl}${this.po}`;
       },
+      updatePO: '/updatePO',
+      generateUpdatePOUrl() {
+        return `${baseUrl}${this.updatePO}`;
+      },
       pickUp: '/pickUp',
       generatePickUpUrl() {
         return `${baseUrl}${this.pickUp}`;

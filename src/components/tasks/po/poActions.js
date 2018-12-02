@@ -123,13 +123,9 @@ const getPO = task => {
   };
 };
 
-const getItemJsonString = po => {
-  return '';
-};
-
-const updatePO = (po, comments => {
+const updatePO = (po, comments, totalAmount, submitType, history) => {
   return (dispatch, getState) => {
-    const updatePOUrl = apiService.endpoints.app.generateUpdatePOUrl();
+    const updatePOUrl = apiService.endpoints.app.generatePOUrl();
     dispatch(updatePOPending());
 
     let payload = {
@@ -154,10 +150,10 @@ const updatePO = (po, comments => {
         totalAmount: totalAmount,
         companyId: po.companyId,
         userId: getValue(constants.LOCAL_STORAGE.USER_ID) || constants.EMPTY_STRING,
-        apiType: po.amendmentEdit ? Constants.UPDATE_PO_AMENDMENT_TYPE_API : Constants.UPDATE_PO_REQ_TYPE_API,
-        comments,
+        apiType: po.amendmentEdit ? constants.API_TYPES.UPDATE_PO_AMENDMENT_TYPE_API : constants.API_TYPES.UPDATE_PO_REQ_TYPE_API,
+        comments: comments || '',
         dynamicColumns: po.dynamicColumns || '',
-        itemJson: getItemJsonString(),
+        itemJson: JSON.stringify(po.poLineItems),
         terms: po.terms,
         paymentTerms: po.paymentTerms,
         entityId: po.entityId,
@@ -191,10 +187,10 @@ const updatePO = (po, comments => {
       })
       .then(response => {
         dispatch(setPO(response.data));
-        dispatch(poFulfilled());
+        history.goBack();
       })
       .catch(err => {
-        dispatch(poRejected());
+        dispatch(updatePORejected());
         if (err.response && err.response.status === 401) {
           history.push('/login');
           dispatch(setErrorMessage(constants.SESSION_EXPIRED));
@@ -207,4 +203,4 @@ const updatePO = (po, comments => {
   };
 };
 
-export { getPO, updateFieldValue, handleLineItemChange };
+export { getPO, updateFieldValue, handleLineItemChange, updatePO };

@@ -15,6 +15,17 @@ const poReducer = (state = poInitialState, action) => {
     case poActionTypes.PO.rejected:
       return state.setIn(['promise', 'po'], setPromiseState(false, false, true));
 
+    case poActionTypes.UPDATE_PO.fulfilled:
+      return state.setIn(['promise', 'updatePO'], setPromiseState(false, true, false));
+
+    case poActionTypes.UPDATE_PO.pending:
+      return state
+        .setIn(['promise', 'updatePO'], setPromiseState(true, false, false))
+        .set('errorMessage', poInitialState.errorMessage);
+
+    case poActionTypes.UPDATE_PO.rejected:
+      return state.setIn(['promise', 'updatePO'], setPromiseState(false, false, true));
+
     case poActionTypes.SET_ERROR_MESSAGE:
       return state.set('errorMessage', action.message);
 
