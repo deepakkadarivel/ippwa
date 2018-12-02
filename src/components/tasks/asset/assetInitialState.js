@@ -6,7 +6,7 @@ const assetInitialState = seamlessImmutable({
     asset: setPromiseState()
   },
   errorMessage: '',
-  asset: {},
+  asset: {}
 });
 
 export default assetInitialState;

@@ -1,11 +1,11 @@
-import 'whatwg-fetch'
+import 'whatwg-fetch';
 import axios from 'axios';
 import assetActionTypes from './assetActionTypes';
 import apiService from '../../../shared/service/apiService';
 import constants from '../../../shared/constants';
-import {getValue} from '../../../shared/service/localStorage';
-import history from "../../../shared/service/history";
-import {selectAsset} from "./assetSelector";
+import { getValue } from '../../../shared/service/localStorage';
+import history from '../../../shared/service/history';
+import { selectAsset } from './assetSelector';
 
 const assetPending = () => {
   return {
@@ -28,14 +28,14 @@ const assetRejected = () => {
 const setErrorMessage = message => {
   return {
     type: assetActionTypes.SET_ERROR_MESSAGE,
-    message,
+    message
   };
 };
 
 const setAsset = asset => {
   return {
     type: assetActionTypes.SET_ASSET,
-    asset,
+    asset
   };
 };
 
@@ -45,7 +45,7 @@ const updateFieldValue = item => {
     dispatch({
       type: assetActionTypes.UPDATE_ASSET_HEADER_FIELD_VALUE,
       item,
-      asset,
+      asset
     });
   };
 };
@@ -56,7 +56,7 @@ const updateLineFieldValue = item => {
     dispatch({
       type: assetActionTypes.UPDATE_ASSET_LINE_FIELD_VALUE,
       item,
-      asset,
+      asset
     });
   };
 };
@@ -74,8 +74,8 @@ const getAsset = task => {
         companyId: task.companyId,
         userId: getValue(constants.LOCAL_STORAGE.USER_ID) || constants.EMPTY_STRING,
         loggedInSupplierId: task.supplierId,
-        apiType: constants.API_TYPES.APPROVE_ASSET_TYPE_API,
-      },
+        apiType: constants.API_TYPES.APPROVE_ASSET_TYPE_API
+      }
     };
 
     return axios
@@ -88,16 +88,18 @@ const getAsset = task => {
         dispatch(setAsset(response.data));
         dispatch(assetFulfilled());
       })
-      .catch((err) => {
+      .catch(err => {
         dispatch(assetRejected());
         if (err.response && err.response.status === 401) {
           history.push('/login');
           dispatch(setErrorMessage(constants.SESSION_EXPIRED));
         } else {
-          dispatch(setErrorMessage(err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE));
+          dispatch(
+            setErrorMessage(err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE)
+          );
         }
       });
   };
 };
 
-export {getAsset, updateFieldValue, updateLineFieldValue};
+export { getAsset, updateFieldValue, updateLineFieldValue };

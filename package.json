@@ -11,7 +11,7 @@
     "gh-pages": "^2.0.1",
     "history": "^4.7.2",
     "lodash": "^4.17.11",
-    "node-sass": "^4.9.4",
+    "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
@@ -44,5 +44,9 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "homepage": "https://deepakkadarivel.github.io/ippwa"
+  "homepage": "https://deepakkadarivel.github.io/ippwa",
+  "devDependencies": {
+    "eslint-config-airbnb": "^17.1.0",
+    "prettier": "^1.15.3"
+  }
 }

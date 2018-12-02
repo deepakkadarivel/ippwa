@@ -1,8 +1,4 @@
-const setPromiseState = (
-  isPending = false,
-  isFulfilled = false,
-  isRejected = false
-) => {
+const setPromiseState = (isPending = false, isFulfilled = false, isRejected = false) => {
   return {
     isPending,
     isFulfilled,

@@ -5,14 +5,14 @@ import history from '../../../../shared/service/history';
 
 const Actions = props => {
   return (
-    <div className='Actions'>
-      <Button size="medium" className='Actions-btn' onClick={() => props.history.goBack()}>
+    <div className="Actions">
+      <Button size="medium" className="Actions-btn" onClick={() => props.history.goBack()}>
         Cancel
       </Button>
-      <Button variant="outlined" size="medium" color="secondary" className='Actions-btn'>
+      <Button variant="outlined" size="medium" color="secondary" className="Actions-btn">
         Complete Approval
       </Button>
-      <Button variant="outlined" size="medium" color="error" className='Actions-btn'>
+      <Button variant="outlined" size="medium" color="error" className="Actions-btn">
         Reject
       </Button>
     </div>

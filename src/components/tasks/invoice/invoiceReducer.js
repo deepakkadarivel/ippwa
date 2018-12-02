@@ -1,27 +1,20 @@
 import invoiceActionTypes from './invoiceActionTypes';
 import invoiceInitialState from './invoiceInitialState';
 import setPromiseState from '../../../shared/service/promiseState';
-import assetActionTypes from "../asset/assetActionTypes";
+import assetActionTypes from '../asset/assetActionTypes';
 
 const invoiceReducer = (state = invoiceInitialState, action) => {
   switch (action.type) {
     case invoiceActionTypes.INVOICE.fulfilled:
-      return state.setIn(
-        ['promise', 'invoice'],
-        setPromiseState(false, true, false)
-      );
+      return state.setIn(['promise', 'invoice'], setPromiseState(false, true, false));
 
     case invoiceActionTypes.INVOICE.pending:
-      return state.setIn(
-        ['promise', 'invoice'],
-        setPromiseState(true, false, false)
-      ).set('errorMessage', invoiceInitialState.errorMessage);
+      return state
+        .setIn(['promise', 'invoice'], setPromiseState(true, false, false))
+        .set('errorMessage', invoiceInitialState.errorMessage);
 
     case invoiceActionTypes.INVOICE.rejected:
-      return state.setIn(
-        ['promise', 'invoice'],
-        setPromiseState(false, false, true)
-      );
+      return state.setIn(['promise', 'invoice'], setPromiseState(false, false, true));
 
     case invoiceActionTypes.SET_ERROR_MESSAGE:
       return state.set('errorMessage', action.message);
@@ -32,7 +25,7 @@ const invoiceReducer = (state = invoiceInitialState, action) => {
     case invoiceActionTypes.UPDATE_INVOICE_HEADER_FIELD_VALUE:
       const updatedHeader = action.invoice.header.map(x => {
         if (x.name === action.item.key) {
-          return {...x, value: action.item.value};
+          return { ...x, value: action.item.value };
         }
         return x;
       });
@@ -42,13 +35,13 @@ const invoiceReducer = (state = invoiceInitialState, action) => {
       const items = action.invoice.invoiceLineItems[action.item.index];
       const lines = items.lines.map(x => {
         if (x.name === action.item.key) {
-          return {...x, value: action.item.value};
+          return { ...x, value: action.item.value };
         }
         return x;
       });
       const updatedLines = action.invoice.invoiceLineItems.map((line, i) => {
         if (i === action.item.index) {
-          return {header: line.header, lines}
+          return { header: line.header, lines };
         }
         return line;
       });

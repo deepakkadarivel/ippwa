@@ -1,4 +1,4 @@
-import 'whatwg-fetch'
+import 'whatwg-fetch';
 import axios from 'axios';
 import loginActionTypes from './loginActionTypes';
 import apiService from '../../shared/service/apiService';
@@ -26,14 +26,14 @@ const loginRejected = () => {
 const setErrorMessage = message => {
   return {
     type: loginActionTypes.SET_ERROR_MESSAGE,
-    message,
+    message
   };
 };
 
 const setAuth = auth => {
   return {
     type: loginActionTypes.SET_AUTH,
-    auth,
+    auth
   };
 };
 
@@ -44,7 +44,7 @@ const login = (userName, password) => {
 
     let payload = {
       userName,
-      password,
+      password
     };
 
     return axios
@@ -58,11 +58,15 @@ const login = (userName, password) => {
         dispatch(setAuth(response.data));
         history.push('/home');
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch(loginRejected());
-        dispatch(setErrorMessage(error.response ? error.response.data.message : constants.SERVER_UNAVAILABLE));
+        dispatch(
+          setErrorMessage(
+            error.response ? error.response.data.message : constants.SERVER_UNAVAILABLE
+          )
+        );
       });
   };
 };
 
-export {login};
+export { login };

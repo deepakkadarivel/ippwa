@@ -1,4 +1,4 @@
-import logo from "../../shared/images/ipact-logo.svg";
+import logo from '../../shared/images/ipact-logo.svg';
 
 const styles = theme => ({
   header: {
@@ -11,20 +11,20 @@ const styles = theme => ({
     backgroundImage: `url(${logo})`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    backgroundSize: 'contain',
+    backgroundSize: 'contain'
   },
   headerDetail: {
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing.unit
   },
   list: {
-    width: 250,
+    width: 250
   },
   link: {
-    textDecoration: 'none',
+    textDecoration: 'none'
   },
   fullList: {
-    width: 'auto',
-  },
+    width: 'auto'
+  }
 });
 
 export default styles;

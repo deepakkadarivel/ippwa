@@ -1,17 +1,14 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import MyTasks from './index';
 import { taskSelector } from './tasksSelector';
 
-import {
-  getTasks,
-  setSelectedTask
-} from './tasksActions';
+import { getTasks, setSelectedTask } from './tasksActions';
 
 const mapStateToProps = state => {
   return {
     promise: state.tasks.promise.tasks,
     errorMessage: state.tasks.errorMessage,
-    tasks: taskSelector(state),
+    tasks: taskSelector(state)
   };
 };
 
@@ -29,4 +26,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MyTasks)
+)(MyTasks);

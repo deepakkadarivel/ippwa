@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Responsive from 'react-responsive';
 import withStyles from '@material-ui/core/styles/withStyles';
-import DesktopTable from "./desktop";
-import MobileTable from "./mobile";
-import './styles.scss'
-import PropTypes from "prop-types";
+import DesktopTable from './desktop';
+import MobileTable from './mobile';
+import './styles.scss';
+import PropTypes from 'prop-types';
 import styles from './styles';
 
 const Desktop = props => <Responsive {...props} minWidth={992} />;
@@ -19,14 +19,22 @@ class MyTasks extends Component {
 
   render() {
     const { classes, tasks, history, setSelectedTask } = this.props;
-    return (<div>
-      <div className={classes.root}>
-        <Desktop><DesktopTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} /></Desktop>
-        <Tablet><DesktopTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} /></Tablet>
-        <Mobile><MobileTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} /></Mobile>
-        {/*<Default><DesktopTable tasks={this.props.tasks}/></Default>*/}
+    return (
+      <div>
+        <div className={classes.root}>
+          <Desktop>
+            <DesktopTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} />
+          </Desktop>
+          <Tablet>
+            <DesktopTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} />
+          </Tablet>
+          <Mobile>
+            <MobileTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} />
+          </Mobile>
+          {/*<Default><DesktopTable tasks={this.props.tasks}/></Default>*/}
+        </div>
       </div>
-    </div>);
+    );
   }
 }
 
@@ -36,8 +44,7 @@ MyTasks.propTypes = {
   promise: PropTypes.object.isRequired,
   errorMessage: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
-  tasks: PropTypes.array.isRequired,
+  tasks: PropTypes.array.isRequired
 };
 
 export default withStyles(styles)(MyTasks);
-

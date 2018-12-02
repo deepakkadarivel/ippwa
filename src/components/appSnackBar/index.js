@@ -11,43 +11,43 @@ import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 const variantIcon = {
   success: CheckCircleIcon,
   warning: WarningIcon,
   error: ErrorIcon,
-  info: InfoIcon,
+  info: InfoIcon
 };
 
 const styles1 = theme => ({
   success: {
-    backgroundColor: green[600],
+    backgroundColor: green[600]
   },
   error: {
-    backgroundColor: theme.palette.error.dark,
+    backgroundColor: theme.palette.error.dark
   },
   info: {
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.primary.dark
   },
   warning: {
-    backgroundColor: amber[700],
+    backgroundColor: amber[700]
   },
   icon: {
-    fontSize: 20,
+    fontSize: 20
   },
   iconVariant: {
     opacity: 0.9,
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing.unit
   },
   message: {
     display: 'flex',
-    alignItems: 'center',
-  },
+    alignItems: 'center'
+  }
 });
 
 function CustomSnackBarContent(props) {
-  const {classes, className, message, onClose, variant, ...other} = props;
+  const { classes, className, message, onClose, variant, ...other } = props;
   const Icon = variantIcon[variant];
 
   return (
@@ -56,7 +56,7 @@ function CustomSnackBarContent(props) {
       aria-describedby="client-snackbar"
       message={
         <span id="client-snackbar" className={classes.message}>
-          <Icon className={classNames(classes.icon, classes.iconVariant)}/>
+          <Icon className={classNames(classes.icon, classes.iconVariant)} />
           {message}
         </span>
       }
@@ -68,8 +68,8 @@ function CustomSnackBarContent(props) {
           className={classes.close}
           onClick={onClose}
         >
-          <CloseIcon className={classes.icon}/>
-        </IconButton>,
+          <CloseIcon className={classes.icon} />
+        </IconButton>
       ]}
       {...other}
     />
@@ -81,29 +81,25 @@ CustomSnackBarContent.propTypes = {
   className: PropTypes.string,
   message: PropTypes.node,
   onClose: PropTypes.func,
-  variant: PropTypes.oneOf(['success', 'warning', 'error', 'info']).isRequired,
+  variant: PropTypes.oneOf(['success', 'warning', 'error', 'info']).isRequired
 };
 
 const SnackBarContentWrapper = withStyles(styles1)(CustomSnackBarContent);
 
 const AppSnackBar = props => {
-  const {open, variant, message, handleClose} = props;
+  const { open, variant, message, handleClose } = props;
   return (
     <div>
       <Snackbar
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'center',
+          horizontal: 'center'
         }}
         open={open}
         autoHideDuration={5000}
         onClose={handleClose}
       >
-        <SnackBarContentWrapper
-          onClose={handleClose}
-          variant={variant}
-          message={message}
-        />
+        <SnackBarContentWrapper onClose={handleClose} variant={variant} message={message} />
       </Snackbar>
     </div>
   );
@@ -113,7 +109,7 @@ AppSnackBar.propTypes = {
   variant: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
   open: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired
 };
 
 export default AppSnackBar;

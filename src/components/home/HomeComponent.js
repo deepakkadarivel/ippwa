@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import NavBar from '../navBar';
 import Drawer from '../SwipeableDrawer';
@@ -8,9 +8,9 @@ import Reports from '../reports';
 import Expense from '../expense';
 import history from '../../shared/service/history';
 import POContainer from '../tasks/po/POContainer';
-import PickUpContainer from "../tasks/pickup/PickUpContainer";
-import InvoiceContainer from "../tasks/invoice/InvoiceContainer";
-import AssetContainer from "../tasks/asset/AssetContainer";
+import PickUpContainer from '../tasks/pickup/PickUpContainer';
+import InvoiceContainer from '../tasks/invoice/InvoiceContainer';
+import AssetContainer from '../tasks/asset/AssetContainer';
 import './home.scss';
 
 class HomeComponent extends React.Component {
@@ -18,8 +18,8 @@ class HomeComponent extends React.Component {
     super(props);
 
     this.state = {
-      isDrawerOpen: false,
-    }
+      isDrawerOpen: false
+    };
   }
 
   componentDidMount() {
@@ -33,23 +33,53 @@ class HomeComponent extends React.Component {
   render() {
     const toggleDrawer = isDrawerOpen => {
       this.setState({
-        isDrawerOpen,
+        isDrawerOpen
       });
     };
 
-    return <div className='Home'>
-      <NavBar isDrawerOpen={this.state.isDrawerOpen} toggleDrawer={toggleDrawer}/>
-      <Drawer isDrawerOpen={this.state.isDrawerOpen} toggleDrawer={toggleDrawer}/>
-      <div>
-        <Route exact path={`${this.props.match.url}/tasks`} render={() => <MyTasksContainer history={history}/>}/>
-        <Route exact path={`${this.props.match.url}/reports`} render={() => <Reports history={history}/>}/>
-        <Route exacrt path={`${this.props.match.url}/expense`} render={() => <Expense history={history}/>}/>
-        <Route exacrt path={`${this.props.match.url}/tasks/po`} render={() => <POContainer history={history}/>}/>
-        <Route exacrt path={`${this.props.match.url}/tasks/pickUp`} render={() => <PickUpContainer history={history}/>}/>
-        <Route exacrt path={`${this.props.match.url}/tasks/invoice`} render={() => <InvoiceContainer history={history}/>}/>
-        <Route exacrt path={`${this.props.match.url}/tasks/asset`} render={() => <AssetContainer history={history}/>}/>
+    return (
+      <div className="Home">
+        <NavBar isDrawerOpen={this.state.isDrawerOpen} toggleDrawer={toggleDrawer} />
+        <Drawer isDrawerOpen={this.state.isDrawerOpen} toggleDrawer={toggleDrawer} />
+        <div>
+          <Route
+            exact
+            path={`${this.props.match.url}/tasks`}
+            render={() => <MyTasksContainer history={history} />}
+          />
+          <Route
+            exact
+            path={`${this.props.match.url}/reports`}
+            render={() => <Reports history={history} />}
+          />
+          <Route
+            exacrt
+            path={`${this.props.match.url}/expense`}
+            render={() => <Expense history={history} />}
+          />
+          <Route
+            exacrt
+            path={`${this.props.match.url}/tasks/po`}
+            render={() => <POContainer history={history} />}
+          />
+          <Route
+            exacrt
+            path={`${this.props.match.url}/tasks/pickUp`}
+            render={() => <PickUpContainer history={history} />}
+          />
+          <Route
+            exacrt
+            path={`${this.props.match.url}/tasks/invoice`}
+            render={() => <InvoiceContainer history={history} />}
+          />
+          <Route
+            exacrt
+            path={`${this.props.match.url}/tasks/asset`}
+            render={() => <AssetContainer history={history} />}
+          />
+        </div>
       </div>
-    </div>;
+    );
   }
 }
 

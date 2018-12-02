@@ -5,22 +5,15 @@ import setPromiseState from '../../../shared/service/promiseState';
 const poReducer = (state = poInitialState, action) => {
   switch (action.type) {
     case poActionTypes.PO.fulfilled:
-      return state.setIn(
-        ['promise', 'po'],
-        setPromiseState(false, true, false)
-      );
+      return state.setIn(['promise', 'po'], setPromiseState(false, true, false));
 
     case poActionTypes.PO.pending:
-      return state.setIn(
-        ['promise', 'po'],
-        setPromiseState(true, false, false)
-      ).set('errorMessage', poInitialState.errorMessage);
+      return state
+        .setIn(['promise', 'po'], setPromiseState(true, false, false))
+        .set('errorMessage', poInitialState.errorMessage);
 
     case poActionTypes.PO.rejected:
-      return state.setIn(
-        ['promise', 'po'],
-        setPromiseState(false, false, true)
-      );
+      return state.setIn(['promise', 'po'], setPromiseState(false, false, true));
 
     case poActionTypes.SET_ERROR_MESSAGE:
       return state.set('errorMessage', action.message);
@@ -31,7 +24,7 @@ const poReducer = (state = poInitialState, action) => {
     case poActionTypes.UPDATE_PO_HEADER_FIELD_VALUE:
       const updatedHeader = action.po.header.map(x => {
         if (x.name === action.item.key) {
-          return {...x, value: action.item.value};
+          return { ...x, value: action.item.value };
         }
         return x;
       });
@@ -41,13 +34,13 @@ const poReducer = (state = poInitialState, action) => {
       const items = action.po.poLineItems[action.item.index];
       const lines = items.lines.map(x => {
         if (x.name === action.item.key) {
-          return {...x, value: action.item.value};
+          return { ...x, value: action.item.value };
         }
         return x;
       });
       const updatedLines = action.po.poLineItems.map((line, i) => {
         if (i === action.item.index) {
-          return {header: line.header, lines}
+          return { header: line.header, lines };
         }
         return line;
       });

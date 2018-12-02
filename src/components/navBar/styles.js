@@ -1,31 +1,31 @@
 import logo from '../../shared/images/ipact-logo.svg';
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: '100%'
   },
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20,
+    marginRight: 20
   },
   logo: {
     backgroundImage: `url(${logo})`,
     height: 40,
     width: 110,
     backgroundSize: 'contain',
-    backgroundRepeat: 'no-repeat',
+    backgroundRepeat: 'no-repeat'
   },
   title: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
+      display: 'block'
+    }
   },
   inputRoot: {
     color: 'inherit',
-    width: '100%',
+    width: '100%'
   },
   inputInput: {
     paddingTop: theme.spacing.unit,
@@ -35,21 +35,21 @@ const styles = theme => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: 200,
-    },
+      width: 200
+    }
   },
   sectionDesktop: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
+      display: 'flex'
+    }
   },
   sectionMobile: {
     display: 'flex',
     [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
+      display: 'none'
+    }
+  }
 });
 
 export default styles;

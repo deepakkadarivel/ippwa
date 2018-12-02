@@ -13,7 +13,7 @@ import styles from './styles';
 class NavBar extends React.Component {
   state = {
     anchorEl: null,
-    mobileMoreAnchorEl: null,
+    mobileMoreAnchorEl: null
   };
 
   handleProfileMenuOpen = event => {
@@ -81,7 +81,7 @@ class NavBar extends React.Component {
 NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
   isDrawerOpen: PropTypes.bool,
-  toggleDrawer: PropTypes.func,
+  toggleDrawer: PropTypes.func
 };
 
 export default withStyles(styles)(NavBar);

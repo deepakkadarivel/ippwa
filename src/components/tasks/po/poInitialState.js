@@ -6,7 +6,7 @@ const poInitialState = seamlessImmutable({
     po: setPromiseState()
   },
   errorMessage: '',
-  po: {},
+  po: {}
 });
 
 export default poInitialState;

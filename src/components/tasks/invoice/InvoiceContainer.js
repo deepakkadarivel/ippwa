@@ -1,19 +1,15 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import InvoiceComponent from './InvoiceComponent';
-import {selectInvoice, selectInvoicePromise} from "./invoiceSelector";
+import { selectInvoice, selectInvoicePromise } from './invoiceSelector';
 
-import {
-  getInvoice,
-  updateFieldValue,
-  updateLineFieldValue,
-} from './invoiceActions';
+import { getInvoice, updateFieldValue, updateLineFieldValue } from './invoiceActions';
 
 const mapStateToProps = state => {
   return {
     selectedTask: state.tasks.selectedTask,
     promise: selectInvoicePromise(state),
     errorMessage: state.invoice.errorMessage,
-    invoice: selectInvoice(state),
+    invoice: selectInvoice(state)
   };
 };
 
@@ -27,11 +23,11 @@ const mapDispatchToProps = dispatch => {
     },
     updateLineFieldValue(item) {
       dispatch(updateLineFieldValue(item));
-    },
+    }
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(InvoiceComponent)
+)(InvoiceComponent);

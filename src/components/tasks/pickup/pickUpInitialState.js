@@ -6,7 +6,7 @@ const pickUpInitialState = seamlessImmutable({
     pickUp: setPromiseState()
   },
   errorMessage: '',
-  pickUp: {},
+  pickUp: {}
 });
 
 export default pickUpInitialState;

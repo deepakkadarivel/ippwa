@@ -7,19 +7,19 @@ export default {
   SERVER_UNAVAILABLE: 'Sorry, Server under maintenance. Try after few minutes or contact support.',
   SESSION_EXPIRED: 'Session expired. Please login again',
   LOCAL_STORAGE: {
-    COOKIE: "cookie",
-    LOADBALANCER: "loadBalancer",
-    USER_ID: "UserId",
-    FIRST_NAME: "firstName",
-    LAST_NAME: "lastName",
-    ORG_NAME: "orgName",
-    ORG_ID: "orgId",
+    COOKIE: 'cookie',
+    LOADBALANCER: 'loadBalancer',
+    USER_ID: 'UserId',
+    FIRST_NAME: 'firstName',
+    LAST_NAME: 'lastName',
+    ORG_NAME: 'orgName',
+    ORG_ID: 'orgId'
   },
   TASKS_WORKFLOW_IDS: {
     PO_REQUISITION_PROCESSING_TYPE: 8,
     PICKUP_PROCESSING_TYPE: 9,
     ASSET_PROCESSING_TYPE: 12,
-    INVOICE_PROCESSING_TYPE: 11,
+    INVOICE_PROCESSING_TYPE: 11
   },
   tasks: {
     columns: {
@@ -43,11 +43,11 @@ export default {
       claimRequestNo: 'Advance OR Claim Request #',
       createdDate: 'Created Date',
       dueDateString: 'Due Date',
-      status: 'Status',
+      status: 'Status'
     },
     actions: {
       APPROVE: 'APPROVE',
-      REJECT: 'REJECT',
+      REJECT: 'REJECT'
     }
   },
   API_TYPES: {
@@ -55,13 +55,13 @@ export default {
     EDIT_PO_AMENDMENT_TYPE_API: 17,
     APPROVE_PICK_UP_TYPE_API: 9,
     APPROVE_INVOICE_TYPE_API: 13,
-    APPROVE_ASSET_TYPE_API: 11,
+    APPROVE_ASSET_TYPE_API: 11
   },
 
   TASK: {
     PO_AMENDMENT_TITLE: 'PO Amendment',
     PICK_UP_TITLE: 'Pickup - Edit Request Item',
     ASSET_TITLE: 'Edit Asset',
-    INVOICE_TITLE: 'Edit Invoice',
+    INVOICE_TITLE: 'Edit Invoice'
   }
-}
+};

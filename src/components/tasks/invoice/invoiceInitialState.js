@@ -6,7 +6,7 @@ const invoiceInitialState = seamlessImmutable({
     invoice: setPromiseState()
   },
   errorMessage: '',
-  invoice: {},
+  invoice: {}
 });
 
 export default invoiceInitialState;

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,9 +14,9 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import SaveAlt from '@material-ui/icons/SaveAlt';
-import {lighten} from '@material-ui/core/styles/colorManipulator';
+import { lighten } from '@material-ui/core/styles/colorManipulator';
 import constants from '../../../shared/constants';
-import {getString} from '../../../shared/utils/string';
+import { getString } from '../../../shared/utils/string';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -45,38 +45,53 @@ function getSorting(order, orderBy) {
 const columns = constants.tasks.columns;
 
 const rows = [
-  {id: 'workflowTypeName', numeric: false, disablePadding: false, label: columns.workflowTypeName},
-  {id: 'supplierName', numeric: false, disablePadding: false, label: columns.supplierName},
-  {id: 'stageName', numeric: false, disablePadding: false, label: columns.stageName},
-  {id: 'contractNo', numeric: false, disablePadding: false, label: columns.contractNo},
-  {id: 'contractOwner', numeric: false, disablePadding: false, label: columns.contractOwner},
-  {id: 'requestedBy', numeric: false, disablePadding: false, label: columns.requestedBy},
-  {id: 'poRequestNo', numeric: false, disablePadding: false, label: columns.poRequestNo},
-  {id: 'poNo', numeric: false, disablePadding: false, label: columns.poNo},
-  {id: 'pickUpRequestNo', numeric: false, disablePadding: false, label: columns.pickUpRequestNo},
-  {id: 'invoiceNo', numeric: false, disablePadding: false, label: columns.invoiceNo},
-  {id: 'assetRequestNo', numeric: false, disablePadding: false, label: columns.assetRequestNo},
-  {id: 'customerPONo', numeric: false, disablePadding: false, label: columns.customerPONo},
-  {id: 'customerInvoiceNo', numeric: false, disablePadding: false, label: columns.customerInvoiceNo},
-  {id: 'quoteRequestNo', numeric: false, disablePadding: false, label: columns.quoteRequestNo},
-  {id: 'costingRequestNo', numeric: false, disablePadding: false, label: columns.costingRequestNo},
-  {id: 'indentRequestNo', numeric: false, disablePadding: false, label: columns.indentRequestNo},
-  {id: 'travelRequestNo', numeric: false, disablePadding: false, label: columns.travelRequestNo},
-  {id: 'claimRequestNo', numeric: false, disablePadding: false, label: columns.claimRequestNo},
-  {id: 'createdDate', numeric: false, disablePadding: false, label: columns.createdDate},
-  {id: 'dueDateString', numeric: false, disablePadding: false, label: columns.dueDateString},
-  {id: 'status', numeric: false, disablePadding: false, label: columns.status},
+  {
+    id: 'workflowTypeName',
+    numeric: false,
+    disablePadding: false,
+    label: columns.workflowTypeName
+  },
+  { id: 'supplierName', numeric: false, disablePadding: false, label: columns.supplierName },
+  { id: 'stageName', numeric: false, disablePadding: false, label: columns.stageName },
+  { id: 'contractNo', numeric: false, disablePadding: false, label: columns.contractNo },
+  { id: 'contractOwner', numeric: false, disablePadding: false, label: columns.contractOwner },
+  { id: 'requestedBy', numeric: false, disablePadding: false, label: columns.requestedBy },
+  { id: 'poRequestNo', numeric: false, disablePadding: false, label: columns.poRequestNo },
+  { id: 'poNo', numeric: false, disablePadding: false, label: columns.poNo },
+  { id: 'pickUpRequestNo', numeric: false, disablePadding: false, label: columns.pickUpRequestNo },
+  { id: 'invoiceNo', numeric: false, disablePadding: false, label: columns.invoiceNo },
+  { id: 'assetRequestNo', numeric: false, disablePadding: false, label: columns.assetRequestNo },
+  { id: 'customerPONo', numeric: false, disablePadding: false, label: columns.customerPONo },
+  {
+    id: 'customerInvoiceNo',
+    numeric: false,
+    disablePadding: false,
+    label: columns.customerInvoiceNo
+  },
+  { id: 'quoteRequestNo', numeric: false, disablePadding: false, label: columns.quoteRequestNo },
+  {
+    id: 'costingRequestNo',
+    numeric: false,
+    disablePadding: false,
+    label: columns.costingRequestNo
+  },
+  { id: 'indentRequestNo', numeric: false, disablePadding: false, label: columns.indentRequestNo },
+  { id: 'travelRequestNo', numeric: false, disablePadding: false, label: columns.travelRequestNo },
+  { id: 'claimRequestNo', numeric: false, disablePadding: false, label: columns.claimRequestNo },
+  { id: 'createdDate', numeric: false, disablePadding: false, label: columns.createdDate },
+  { id: 'dueDateString', numeric: false, disablePadding: false, label: columns.dueDateString },
+  { id: 'status', numeric: false, disablePadding: false, label: columns.status }
 ];
 
 const tableHeadStyles = theme => ({
   head: {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   body: {
     fontSize: 14,
     color: theme.palette.common.white,
-    width: 160,
-  },
+    width: 160
+  }
 });
 
 class EnhancedTableHead extends React.Component {
@@ -85,7 +100,7 @@ class EnhancedTableHead extends React.Component {
   };
 
   render() {
-    const {order, orderBy, classes} = this.props;
+    const { order, orderBy, classes } = this.props;
 
     return (
       <TableHead className={classes.head}>
@@ -126,28 +141,28 @@ EnhancedTableHead.propTypes = {
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
+  rowCount: PropTypes.number.isRequired
 };
 
 EnhancedTableHead = withStyles(tableHeadStyles)(EnhancedTableHead);
 
 const toolbarStyles = theme => ({
   root: {
-    paddingRight: theme.spacing.unit,
+    paddingRight: theme.spacing.unit
   },
   spacer: {
-    flex: '1 1 100%',
+    flex: '1 1 100%'
   },
   actions: {
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary
   },
   title: {
-    flex: '0 0 auto',
-  },
+    flex: '0 0 auto'
+  }
 });
 
 let EnhancedTableToolbar = props => {
-  const {classes} = props;
+  const { classes } = props;
 
   return (
     <Toolbar className={classes.root}>
@@ -156,11 +171,11 @@ let EnhancedTableToolbar = props => {
           My Tasks
         </Typography>
       </div>
-      <div className={classes.spacer}/>
+      <div className={classes.spacer} />
       <div className={classes.actions}>
         <Tooltip title="Export All">
           <IconButton aria-label="Export All">
-            <SaveAlt/>
+            <SaveAlt />
           </IconButton>
         </Tooltip>
       </div>
@@ -169,7 +184,7 @@ let EnhancedTableToolbar = props => {
 };
 
 EnhancedTableToolbar.propTypes = {
-  classes: PropTypes.object,
+  classes: PropTypes.object
 };
 
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
@@ -177,19 +192,19 @@ EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
 const styles = theme => ({
   root: {
     width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing.unit * 3
   },
   table: {
-    minWidth: 1020,
+    minWidth: 1020
   },
   tableWrapper: {
-    overflowX: 'auto',
+    overflowX: 'auto'
   },
   row: {
     '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.background.default,
-    },
-  },
+      backgroundColor: theme.palette.background.default
+    }
+  }
 });
 
 class DesktopTable extends React.Component {
@@ -199,10 +214,9 @@ class DesktopTable extends React.Component {
       order: 'asc',
       orderBy: 'calories',
       page: 0,
-      rowsPerPage: 13,
+      rowsPerPage: 13
     };
   }
-
 
   handleRequestSort = (event, property) => {
     const orderBy = property;
@@ -212,23 +226,23 @@ class DesktopTable extends React.Component {
       order = 'asc';
     }
 
-    this.setState({order, orderBy});
+    this.setState({ order, orderBy });
   };
 
   handleChangePage = (event, page) => {
-    this.setState({page});
+    this.setState({ page });
   };
 
   handleChangeRowsPerPage = event => {
-    this.setState({rowsPerPage: event.target.value});
+    this.setState({ rowsPerPage: event.target.value });
   };
 
   render() {
-    const {classes, tasks, history} = this.props;
+    const { classes, tasks, history } = this.props;
 
-    const data = tasks.asMutable({deep: true});
+    const data = tasks.asMutable({ deep: true });
 
-    const {order, orderBy, rowsPerPage, page} = this.state;
+    const { order, orderBy, rowsPerPage, page } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
     const handleClick = (e, task) => {
@@ -253,7 +267,7 @@ class DesktopTable extends React.Component {
 
     return (
       <Paper className={classes.root}>
-        <EnhancedTableToolbar/>
+        <EnhancedTableToolbar />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
@@ -294,13 +308,15 @@ class DesktopTable extends React.Component {
                       <TableCell>{getString(task.claimRequestNo)}</TableCell>
                       <TableCell>{getString(task.createdDate)}</TableCell>
                       <TableCell>{getString(task.dueDateString)}</TableCell>
-                      <TableCell>{task.status === 0 ? 'Active' : getString(task.status.toString())}</TableCell>
+                      <TableCell>
+                        {task.status === 0 ? 'Active' : getString(task.status.toString())}
+                      </TableCell>
                     </TableRow>
                   );
                 })}
               {emptyRows > 0 && (
-                <TableRow style={{height: 49 * emptyRows}}>
-                  <TableCell colSpan={6}/>
+                <TableRow style={{ height: 49 * emptyRows }}>
+                  <TableCell colSpan={6} />
                 </TableRow>
               )}
             </TableBody>
@@ -313,10 +329,10 @@ class DesktopTable extends React.Component {
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{
-            'aria-label': 'Previous Page',
+            'aria-label': 'Previous Page'
           }}
           nextIconButtonProps={{
-            'aria-label': 'Next Page',
+            'aria-label': 'Next Page'
           }}
           onChangePage={this.handleChangePage}
           onChangeRowsPerPage={this.handleChangeRowsPerPage}
@@ -329,7 +345,7 @@ class DesktopTable extends React.Component {
 DesktopTable.propTypes = {
   classes: PropTypes.object.isRequired,
   tasks: PropTypes.array.isRequired,
-  setSelectedTask: PropTypes.func.isRequired,
+  setSelectedTask: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(DesktopTable);
