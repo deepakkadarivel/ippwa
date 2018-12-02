@@ -31,20 +31,23 @@ const poReducer = (state = poInitialState, action) => {
       return state.setIn(['po', 'header'], updatedHeader);
 
     case poActionTypes.UPDATE_PO_LINE_FIELD_VALUE:
-      const items = action.po.poLineItems[action.item.index];
-      const lines = items.lines.map(x => {
-        if (x.name === action.item.key) {
-          return { ...x, value: action.item.value };
-        }
-        return x;
+      const poLineItems = action.po.poLineItems;
+      const line = poLineItems[action.item.index];
+      const qty = parseInt(action.item.value);
+      const tax = parseFloat(((line.price * qty) / 100) * (line.sgst + line.cgst));
+      const netPrice = parseFloat(line.price * qty);
+      const totalAmount = parseFloat(netPrice + tax);
+      const updatedLine = {
+        ...line,
+        [action.item.key]: qty || 0,
+        tax: tax,
+        netPrice: netPrice,
+        totalAmount: totalAmount
+      };
+      const newLines = Object.assign([], poLineItems, {
+        [action.item.index]: updatedLine
       });
-      const updatedLines = action.po.poLineItems.map((line, i) => {
-        if (i === action.item.index) {
-          return { header: line.header, lines };
-        }
-        return line;
-      });
-      return state.setIn(['po', 'poLineItems'], updatedLines);
+      return state.setIn(['po', 'poLineItems'], newLines);
 
     default:
       return state;

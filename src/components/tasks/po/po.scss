@@ -1,2 +1,9 @@
+// @import 'shared/styles/colors';
 .PO {
+  &--Line {
+    margin-top: 20px;
+    width: 100%;
+    box-shadow: none !important;
+    border: 1px solid #cccccc;
+  }
 }

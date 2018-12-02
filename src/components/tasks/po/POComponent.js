@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './po.scss';
 import Header from '../common/header/Header';
 import constants from '../../../shared/constants';
-import Line from '../common/line/Line';
+import POLine from './POLine';
 import Price from '../common/price/Price';
 import Footer from '../common/footer/Footer';
 import Divider from '@material-ui/core/Divider/Divider';
@@ -21,7 +21,7 @@ class POComponent extends Component {
       updateFieldValue({ key: event.target.name, value: event.target.value });
     };
 
-    const handleLineChange = y => event => {
+    const handleLineItemChange = y => event => {
       updateLineFieldValue({ index: y, key: event.target.name, value: event.target.value });
     };
 
@@ -29,21 +29,22 @@ class POComponent extends Component {
       <div className="PO container">
         {/* Header */}
         {promise.isFulfilled && (
-          <Header
-            header={po.header}
-            title={constants.TASK.PO_AMENDMENT_TITLE}
-            handleChange={handleChange}
-          />
+          <div>
+            <Header
+              header={po.header}
+              title={constants.TASK.PO_AMENDMENT_TITLE}
+              handleChange={handleChange}
+            />
+            {po.poLineItems.map((x, y) => (
+              <POLine key={y} line={x} handleLineItemChange={handleLineItemChange(y)} />
+            ))}
+            {/* <Price items={po.prices} /> */}
+            <Divider variant="inset" />
+            <Footer items={po.footer} />
+            <Divider variant="inset" />
+            <Actions history={history} />
+          </div>
         )}
-        {promise.isFulfilled &&
-          po.poLineItems.map((x, y) => (
-            <Line key={y} item={x} handleChange={handleLineChange(y)} />
-          ))}
-        {promise.isFulfilled && <Price items={po.prices} />}
-        <Divider variant="inset" />
-        {promise.isFulfilled && <Footer items={po.footer} />}
-        <Divider variant="inset" />
-        {promise.isFulfilled && <Actions history={history} />}
       </div>
     );
   }

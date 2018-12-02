@@ -1,11 +1,11 @@
-import 'whatwg-fetch'
+import 'whatwg-fetch';
 import axios from 'axios';
 import poActionTypes from './poActionTypes';
 import apiService from '../../../shared/service/apiService';
 import constants from '../../../shared/constants';
-import {getValue} from '../../../shared/service/localStorage';
-import history from "../../../shared/service/history";
-import {selectPO} from "./poSelector";
+import { getValue } from '../../../shared/service/localStorage';
+import history from '../../../shared/service/history';
+import { selectPO } from './poSelector';
 
 const poPending = () => {
   return {
@@ -28,14 +28,14 @@ const poRejected = () => {
 const setErrorMessage = message => {
   return {
     type: poActionTypes.SET_ERROR_MESSAGE,
-    message,
+    message
   };
 };
 
 const setPO = po => {
   return {
     type: poActionTypes.SET_PO,
-    po,
+    po
   };
 };
 
@@ -45,18 +45,18 @@ const updateFieldValue = item => {
     dispatch({
       type: poActionTypes.UPDATE_PO_HEADER_FIELD_VALUE,
       item,
-      po,
+      po
     });
   };
 };
 
-const updateLineFieldValue = item => {
+const handleLineItemChange = item => {
   return (dispatch, getState) => {
     const po = selectPO(getState());
     return dispatch({
       type: poActionTypes.UPDATE_PO_LINE_FIELD_VALUE,
       item,
-      po,
+      po
     });
   };
 };
@@ -74,8 +74,11 @@ const getPO = task => {
         companyId: task.companyId,
         userId: getValue(constants.LOCAL_STORAGE.USER_ID) || constants.EMPTY_STRING,
         loggedInSupplierId: constants.EMPTY_STRING,
-        apiType: task.poParentId === 0 ? constants.API_TYPES.APPROVE_PO_REQ_TYPE_API : constants.API_TYPES.EDIT_PO_AMENDMENT_TYPE_API,
-      },
+        apiType:
+          task.poParentId === 0
+            ? constants.API_TYPES.APPROVE_PO_REQ_TYPE_API
+            : constants.API_TYPES.EDIT_PO_AMENDMENT_TYPE_API
+      }
     };
 
     return axios
@@ -88,16 +91,18 @@ const getPO = task => {
         dispatch(setPO(response.data));
         dispatch(poFulfilled());
       })
-      .catch((err) => {
+      .catch(err => {
         dispatch(poRejected());
         if (err.response && err.response.status === 401) {
           history.push('/login');
           dispatch(setErrorMessage(constants.SESSION_EXPIRED));
         } else {
-          dispatch(setErrorMessage(err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE));
+          dispatch(
+            setErrorMessage(err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE)
+          );
         }
       });
   };
 };
 
-export {getPO, updateFieldValue, updateLineFieldValue};
+export { getPO, updateFieldValue, handleLineItemChange };
