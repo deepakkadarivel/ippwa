@@ -57,6 +57,13 @@ const setPO = po => {
   };
 };
 
+const setPOApprovalResponse = po => {
+  return {
+    type: poActionTypes.SET_PO_APPROVAL_RESPONSE,
+    po
+  };
+};
+
 const updateFieldValue = item => {
   return (dispatch, getState) => {
     const po = selectPO(getState());
@@ -125,7 +132,7 @@ const getPO = task => {
 
 const updatePO = (po, comments, totalAmount, submitType, history) => {
   return (dispatch, getState) => {
-    const updatePOUrl = apiService.endpoints.app.generatePOUrl();
+    const updatePOUrl = apiService.endpoints.app.generateUpdatePOUrl();
     dispatch(updatePOPending());
 
     let payload = {
@@ -145,10 +152,10 @@ const updatePO = (po, comments, totalAmount, submitType, history) => {
         seqFlow: po.seqFlow,
         auditTrackId: po.auditTrackId,
         processInstanceId: po.processInstanceId,
-        submitType: submitType,
+        submitType,
         poFrom: po.poFrom,
-        totalAmount: totalAmount,
-        companyId: po.companyId,
+        totalAmount,
+        companyId: po.companyId || 0,
         userId: getValue(constants.LOCAL_STORAGE.USER_ID) || constants.EMPTY_STRING,
         apiType: po.amendmentEdit ? constants.API_TYPES.UPDATE_PO_AMENDMENT_TYPE_API : constants.API_TYPES.UPDATE_PO_REQ_TYPE_API,
         comments: comments || '',
@@ -179,6 +186,8 @@ const updatePO = (po, comments, totalAmount, submitType, history) => {
       }
     };
 
+    console.log(payload);
+
     return axios
       .post(updatePOUrl, payload, {
         headers: {
@@ -186,8 +195,9 @@ const updatePO = (po, comments, totalAmount, submitType, history) => {
         }
       })
       .then(response => {
-        dispatch(setPO(response.data));
+        dispatch(setPOApprovalResponse(response.data));
         history.goBack();
+        dispatch(updatePOFulfilled());
       })
       .catch(err => {
         dispatch(updatePORejected());
@@ -203,4 +213,4 @@ const updatePO = (po, comments, totalAmount, submitType, history) => {
   };
 };
 
-export { getPO, updateFieldValue, handleLineItemChange, updatePO };
+export { getPO, updateFieldValue, handleLineItemChange, updatePO, setPOApprovalResponse };

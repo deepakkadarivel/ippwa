@@ -60,6 +60,9 @@ const poReducer = (state = poInitialState, action) => {
       });
       return state.setIn(['po', 'poLineItems'], newLines);
 
+    case poActionTypes.SET_PO_APPROVAL_RESPONSE:
+      return state.set('poApprovalResponse', action.po);
+
     default:
       return state;
   }
