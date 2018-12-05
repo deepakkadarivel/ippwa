@@ -6,9 +6,6 @@ import constants from '../../../shared/constants';
 import {getValue} from '../../../shared/service/localStorage';
 import history from "../../../shared/service/history";
 import {selectPickUp} from "./pickUpSelector";
-import {selectPO} from "../po/poSelector";
-import poActionTypes from "../po/poActionTypes";
-import {setPOApprovalResponse} from "../po/poActions";
 
 const pickUpPending = () => {
   return {

@@ -1,8 +1,8 @@
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import AssetComponent from './AssetComponent';
 
-import { getAsset, updateFieldValue, updateLineFieldValue } from './assetActions';
-import { selectAsset, selectAssetPromise } from './assetSelector';
+import {getAsset, handleLineItemChange, updateAsset, updateFieldValue} from './assetActions';
+import {selectAsset, selectAssetPromise} from './assetSelector';
 
 const mapStateToProps = state => {
   return {
@@ -22,7 +22,10 @@ const mapDispatchToProps = dispatch => {
       dispatch(updateFieldValue(item));
     },
     updateLineFieldValue(item) {
-      dispatch(updateLineFieldValue(item));
+      dispatch(handleLineItemChange(item));
+    },
+    updateAsset(asset, comments, submitType, history) {
+      dispatch(updateAsset(asset, comments, submitType, history));
     }
   };
 };

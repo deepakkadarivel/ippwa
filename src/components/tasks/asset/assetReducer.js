@@ -1,7 +1,6 @@
 import assetActionTypes from './assetActionTypes';
 import assetInitialState from './assetInitialState';
 import setPromiseState from '../../../shared/service/promiseState';
-import pickUpActionTypes from '../pickup/pickUpActionTypes';
 
 const assetReducer = (state = assetInitialState, action) => {
   switch (action.type) {
@@ -32,20 +31,20 @@ const assetReducer = (state = assetInitialState, action) => {
       return state.setIn(['asset', 'header'], updatedHeader);
 
     case assetActionTypes.UPDATE_ASSET_LINE_FIELD_VALUE:
-      const items = action.asset.assetLineItems[action.item.index];
-      const lines = items.lines.map(x => {
-        if (x.name === action.item.key) {
-          return { ...x, value: action.item.value };
-        }
-        return x;
+      const assetLineItems = action.asset.assetLineItems;
+      const line = assetLineItems[action.item.index];
+      const updatedLine = {
+        ...line,
+        [action.item.key]: parseInt(action.item.value) || 0,
+      };
+
+      const newLines = Object.assign([], assetLineItems, {
+        [action.item.index]: updatedLine
       });
-      const updatedLines = action.asset.assetLineItems.map((line, i) => {
-        if (i === action.item.index) {
-          return { header: line.header, lines };
-        }
-        return line;
-      });
-      return state.setIn(['asset', 'assetLineItems'], updatedLines);
+      return state.setIn(['asset', 'assetLineItems'], newLines);
+
+    case assetActionTypes.SET_ASSET_APPROVAL_RESPONSE:
+      return state.set('assetApprovalResponse', action.asset);
 
     default:
       return state;

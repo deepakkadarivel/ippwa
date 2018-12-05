@@ -3,9 +3,9 @@ import axios from 'axios';
 import assetActionTypes from './assetActionTypes';
 import apiService from '../../../shared/service/apiService';
 import constants from '../../../shared/constants';
-import { getValue } from '../../../shared/service/localStorage';
+import {getValue} from '../../../shared/service/localStorage';
 import history from '../../../shared/service/history';
-import { selectAsset } from './assetSelector';
+import {selectAsset} from './assetSelector';
 
 const assetPending = () => {
   return {
@@ -25,6 +25,24 @@ const assetRejected = () => {
   };
 };
 
+const updateAssetPending = () => {
+  return {
+    type: assetActionTypes.UPDATE_ASSET.pending
+  };
+};
+
+const updateAssetFulfilled = () => {
+  return {
+    type: assetActionTypes.UPDATE_ASSET.fulfilled
+  };
+};
+
+const updateAssetRejected = () => {
+  return {
+    type: assetActionTypes.UPDATE_ASSET.rejected
+  };
+};
+
 const setErrorMessage = message => {
   return {
     type: assetActionTypes.SET_ERROR_MESSAGE,
@@ -35,6 +53,13 @@ const setErrorMessage = message => {
 const setAsset = asset => {
   return {
     type: assetActionTypes.SET_ASSET,
+    asset
+  };
+};
+
+const setAssetApprovalResponse = asset => {
+  return {
+    type: assetActionTypes.SET_ASSET_APPROVAL_RESPONSE,
     asset
   };
 };
@@ -50,7 +75,7 @@ const updateFieldValue = item => {
   };
 };
 
-const updateLineFieldValue = item => {
+const handleLineItemChange = item => {
   return (dispatch, getState) => {
     const asset = selectAsset(getState());
     dispatch({
@@ -102,4 +127,65 @@ const getAsset = task => {
   };
 };
 
-export { getAsset, updateFieldValue, updateLineFieldValue };
+const updateAsset = (asset, comments, submitType, history) => {
+  return (dispatch, getState) => {
+    const updateAssetUrl = apiService.endpoints.app.generateUpdateAssetUrl();
+    dispatch(updateAssetPending());
+
+    let payload = {
+      cookie: getValue(constants.LOCAL_STORAGE.COOKIE) || constants.EMPTY_STRING,
+      loadBalancer: getValue(constants.LOCAL_STORAGE.LOADBALANCER) || constants.EMPTY_STRING,
+      payload: {
+        pickUpItemId: asset.pickUpItemId,
+        assetId: asset.assetId,
+        workflowAuditId: asset.workflowAuditId,
+        taskId: asset.taskId,
+        seqFlow: asset.seqFlow,
+        auditTrackId: asset.auditTrackId,
+        processInstanceId: asset.processInstanceId,
+        pickUpItemRequestNo: asset.pickUpItemRequestNo,
+        workflowId: asset.workflowId,
+        wareHouse: asset.wareHouse,
+        submitType,
+        needDate: asset.needDate,
+        returnDate: asset.returnDate,
+        companyId: asset.companyId || 0,
+        userId: parseInt(getValue(constants.LOCAL_STORAGE.USER_ID)) || constants.EMPTY_STRING,
+        apiType: constants.API_TYPES.UPDATE_ASSET_TYPE_API,
+        comments,
+        dynamicColumns: asset.dynamicColumns,
+        itemJsonString: JSON.stringify(asset.assetLineItems),
+        entityId: asset.entityId,
+        entityName: asset.entityName,
+        viewId: asset.viewId,
+        viewName: asset.viewName,
+        requesterId: asset.requesterId
+      }
+    };
+
+    return axios
+      .post(updateAssetUrl, payload, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        dispatch(setAssetApprovalResponse(response.data));
+        history.goBack();
+        dispatch(updateAssetFulfilled());
+      })
+      .catch(err => {
+        dispatch(updateAssetRejected());
+        if (err.response && err.response.status === 401) {
+          history.push('/login');
+          dispatch(setErrorMessage(constants.SESSION_EXPIRED));
+        } else {
+          dispatch(
+            setErrorMessage(err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE)
+          );
+        }
+      });
+  };
+};
+
+export {getAsset, updateFieldValue, handleLineItemChange, updateAsset};

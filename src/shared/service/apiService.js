@@ -40,6 +40,10 @@ const apiService = {
       asset: '/asset',
       generateAssetUrl() {
         return `${baseUrl}${this.asset}`;
+      },
+      updateAsset: '/updateAsset',
+      generateUpdateAssetUrl() {
+        return `${baseUrl}${this.updateAsset}`;
       }
     }
   }

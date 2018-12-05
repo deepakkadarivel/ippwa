@@ -3,10 +3,12 @@ import setPromiseState from '../../../shared/service/promiseState';
 
 const assetInitialState = seamlessImmutable({
   promise: {
-    asset: setPromiseState()
+    asset: setPromiseState(),
+    updateAsset: setPromiseState(),
   },
   errorMessage: '',
-  asset: {}
+  asset: {},
+  assetApprovalResponse: {},
 });
 
 export default assetInitialState;
