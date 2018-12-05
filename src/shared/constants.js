@@ -60,6 +60,7 @@ export default {
     UPDATE_PO_REQ_TYPE_API: 5,
     UPDATE_PICK_UP_TYPE_API: 10,
     UPDATE_ASSET_TYPE_API: 12,
+    UPDATE_INVOICE_TYPE_API: 14,
   },
 
   TASK: {

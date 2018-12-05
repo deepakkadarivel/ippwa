@@ -6,6 +6,7 @@ import constants from '../../../shared/constants';
 import {getValue} from '../../../shared/service/localStorage';
 import history from "../../../shared/service/history";
 import {selectInvoice} from "./invoiceSelector";
+import {setPOApprovalResponse} from "../po/poActions";
 
 const invoicePending = () => {
   return {
@@ -25,6 +26,24 @@ const invoiceRejected = () => {
   };
 };
 
+const updateInvoicePending = () => {
+  return {
+    type: invoiceActionTypes.UPDATE_INVOICE.pending
+  };
+};
+
+const updateInvoiceFulfilled = () => {
+  return {
+    type: invoiceActionTypes.UPDATE_INVOICE.fulfilled
+  };
+};
+
+const updateInvoiceRejected = () => {
+  return {
+    type: invoiceActionTypes.UPDATE_INVOICE.rejected
+  };
+};
+
 const setErrorMessage = message => {
   return {
     type: invoiceActionTypes.SET_ERROR_MESSAGE,
@@ -35,6 +54,13 @@ const setErrorMessage = message => {
 const setInvoice = invoice => {
   return {
     type: invoiceActionTypes.SET_INVOICE,
+    invoice,
+  };
+};
+
+const setInvoiceApprovalResponse = invoice => {
+  return {
+    type: invoiceActionTypes.SET_INVOICE_APPROVAL_RESPONSE,
     invoice,
   };
 };
@@ -55,6 +81,17 @@ const updateLineFieldValue = item => {
     const invoice = selectInvoice(getState());
     dispatch({
       type: invoiceActionTypes.UPDATE_INVOICE_LINE_FIELD_VALUE,
+      item,
+      invoice,
+    });
+  };
+};
+
+const updateInvoiceFieldValue = item => {
+  return (dispatch, getState) => {
+    const invoice = selectInvoice(getState());
+    dispatch({
+      type: invoiceActionTypes.UPDATE_INVOICE_FIELD_VALUE,
       item,
       invoice,
     });
@@ -100,4 +137,71 @@ const getInvoice = task => {
   };
 };
 
-export {getInvoice, updateFieldValue, updateLineFieldValue};
+const updateInvoice = (invoice, comments, totalAmount, submitType, history) => {
+  return (dispatch, getState) => {
+    const updateInvoiceUrl = apiService.endpoints.app.generateUpdateInvoiceUrl();
+    dispatch(updateInvoicePending());
+
+    let payload = {
+      cookie: getValue(constants.LOCAL_STORAGE.COOKIE) || constants.EMPTY_STRING,
+      loadBalancer: getValue(constants.LOCAL_STORAGE.LOADBALANCER) || constants.EMPTY_STRING,
+      payload: {
+        invoiceId: invoice.invoiceId,
+        submitType,
+        workflowAuditId: invoice.workflowAuditId,
+        taskId: invoice.taskId,
+        seqFlow: invoice.seqFlow,
+        auditTrackId: invoice.auditTrackId,
+        processInstanceId: invoice.processInstanceId,
+        invoiceNo: invoice.invoiceNo,
+        invoiceDate: invoice.invoiceDate,
+        workflowId: invoice.workflowId,
+        supplierId: invoice.supplierId,
+        requisitionId: invoice.poRequesition.requisitionId,
+        companyId: invoice.companyId,
+        userId: parseInt(getValue(constants.LOCAL_STORAGE.USER_ID)) || constants.EMPTY_STRING,
+        apiType: constants.API_TYPES.UPDATE_INVOICE_TYPE_API,
+        comments,
+        itemJson: JSON.stringify(invoice.invoiceLineItems),
+        subTotalAmt: invoice.subTotalAmt,
+        additionalAmt: invoice.additionalAmt,
+        adjustedAmt: invoice.adjustedAmt,
+        discount: invoice.discount,
+        grandTotal: invoice.grandTotal,
+        entityId: invoice.entityId,
+        entityName: invoice.entityName,
+        requesterId: invoice.requesterId,
+        poFrom: invoice.poFrom,
+        paymentDays: invoice.paymentDays,
+        creditNotes: invoice.creditNotes,
+      }
+    };
+
+    console.log(payload);
+
+    return axios
+      .post(updateInvoiceUrl, payload, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        dispatch(setInvoiceApprovalResponse(response.data));
+        history.goBack();
+        dispatch(updateInvoiceFulfilled());
+      })
+      .catch(err => {
+        dispatch(updateInvoiceRejected());
+        if (err.response && err.response.status === 401) {
+          history.push('/login');
+          dispatch(setErrorMessage(constants.SESSION_EXPIRED));
+        } else {
+          dispatch(
+            setErrorMessage(err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE)
+          );
+        }
+      });
+  };
+};
+
+export {getInvoice, updateFieldValue, updateLineFieldValue, updateInvoice, updateInvoiceFieldValue};

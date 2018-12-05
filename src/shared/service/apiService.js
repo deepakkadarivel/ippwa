@@ -37,6 +37,10 @@ const apiService = {
       generateInvoiceUrl() {
         return `${baseUrl}${this.invoice}`;
       },
+      updateInvoice: '/updateInvoice',
+      generateUpdateInvoiceUrl() {
+        return `${baseUrl}${this.updateInvoice}`;
+      },
       asset: '/asset',
       generateAssetUrl() {
         return `${baseUrl}${this.asset}`;

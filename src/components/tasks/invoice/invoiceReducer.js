@@ -25,23 +25,30 @@ const invoiceReducer = (state = invoiceInitialState, action) => {
     case invoiceActionTypes.UPDATE_INVOICE_HEADER_FIELD_VALUE:
       const updatedHeader = action.invoice.header.map(x => {
         if (x.name === action.item.key) {
-          return { ...x, value: action.item.value };
+          return {...x, value: action.item.value};
         }
         return x;
       });
       return state.setIn(['invoice', 'header'], updatedHeader);
 
+    case invoiceActionTypes.UPDATE_INVOICE_FIELD_VALUE:
+      const updateInvoice = {...action.invoice, [action.item.key]: parseFloat(action.item.value) || 0};
+      return state.set('invoice', {
+        ...updateInvoice,
+        grandTotal: updateInvoice.subTotalAmt + updateInvoice.additionalAmt + updateInvoice.adjustedAmt - updateInvoice.discount
+      });
+
     case invoiceActionTypes.UPDATE_INVOICE_LINE_FIELD_VALUE:
       const items = action.invoice.invoiceLineItems[action.item.index];
       const lines = items.lines.map(x => {
         if (x.name === action.item.key) {
-          return { ...x, value: action.item.value };
+          return {...x, value: action.item.value};
         }
         return x;
       });
       const updatedLines = action.invoice.invoiceLineItems.map((line, i) => {
         if (i === action.item.index) {
-          return { header: line.header, lines };
+          return {header: line.header, lines};
         }
         return line;
       });

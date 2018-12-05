@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import InvoiceComponent from './InvoiceComponent';
 import { selectInvoice, selectInvoicePromise } from './invoiceSelector';
 
-import { getInvoice, updateFieldValue, updateLineFieldValue } from './invoiceActions';
+import { getInvoice, updateFieldValue, updateLineFieldValue, updateInvoiceFieldValue } from './invoiceActions';
 
 const mapStateToProps = state => {
   return {
@@ -23,6 +23,9 @@ const mapDispatchToProps = dispatch => {
     },
     updateLineFieldValue(item) {
       dispatch(updateLineFieldValue(item));
+    },
+    updateInvoiceFieldValue(item) {
+      dispatch(updateInvoiceFieldValue(item));
     }
   };
 };
