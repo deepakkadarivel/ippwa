@@ -137,7 +137,7 @@ const getInvoice = task => {
   };
 };
 
-const updateInvoice = (invoice, comments, totalAmount, submitType, history) => {
+const updateInvoice = (invoice, comments, submitType, history) => {
   return (dispatch, getState) => {
     const updateInvoiceUrl = apiService.endpoints.app.generateUpdateInvoiceUrl();
     dispatch(updateInvoicePending());
@@ -157,7 +157,7 @@ const updateInvoice = (invoice, comments, totalAmount, submitType, history) => {
         invoiceDate: invoice.invoiceDate,
         workflowId: invoice.workflowId,
         supplierId: invoice.supplierId,
-        requisitionId: invoice.poRequesition.requisitionId,
+        requisitionId: invoice.requisitionId,
         companyId: invoice.companyId,
         userId: parseInt(getValue(constants.LOCAL_STORAGE.USER_ID)) || constants.EMPTY_STRING,
         apiType: constants.API_TYPES.UPDATE_INVOICE_TYPE_API,

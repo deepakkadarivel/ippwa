@@ -1,8 +1,14 @@
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import InvoiceComponent from './InvoiceComponent';
-import { selectInvoice, selectInvoicePromise } from './invoiceSelector';
+import {selectInvoice, selectInvoicePromise} from './invoiceSelector';
 
-import { getInvoice, updateFieldValue, updateLineFieldValue, updateInvoiceFieldValue } from './invoiceActions';
+import {
+  getInvoice,
+  updateFieldValue,
+  updateLineFieldValue,
+  updateInvoiceFieldValue,
+  updateInvoice
+} from './invoiceActions';
 
 const mapStateToProps = state => {
   return {
@@ -26,6 +32,9 @@ const mapDispatchToProps = dispatch => {
     },
     updateInvoiceFieldValue(item) {
       dispatch(updateInvoiceFieldValue(item));
+    },
+    updateInvoice(invoice, comments, submitType, history) {
+      dispatch(updateInvoice(invoice, comments, submitType, history));
     }
   };
 };

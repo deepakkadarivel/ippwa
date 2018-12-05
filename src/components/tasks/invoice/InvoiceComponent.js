@@ -7,6 +7,7 @@ import Footer from '../common/footer/Footer';
 import Actions from '../common/actions/Actions';
 import InvoiceLine from "./InvoiceLine";
 import InvoicePrice from "./InvoicePrice";
+import Button from "@material-ui/core/Button/Button";
 
 class InvoiceComponent extends Component {
 
@@ -15,7 +16,7 @@ class InvoiceComponent extends Component {
   }
 
   render() {
-    const {invoice, promise, updateFieldValue, updateInvoiceFieldValue, history} = this.props;
+    const {invoice, promise, updateFieldValue, updateInvoiceFieldValue, history, updateInvoice} = this.props;
 
     const handleChange = event => {
       updateFieldValue({key: event.target.name, value: event.target.value});
@@ -25,7 +26,7 @@ class InvoiceComponent extends Component {
       // updateLineFieldValue({ index: y, key: event.target.name, value: event.target.value });
     };
 
-    const updateInvoice = event => {
+    const handleInvoiceUpdate = event => {
       updateInvoiceFieldValue({key: event.target.name, value: event.target.value});
     };
 
@@ -45,13 +46,27 @@ class InvoiceComponent extends Component {
         ))}
         <Divider variant="inset"/>
         {promise.isFulfilled && <InvoicePrice
-          handleChange={updateInvoice}
+          handleChange={handleInvoiceUpdate}
           invoice={invoice}
         />}
         <Divider variant="inset"/>
         {promise.isFulfilled && <Footer items={invoice.footer}/>}
         <Divider variant="inset"/>
-        {promise.isFulfilled && <Actions history={history}/>}
+        {promise.isFulfilled &&
+        <div className="Invoice--Actions">
+          <Button size="medium" className="Actions-btn" onClick={() => history.goBack()}>
+            Cancel
+          </Button>
+          <Button variant="outlined" size="medium" color="secondary" className="Actions-btn"
+                  onClick={() => updateInvoice(invoice, '', 'approve', history)}>
+            Complete Approval
+          </Button>
+          <Button variant="outlined" size="medium" color="error" className="Actions-btn"
+                  onClick={() => updateInvoice(invoice, '', 'reject', history)}>
+            Reject
+          </Button>
+        </div>
+        }
       </div>
     );
   }
@@ -62,6 +77,7 @@ InvoiceComponent.propTypes = {
   updateFieldValue: PropTypes.func.isRequired,
   updateLineFieldValue: PropTypes.func.isRequired,
   updateInvoiceFieldValue: PropTypes.func.isRequired,
+  updateInvoice: PropTypes.func.isRequired,
   selectedTask: PropTypes.object.isRequired,
   invoice: PropTypes.object.isRequired,
   promise: PropTypes.object.isRequired
