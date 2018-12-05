@@ -66,7 +66,7 @@ const renderLine = props => {
 
 const AssetLine = props => {
   return (
-    <Card className="PickUp--Line">
+    <Card className="Asset--Line">
       <CardContent>
         <Typography variant="h6" color="textPrimary" gutterBottom>
           Item

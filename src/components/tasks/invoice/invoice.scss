@@ -1,0 +1,22 @@
+// @import 'shared/styles/colors';
+.Invoice {
+  &--Line {
+    margin-top: 20px;
+    width: 100%;
+    box-shadow: none !important;
+    border: 1px solid #cccccc;
+  }
+
+  &--Price {
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  &--Actions {
+    margin-top: 20px;
+    width: 100%;
+    &-btn {
+      margin: 1% !important;
+    }
+  }
+}
