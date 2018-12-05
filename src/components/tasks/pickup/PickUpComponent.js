@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Header from '../common/header/Header';
 import constants from '../../../shared/constants';
@@ -6,6 +6,8 @@ import Line from '../common/line/Line';
 import Divider from '@material-ui/core/Divider/Divider';
 import Footer from '../common/footer/Footer';
 import Actions from '../common/actions/Actions';
+import POLine from "../po/POLine";
+import PickUpLine from "./PickUpLine";
 
 class PickUpComponent extends Component {
   componentDidMount() {
@@ -13,14 +15,14 @@ class PickUpComponent extends Component {
   }
 
   render() {
-    const { pickUp, promise, updateFieldValue, updateLineFieldValue, history } = this.props;
+    const {pickUp, promise, updateFieldValue, updateLineFieldValue, history} = this.props;
 
     const handleChange = event => {
-      updateFieldValue({ key: event.target.name, value: event.target.value });
+      updateFieldValue({key: event.target.name, value: event.target.value});
     };
 
-    const handleLineChange = y => event => {
-      updateLineFieldValue({ index: y, key: event.target.name, value: event.target.value });
+    const handleLineItemChange = y => event => {
+      updateLineFieldValue({index: y, key: event.target.name, value: event.target.value});
     };
 
     return (
@@ -34,13 +36,13 @@ class PickUpComponent extends Component {
           />
         )}
         {promise.isFulfilled &&
-          pickUp.pickUpLineItems.map((x, y) => (
-            <Line key={y} item={x} handleChange={handleLineChange(y)} />
-          ))}
-        <Divider variant="inset" />
-        {promise.isFulfilled && <Footer items={pickUp.footer} />}
-        <Divider variant="inset" />
-        {promise.isFulfilled && <Actions history={history} />}
+        pickUp.pickUpLineItems.map((x, y) => (
+          <PickUpLine key={y} line={x} handleLineItemChange={handleLineItemChange(y)}/>
+        ))}
+        <Divider variant="inset"/>
+        {promise.isFulfilled && <Footer items={pickUp.footer}/>}
+        <Divider variant="inset"/>
+        {promise.isFulfilled && <Actions history={history}/>}
       </div>
     );
   }

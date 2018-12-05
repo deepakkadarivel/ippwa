@@ -32,21 +32,17 @@ const pickUpReducer = (state = pickUpInitialState, action) => {
       return state.setIn(['pickUp', 'header'], updatedHeader);
 
     case pickUpActionTypes.UPDATE_PICK_UP_LINE_FIELD_VALUE:
-      const items = action.pickUp.pickUpLineItems[action.item.index];
-      const lines = items.lines.map(x => {
-        if (x.name === action.item.key) {
-          return { ...x, value: action.item.value };
-        }
-        return x;
-      });
-      const updatedLines = action.pickUp.pickUpLineItems.map((line, i) => {
-        if (i === action.item.index) {
-          return { header: line.header, lines };
-        }
-        return line;
-      });
-      return state.setIn(['pickUp', 'pickUpLineItems'], updatedLines);
+      const pickUpLineItems = action.pickUp.pickUpLineItems;
+      const line = pickUpLineItems[action.item.index];
+      const updatedLine = {
+        ...line,
+        [action.item.key]: parseInt(action.item.value) || 0,
+      };
 
+      const newLines = Object.assign([], pickUpLineItems, {
+        [action.item.index]: updatedLine
+      });
+      return state.setIn(['pickUp', 'pickUpLineItems'], newLines);
     default:
       return state;
   }

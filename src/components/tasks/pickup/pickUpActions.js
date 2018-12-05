@@ -6,6 +6,8 @@ import constants from '../../../shared/constants';
 import {getValue} from '../../../shared/service/localStorage';
 import history from "../../../shared/service/history";
 import {selectPickUp} from "./pickUpSelector";
+import {selectPO} from "../po/poSelector";
+import poActionTypes from "../po/poActionTypes";
 
 const pickUpPending = () => {
   return {
@@ -50,7 +52,7 @@ const updateFieldValue = item => {
   };
 };
 
-const updateLineFieldValue = item => {
+const handleLineItemChange = item => {
   return (dispatch, getState) => {
     const pickUp = selectPickUp(getState());
     dispatch({
@@ -100,4 +102,4 @@ const getPickUp = task => {
   };
 };
 
-export {getPickUp, updateFieldValue, updateLineFieldValue};
+export {getPickUp, updateFieldValue, handleLineItemChange};
