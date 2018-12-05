@@ -156,7 +156,7 @@ const updatePO = (po, comments, totalAmount, submitType, history) => {
         poFrom: po.poFrom,
         totalAmount,
         companyId: po.companyId || 0,
-        userId: getValue(constants.LOCAL_STORAGE.USER_ID) || constants.EMPTY_STRING,
+        userId: parseInt(getValue(constants.LOCAL_STORAGE.USER_ID)) || constants.EMPTY_STRING,
         apiType: po.amendmentEdit ? constants.API_TYPES.UPDATE_PO_AMENDMENT_TYPE_API : constants.API_TYPES.UPDATE_PO_REQ_TYPE_API,
         comments: comments || '',
         dynamicColumns: po.dynamicColumns || '',

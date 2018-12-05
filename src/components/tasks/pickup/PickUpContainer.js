@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import PickUpComponent from './PickUpComponent';
 
-import { getPickUp, updateFieldValue, handleLineItemChange } from './pickUpActions';
+import { getPickUp, updateFieldValue, handleLineItemChange, updatePickUp } from './pickUpActions';
 import { selectPickUp, selectPickUpPromise } from './pickUpSelector';
 
 const mapStateToProps = state => {
@@ -23,6 +23,9 @@ const mapDispatchToProps = dispatch => {
     },
     updateLineFieldValue(item) {
       dispatch(handleLineItemChange(item));
+    },
+    updatePickUp(pickUp, comments, submitType, history) {
+      dispatch(updatePickUp(pickUp, comments, submitType, history));
     }
   };
 };

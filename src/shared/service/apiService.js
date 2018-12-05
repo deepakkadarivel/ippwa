@@ -29,6 +29,10 @@ const apiService = {
       generatePickUpUrl() {
         return `${baseUrl}${this.pickUp}`;
       },
+      updatePickUp: '/updatePickUp',
+      generateUpdatePickUpUrl() {
+        return `${baseUrl}${this.updatePickUp}`;
+      },
       invoice: '/invoice',
       generateInvoiceUrl() {
         return `${baseUrl}${this.invoice}`;

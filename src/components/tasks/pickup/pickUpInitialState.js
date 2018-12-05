@@ -3,10 +3,12 @@ import setPromiseState from '../../../shared/service/promiseState';
 
 const pickUpInitialState = seamlessImmutable({
   promise: {
-    pickUp: setPromiseState()
+    pickUp: setPromiseState(),
+    updatePickUp: setPromiseState(),
   },
   errorMessage: '',
-  pickUp: {}
+  pickUp: {},
+  pickUpApprovalResponse: {},
 });
 
 export default pickUpInitialState;

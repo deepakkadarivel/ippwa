@@ -16,6 +16,17 @@ const pickUpReducer = (state = pickUpInitialState, action) => {
     case pickUpActionTypes.PICK_UP.rejected:
       return state.setIn(['promise', 'pickUp'], setPromiseState(false, false, true));
 
+    case pickUpActionTypes.UPDATE_PICK_UP.fulfilled:
+      return state.setIn(['promise', 'updatePickUp'], setPromiseState(false, true, false));
+
+    case pickUpActionTypes.UPDATE_PICK_UP.pending:
+      return state
+        .setIn(['promise', 'updatePickUp'], setPromiseState(true, false, false))
+        .set('errorMessage', pickUpInitialState.errorMessage);
+
+    case pickUpActionTypes.UPDATE_PICK_UP.rejected:
+      return state.setIn(['promise', 'updatePickUp'], setPromiseState(false, false, true));
+
     case pickUpActionTypes.SET_ERROR_MESSAGE:
       return state.set('errorMessage', action.message);
 
@@ -43,6 +54,10 @@ const pickUpReducer = (state = pickUpInitialState, action) => {
         [action.item.index]: updatedLine
       });
       return state.setIn(['pickUp', 'pickUpLineItems'], newLines);
+
+    case pickUpActionTypes.SET_PICK_UP_APPROVAL_RESPONSE:
+      return state.set('pickUpApprovalResponse', action.pickUp);
+
     default:
       return state;
   }

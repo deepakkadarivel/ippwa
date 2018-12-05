@@ -8,6 +8,7 @@ import history from "../../../shared/service/history";
 import {selectPickUp} from "./pickUpSelector";
 import {selectPO} from "../po/poSelector";
 import poActionTypes from "../po/poActionTypes";
+import {setPOApprovalResponse} from "../po/poActions";
 
 const pickUpPending = () => {
   return {
@@ -27,6 +28,24 @@ const pickUpRejected = () => {
   };
 };
 
+const updatePickUpPending = () => {
+  return {
+    type: pickUpActionTypes.UPDATE_PICK_UP.pending
+  };
+};
+
+const updatePickUpFulfilled = () => {
+  return {
+    type: pickUpActionTypes.UPDATE_PICK_UP.fulfilled
+  };
+};
+
+const updatePickUpRejected = () => {
+  return {
+    type: pickUpActionTypes.UPDATE_PICK_UP.rejected
+  };
+};
+
 const setErrorMessage = message => {
   return {
     type: pickUpActionTypes.SET_ERROR_MESSAGE,
@@ -37,6 +56,13 @@ const setErrorMessage = message => {
 const setPickUp = pickUp => {
   return {
     type: pickUpActionTypes.SET_PICK_UP,
+    pickUp,
+  };
+};
+
+const setPickUpApprovalResponse = pickUp => {
+  return {
+    type: pickUpActionTypes.SET_PICK_UP_APPROVAL_RESPONSE,
     pickUp,
   };
 };
@@ -102,4 +128,65 @@ const getPickUp = task => {
   };
 };
 
-export {getPickUp, updateFieldValue, handleLineItemChange};
+const updatePickUp = (pickUp, comments, submitType, history) => {
+  return (dispatch, getState) => {
+    const updatePickUpUrl = apiService.endpoints.app.generateUpdatePickUpUrl();
+    dispatch(updatePickUpPending());
+
+    let payload = {
+      cookie: getValue(constants.LOCAL_STORAGE.COOKIE) || constants.EMPTY_STRING,
+      loadBalancer: getValue(constants.LOCAL_STORAGE.LOADBALANCER) || constants.EMPTY_STRING,
+      payload: {
+        pickUpItemId: pickUp.pickUpItemId,
+        assetId: pickUp.assetId,
+        workflowAuditId: pickUp.workflowAuditId,
+        taskId: pickUp.taskId,
+        seqFlow: pickUp.seqFlow,
+        auditTrackId: pickUp.auditTrackId,
+        processInstanceId: pickUp.processInstanceId,
+        pickUpItemRequestNo: pickUp.pickUpItemRequestNo,
+        workflowId: pickUp.workflowId,
+        wareHouse: pickUp.wareHouse,
+        submitType,
+        needDate: pickUp.needDate,
+        returnDate: pickUp.returnDate,
+        companyId: pickUp.companyId || 0,
+        userId: parseInt(getValue(constants.LOCAL_STORAGE.USER_ID)) || constants.EMPTY_STRING,
+        apiType: constants.API_TYPES.UPDATE_PICK_UP_TYPE_API,
+        comments,
+        dynamicColumns: pickUp.dynamicColumns,
+        itemJsonString: JSON.stringify(pickUp.pickUpLineItems),
+        entityId: pickUp.entityId,
+        entityName: pickUp.entityName,
+        viewId: pickUp.viewId,
+        viewName: pickUp.viewName,
+        requesterId: pickUp.requesterId
+      }
+    };
+
+    return axios
+      .post(updatePickUpUrl, payload, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        dispatch(setPickUpApprovalResponse(response.data));
+        history.goBack();
+        dispatch(updatePickUpFulfilled());
+      })
+      .catch(err => {
+        dispatch(updatePickUpRejected());
+        if (err.response && err.response.status === 401) {
+          history.push('/login');
+          dispatch(setErrorMessage(constants.SESSION_EXPIRED));
+        } else {
+          dispatch(
+            setErrorMessage(err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE)
+          );
+        }
+      });
+  };
+};
+
+export {getPickUp, updateFieldValue, handleLineItemChange, updatePickUp};
