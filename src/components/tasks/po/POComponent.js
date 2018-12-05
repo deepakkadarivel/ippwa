@@ -53,7 +53,10 @@ class POComponent extends Component {
                       }, 0), 'approve', history)}>
                 Complete Approval
               </Button>
-              <Button variant="outlined" size="medium" color="error" className="Actions-btn">
+              <Button variant="outlined" size="medium" color="error" className="Actions-btn"
+                      onClick={() => updatePO(po, '', po.poLineItems.reduce((acc, line) => {
+                        return acc + line.totalAmount;
+                      }, 0), 'reject', history)}>
                 Reject
               </Button>
             </div>
