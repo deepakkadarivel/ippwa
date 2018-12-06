@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import NavBar from '../navBar';
-import Drawer from '../SwipeableDrawer';
+import NavBar from '../common/navBar';
+import Drawer from '../common/SwipeableDrawer';
 import MyTasksContainer from '../tasks/myTasks/MyTasksContainer';
 import Reports from '../reports';
 import Expense from '../expense';
@@ -12,6 +12,7 @@ import PickUpContainer from '../tasks/pickup/PickUpContainer';
 import InvoiceContainer from '../tasks/invoice/InvoiceContainer';
 import AssetContainer from '../tasks/asset/AssetContainer';
 import './home.scss';
+import AppSnackBar from "../common/appSnackBar";
 
 class HomeComponent extends React.Component {
   constructor(props) {
@@ -37,44 +38,47 @@ class HomeComponent extends React.Component {
       });
     };
 
+    const {toast, handleToastClose, match} = this.props;
+
     return (
       <div className="Home">
         <NavBar isDrawerOpen={this.state.isDrawerOpen} toggleDrawer={toggleDrawer} />
         <Drawer isDrawerOpen={this.state.isDrawerOpen} toggleDrawer={toggleDrawer} />
+        <AppSnackBar variant={toast.variant} message={toast.message} open={toast.isOpen} handleClose={() => handleToastClose()}/>
         <div>
           <Route
             exact
-            path={`${this.props.match.url}/tasks`}
+            path={`${match.url}/tasks`}
             render={() => <MyTasksContainer history={history} />}
           />
           <Route
             exact
-            path={`${this.props.match.url}/reports`}
+            path={`${match.url}/reports`}
             render={() => <Reports history={history} />}
           />
           <Route
             exacrt
-            path={`${this.props.match.url}/expense`}
+            path={`${match.url}/expense`}
             render={() => <Expense history={history} />}
           />
           <Route
             exacrt
-            path={`${this.props.match.url}/tasks/po`}
+            path={`${match.url}/tasks/po`}
             render={() => <POContainer history={history} />}
           />
           <Route
             exacrt
-            path={`${this.props.match.url}/tasks/pickUp`}
+            path={`${match.url}/tasks/pickUp`}
             render={() => <PickUpContainer history={history} />}
           />
           <Route
             exacrt
-            path={`${this.props.match.url}/tasks/invoice`}
+            path={`${match.url}/tasks/invoice`}
             render={() => <InvoiceContainer history={history} />}
           />
           <Route
             exacrt
-            path={`${this.props.match.url}/tasks/asset`}
+            path={`${match.url}/tasks/asset`}
             render={() => <AssetContainer history={history} />}
           />
         </div>

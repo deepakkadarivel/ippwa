@@ -5,7 +5,8 @@ import apiService from '../../../shared/service/apiService';
 import constants from '../../../shared/constants';
 import {getValue} from '../../../shared/service/localStorage';
 import history from "../../../shared/service/history";
-import {selectPickUp} from "./pickUpSelector";
+import {selectPickUp, selectPickUpApprovalResponse} from "./pickUpSelector";
+import {setToast} from "../../home/homeActions";
 
 const pickUpPending = () => {
   return {
@@ -112,6 +113,12 @@ const getPickUp = task => {
       .then(response => {
         dispatch(setPickUp(response.data));
         dispatch(pickUpFulfilled());
+        const pickUpApprovalResponse = selectPickUpApprovalResponse(getState());
+        dispatch(setToast({
+          variant: constants.TOAST.VARIANTS.SUCCESS,
+          message: pickUpApprovalResponse.actionMsg ? pickUpApprovalResponse.actionMsg : 'PickUp Updated successfully',
+          isOpen: true
+        }));
       })
       .catch((err) => {
         dispatch(pickUpRejected());
@@ -119,7 +126,13 @@ const getPickUp = task => {
           history.push('/login');
           dispatch(setErrorMessage(constants.SESSION_EXPIRED));
         } else {
-          dispatch(setErrorMessage(err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE));
+          const message = err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE;
+          dispatch(setErrorMessage(message));
+          dispatch(setToast({
+            variant: constants.TOAST.VARIANTS.ERROR,
+            message,
+            isOpen: true
+          }));
         }
       });
   };
@@ -178,9 +191,13 @@ const updatePickUp = (pickUp, comments, submitType, history) => {
           history.push('/login');
           dispatch(setErrorMessage(constants.SESSION_EXPIRED));
         } else {
-          dispatch(
-            setErrorMessage(err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE)
-          );
+          const message = err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE;
+          dispatch(setErrorMessage(message));
+          dispatch(setToast({
+            variant: constants.TOAST.VARIANTS.ERROR,
+            message,
+            isOpen: true
+          }));
         }
       });
   };

@@ -3,9 +3,10 @@ import axios from 'axios';
 import poActionTypes from './poActionTypes';
 import apiService from '../../../shared/service/apiService';
 import constants from '../../../shared/constants';
-import { getValue } from '../../../shared/service/localStorage';
+import {getValue} from '../../../shared/service/localStorage';
 import history from '../../../shared/service/history';
-import { selectPO } from './poSelector';
+import {selectPO, selectPOApprovalResponse} from './poSelector';
+import {setToast} from "../../home/homeActions";
 
 const poPending = () => {
   return {
@@ -122,9 +123,13 @@ const getPO = task => {
           history.push('/login');
           dispatch(setErrorMessage(constants.SESSION_EXPIRED));
         } else {
-          dispatch(
-            setErrorMessage(err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE)
-          );
+          const message = err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE;
+          dispatch(setErrorMessage(message));
+          dispatch(setToast({
+            variant: constants.TOAST.VARIANTS.ERROR,
+            message,
+            isOpen: true
+          }));
         }
       });
   };
@@ -198,6 +203,12 @@ const updatePO = (po, comments, totalAmount, submitType, history) => {
         dispatch(setPOApprovalResponse(response.data));
         history.goBack();
         dispatch(updatePOFulfilled());
+        const poApprovalResponse = selectPOApprovalResponse(getState());
+        dispatch(setToast({
+          variant: constants.TOAST.VARIANTS.SUCCESS,
+          message: poApprovalResponse.actionMsg ? poApprovalResponse.actionMsg : 'PO Updated successfully',
+          isOpen: true
+        }));
       })
       .catch(err => {
         dispatch(updatePORejected());
@@ -205,12 +216,16 @@ const updatePO = (po, comments, totalAmount, submitType, history) => {
           history.push('/login');
           dispatch(setErrorMessage(constants.SESSION_EXPIRED));
         } else {
-          dispatch(
-            setErrorMessage(err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE)
-          );
+          const message = err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE;
+          dispatch(setErrorMessage(message));
+          dispatch(setToast({
+            variant: constants.TOAST.VARIANTS.ERROR,
+            message,
+            isOpen: true
+          }));
         }
       });
   };
 };
 
-export { getPO, updateFieldValue, handleLineItemChange, updatePO, setPOApprovalResponse };
+export {getPO, updateFieldValue, handleLineItemChange, updatePO, setPOApprovalResponse};

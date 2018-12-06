@@ -14,10 +14,10 @@ import ExitToApp from '@material-ui/icons/ExitToApp';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import AttachMoney from '@material-ui/icons/AttachMoney';
 import styles from './styles';
-import constants from '../../shared/constants';
+import constants from '../../../shared/constants';
 import menuConstants from './constants';
-import {getValue} from '../../shared/service/localStorage';
-import history from "../../shared/service/history";
+import {getValue} from '../../../shared/service/localStorage';
+import history from "../../../shared/service/history";
 
 const Drawer = props => {
   const {classes, isDrawerOpen, toggleDrawer} = props;

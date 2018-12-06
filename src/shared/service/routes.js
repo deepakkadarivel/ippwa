@@ -7,8 +7,8 @@ import { withTheme } from '@material-ui/core/styles';
 import LoginContainer from '../../components/login/LoginContainer';
 import App from '../../components/app/App';
 import configureStore from '../store';
-import Home from '../../components/home/HomeComponent';
 import history from './history';
+import HomeContainer from "../../components/home/HomeContainer";
 
 const store = configureStore();
 
@@ -55,7 +55,7 @@ const Routes = () => {
         <MuiThemeProvider theme={theme}>
           <Switch basename={window.location.pathname || ''}>
             <Route path="/login" component={LoginContainer} />
-            <Route path="/home" component={Home} />
+            <Route path="/home" component={HomeContainer} />
             <Route component={App} />
           </Switch>
         </MuiThemeProvider>
