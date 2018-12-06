@@ -124,12 +124,6 @@ const getInvoice = task => {
       .then(response => {
         dispatch(setInvoice(response.data));
         dispatch(invoiceFulfilled());
-        const invoiceApprovalResponse = selectInvoiceApprovalResponse(getState());
-        dispatch(setToast({
-          variant: constants.TOAST.VARIANTS.SUCCESS,
-          message: invoiceApprovalResponse.actionMsg ? invoiceApprovalResponse.actionMsg : 'Invoice Updated successfully',
-          isOpen: true
-        }));
       })
       .catch((err) => {
         dispatch(invoiceRejected());
