@@ -113,6 +113,12 @@ const getAsset = task => {
       .then(response => {
         dispatch(setAsset(response.data));
         dispatch(assetFulfilled());
+        const assetApprovalResponse = selectAssetApprovalResponse(getState());
+        dispatch(setToast({
+          variant: constants.TOAST.VARIANTS.SUCCESS,
+          message: assetApprovalResponse.actionMsg ? assetApprovalResponse.actionMsg : 'Asset Updated successfully',
+          isOpen: true
+        }));
       })
       .catch(err => {
         dispatch(assetRejected());

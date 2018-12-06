@@ -113,6 +113,12 @@ const getPickUp = task => {
       .then(response => {
         dispatch(setPickUp(response.data));
         dispatch(pickUpFulfilled());
+        const pickUpApprovalResponse = selectPickUpApprovalResponse(getState());
+        dispatch(setToast({
+          variant: constants.TOAST.VARIANTS.SUCCESS,
+          message: pickUpApprovalResponse.actionMsg ? pickUpApprovalResponse.actionMsg : 'PickUp Updated successfully',
+          isOpen: true
+        }));
       })
       .catch((err) => {
         dispatch(pickUpRejected());
