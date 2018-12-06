@@ -1,10 +1,14 @@
-// @import 'shared/styles/colors';
+@import "../../../shared/styles/colors";
+
 .Invoice {
+  min-height: 100vh;
+  padding: 50px 20px;
+
   &--Line {
     margin-top: 20px;
     width: 100%;
     box-shadow: none !important;
-    border: 1px solid #cccccc;
+    border: $border;
   }
 
   &--Price {

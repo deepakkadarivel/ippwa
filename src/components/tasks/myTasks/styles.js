@@ -1,6 +1,6 @@
 const styles = theme => ({
   root: {
-    padding: '0 24px'
+    padding: '20px'
   }
 });
 

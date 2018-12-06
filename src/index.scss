@@ -1,3 +1,5 @@
+@import "shared/styles/colors";
+
 * {
   //box-shadow: none !important;
 }
@@ -26,6 +28,12 @@ label {
 
 hr {
   margin-left: 0px !important;
+}
+
+.progress {
+  position: absolute;
+  margin: 20% 40%;
+  color: $blue !important;
 }
 
 /* For mobile phones: */
@@ -114,6 +122,10 @@ hr {
 
 @media only screen and (min-width: 768px) {
   /* For desktop: */
+  .progress {
+    margin: 10% 45%;
+  }
+
   .col-1 {
     width: 8.33%;
     //width:12%;

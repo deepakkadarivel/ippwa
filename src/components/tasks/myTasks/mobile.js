@@ -16,6 +16,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 import constants from '../../../shared/constants';
 import { getString } from '../../../shared/utils/string';
+import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
 
 const styles = theme => ({
   card: {
@@ -240,14 +241,17 @@ MyTasksCard = withStyles(styles)(MyTasksCard);
 const MobileTable = props => {
   return (
     <div>
-      {props.tasks.map((task, index) => (
-        <MyTasksCard
-          key={index}
-          task={task}
-          history={props.history}
-          setSelectedTask={props.setSelectedTask}
-        />
-      ))}
+      {props.promise.isPending && (<CircularProgress className="progress"/>)}
+      {props.promise.isFulfilled && (<div>
+        {props.tasks.map((task, index) => (
+          <MyTasksCard
+            key={index}
+            task={task}
+            history={props.history}
+            setSelectedTask={props.setSelectedTask}
+          />
+        ))}
+      </div>)}
     </div>
   );
 };

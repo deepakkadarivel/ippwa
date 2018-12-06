@@ -7,6 +7,7 @@ import Footer from '../common/footer/Footer';
 import Actions from '../common/actions/Actions';
 import PickUpLine from './PickUpLine';
 import Button from "@material-ui/core/Button/Button";
+import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
 
 class PickUpComponent extends Component {
   componentDidMount() {
@@ -27,35 +28,36 @@ class PickUpComponent extends Component {
     };
 
     return (
-      <div className="PickUp container">
-        {/* Header */}
+      <div className="PickUp">
+        {promise.isPending && (<CircularProgress className="progress"/>)}
         {promise.isFulfilled && (
-          <Header
-            header={pickUp.header}
-            title={constants.TASK.PICK_UP_TITLE}
-            handleChange={handleChange}
-          />
+          <div>
+            <Header
+              header={pickUp.header}
+              title={constants.TASK.PICK_UP_TITLE}
+              handleChange={handleChange}
+            />
+            {pickUp.pickUpLineItems.map((x, y) => (
+              <PickUpLine key={y} line={x} handleLineItemChange={handleLineItemChange(y)}/>
+            ))}
+            <Divider variant="inset"/>
+            <Footer items={pickUp.footer}/>
+            <Divider variant="inset"/>
+            <div className="PickUp--Actions">
+              <Button size="medium" className="Actions-btn" onClick={() => history.goBack()}>
+                Cancel
+              </Button>
+              <Button variant="outlined" size="medium" color="secondary" className="Actions-btn"
+                      onClick={() => updatePickUp(pickUp, '', 'approve', history)}>
+                Complete Approval
+              </Button>
+              <Button variant="outlined" size="medium" color="error" className="Actions-btn"
+                      onClick={() => updatePickUp(pickUp, '', 'reject', history)}>
+                Reject
+              </Button>
+            </div>
+          </div>
         )}
-        {promise.isFulfilled
-        && pickUp.pickUpLineItems.map((x, y) => (
-          <PickUpLine key={y} line={x} handleLineItemChange={handleLineItemChange(y)}/>
-        ))}
-        <Divider variant="inset"/>
-        {promise.isFulfilled && <Footer items={pickUp.footer}/>}
-        <Divider variant="inset"/>
-        <div className="PickUp--Actions">
-          <Button size="medium" className="Actions-btn" onClick={() => history.goBack()}>
-            Cancel
-          </Button>
-          <Button variant="outlined" size="medium" color="secondary" className="Actions-btn"
-                  onClick={() => updatePickUp(pickUp, '', 'approve', history)}>
-            Complete Approval
-          </Button>
-          <Button variant="outlined" size="medium" color="error" className="Actions-btn"
-                  onClick={() => updatePickUp(pickUp, '', 'reject', history)}>
-            Reject
-          </Button>
-        </div>
       </div>
     );
   }

@@ -4,10 +4,10 @@ import Header from '../common/header/Header';
 import constants from '../../../shared/constants';
 import Divider from '@material-ui/core/Divider/Divider';
 import Footer from '../common/footer/Footer';
-import Actions from '../common/actions/Actions';
 import InvoiceLine from "./InvoiceLine";
 import InvoicePrice from "./InvoicePrice";
 import Button from "@material-ui/core/Button/Button";
+import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
 
 class InvoiceComponent extends Component {
 
@@ -32,41 +32,40 @@ class InvoiceComponent extends Component {
 
     return (
       <div className="Invoice container">
-        {/* Header */}
+        {promise.isPending && (<CircularProgress className="progress"/>)}
         {promise.isFulfilled && (
-          <Header
-            header={invoice.header}
-            title={constants.TASK.INVOICE_TITLE}
-            handleChange={handleChange}
-          />
+          <div>
+            <Header
+              header={invoice.header}
+              title={constants.TASK.INVOICE_TITLE}
+              handleChange={handleChange}
+            />
+            {invoice.invoiceLineItems.map((x, y) => (
+              <InvoiceLine key={y} line={x} handleLineItemChange={handleLineItemChange(y)}/>
+            ))}
+            <Divider variant="inset"/>
+            <InvoicePrice
+              handleChange={handleInvoiceUpdate}
+              invoice={invoice}
+            />
+            <Divider variant="inset"/>
+            <Footer items={invoice.footer}/>
+            <Divider variant="inset"/>
+            <div className="Invoice--Actions">
+              <Button size="medium" className="Actions-btn" onClick={() => history.goBack()}>
+                Cancel
+              </Button>
+              <Button variant="outlined" size="medium" color="secondary" className="Actions-btn"
+                      onClick={() => updateInvoice(invoice, '', 'approve', history)}>
+                Complete Approval
+              </Button>
+              <Button variant="outlined" size="medium" color="error" className="Actions-btn"
+                      onClick={() => updateInvoice(invoice, '', 'reject', history)}>
+                Reject
+              </Button>
+            </div>
+          </div>
         )}
-        {promise.isFulfilled &&
-        invoice.invoiceLineItems.map((x, y) => (
-          <InvoiceLine key={y} line={x} handleLineItemChange={handleLineItemChange(y)}/>
-        ))}
-        <Divider variant="inset"/>
-        {promise.isFulfilled && <InvoicePrice
-          handleChange={handleInvoiceUpdate}
-          invoice={invoice}
-        />}
-        <Divider variant="inset"/>
-        {promise.isFulfilled && <Footer items={invoice.footer}/>}
-        <Divider variant="inset"/>
-        {promise.isFulfilled &&
-        <div className="Invoice--Actions">
-          <Button size="medium" className="Actions-btn" onClick={() => history.goBack()}>
-            Cancel
-          </Button>
-          <Button variant="outlined" size="medium" color="secondary" className="Actions-btn"
-                  onClick={() => updateInvoice(invoice, '', 'approve', history)}>
-            Complete Approval
-          </Button>
-          <Button variant="outlined" size="medium" color="error" className="Actions-btn"
-                  onClick={() => updateInvoice(invoice, '', 'reject', history)}>
-            Reject
-          </Button>
-        </div>
-        }
       </div>
     );
   }

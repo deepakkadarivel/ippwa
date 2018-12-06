@@ -7,8 +7,8 @@ import POLine from './POLine';
 import POPrice from './POPrice';
 import Footer from '../common/footer/Footer';
 import Divider from '@material-ui/core/Divider/Divider';
-import Actions from '../common/actions/Actions';
 import Button from "@material-ui/core/Button/Button";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class POComponent extends Component {
   componentDidMount() {
@@ -27,8 +27,7 @@ class POComponent extends Component {
     };
 
     return (
-      <div className="PO container">
-        {/* Header */}
+      <div className="PO">
         {promise.isFulfilled && (
           <div>
             <Header
@@ -62,6 +61,7 @@ class POComponent extends Component {
             </div>
           </div>
         )}
+        {promise.isPending && (<CircularProgress className="progress"/>)}
       </div>
     );
   }

@@ -18,18 +18,18 @@ class MyTasks extends Component {
   }
 
   render() {
-    const { classes, tasks, history, setSelectedTask } = this.props;
+    const { classes, tasks, history, setSelectedTask, promise } = this.props;
     return (
       <div>
         <div className={classes.root}>
           <Desktop>
-            <DesktopTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} />
+            <DesktopTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} promise={promise}/>
           </Desktop>
           <Tablet>
-            <DesktopTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} />
+            <DesktopTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} promise={promise}/>
           </Tablet>
           <Mobile>
-            <MobileTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} />
+            <MobileTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} promise={promise}/>
           </Mobile>
           {/*<Default><DesktopTable tasks={this.props.tasks}/></Default>*/}
         </div>
