@@ -4,6 +4,7 @@ import loginActionTypes from './loginActionTypes';
 import apiService from '../../shared/service/apiService';
 import history from '../../shared/service/history';
 import constants from '../../shared/constants';
+import {setToast} from "../home/homeActions";
 
 const loginPending = () => {
   return {
@@ -59,11 +60,10 @@ const login = (userName, password) => {
         history.push('/home');
       })
       .catch(error => {
+        const msg = error.response ? error.response.data.message : constants.SERVER_UNAVAILABLE;
         dispatch(loginRejected());
         dispatch(
-          setErrorMessage(
-            error.response ? error.response.data.message : constants.SERVER_UNAVAILABLE
-          )
+          setErrorMessage(msg)
         );
       });
   };

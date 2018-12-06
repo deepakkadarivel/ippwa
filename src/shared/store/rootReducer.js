@@ -5,14 +5,16 @@ import tasksReducer from '../../components/tasks/myTasks/tasksRducer';
 import pickUpReducer from '../../components/tasks/pickup/pickUpReducer';
 import invoiceReducer from '../../components/tasks/invoice/invoiceReducer';
 import assetReducer from '../../components/tasks/asset/assetReducer';
+import homeReducer from "../../components/home/homeReducer";
 
 const app = combineReducers({
+  home: homeReducer,
   login: loginReducer,
   tasks: tasksReducer,
   po: poReducer,
   pickUp: pickUpReducer,
   invoice: invoiceReducer,
-  asset: assetReducer
+  asset: assetReducer,
 });
 
 export default app;

@@ -99,7 +99,7 @@ const AppSnackBar = props => {
         autoHideDuration={5000}
         onClose={handleClose}
       >
-        <SnackBarContentWrapper onClose={handleClose} variant={variant} message={message} />
+        <SnackBarContentWrapper onClose={() => handleClose()} variant={variant} message={message} />
       </Snackbar>
     </div>
   );

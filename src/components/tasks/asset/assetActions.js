@@ -5,7 +5,8 @@ import apiService from '../../../shared/service/apiService';
 import constants from '../../../shared/constants';
 import {getValue} from '../../../shared/service/localStorage';
 import history from '../../../shared/service/history';
-import {selectAsset} from './assetSelector';
+import {selectAsset, selectAssetApprovalResponse} from './assetSelector';
+import {setToast} from "../../home/homeActions";
 
 const assetPending = () => {
   return {
@@ -119,9 +120,13 @@ const getAsset = task => {
           history.push('/login');
           dispatch(setErrorMessage(constants.SESSION_EXPIRED));
         } else {
-          dispatch(
-            setErrorMessage(err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE)
-          );
+          const message = err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE;
+          dispatch(setErrorMessage(message));
+          dispatch(setToast({
+            variant: constants.TOAST.VARIANTS.ERROR,
+            message,
+            isOpen: true
+          }));
         }
       });
   };
@@ -173,6 +178,12 @@ const updateAsset = (asset, comments, submitType, history) => {
         dispatch(setAssetApprovalResponse(response.data));
         history.goBack();
         dispatch(updateAssetFulfilled());
+        const assetApprovalResponse = selectAssetApprovalResponse(getState());
+        dispatch(setToast({
+          variant: constants.TOAST.VARIANTS.SUCCESS,
+          message: assetApprovalResponse.actionMsg ? assetApprovalResponse.actionMsg : 'Asset Updated successfully',
+          isOpen: true
+        }));
       })
       .catch(err => {
         dispatch(updateAssetRejected());
@@ -180,9 +191,13 @@ const updateAsset = (asset, comments, submitType, history) => {
           history.push('/login');
           dispatch(setErrorMessage(constants.SESSION_EXPIRED));
         } else {
-          dispatch(
-            setErrorMessage(err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE)
-          );
+          const message = err.response ? err.response.data.message : constants.SERVER_UNAVAILABLE;
+          dispatch(setErrorMessage(message));
+          dispatch(setToast({
+            variant: constants.TOAST.VARIANTS.ERROR,
+            message,
+            isOpen: true
+          }));
         }
       });
   };

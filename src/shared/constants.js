@@ -68,5 +68,14 @@ export default {
     PICK_UP_TITLE: 'Pickup - Edit Request Item',
     ASSET_TITLE: 'Edit Asset',
     INVOICE_TITLE: 'Edit Invoice'
+  },
+
+  TOAST: {
+    VARIANTS: {
+      SUCCESS: 'success',
+      ERROR: 'error',
+      WARNING: 'warning',
+      INFO: 'info',
+    }
   }
 };
