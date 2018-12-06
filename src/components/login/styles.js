@@ -7,7 +7,6 @@ const styles = theme => ({
   main: {
     width: 'auto',
     display: 'block', // Fix IE 11 issue.
-    textAlign: 'center',
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
       width: 340,
       marginLeft: 'auto',
@@ -40,7 +39,8 @@ const styles = theme => ({
     marginLeft: -12
   },
   footer: {
-    margin: theme.spacing.unit * 3
+    margin: theme.spacing.unit * 3,
+    textAlign: 'center'
   }
 });
 
