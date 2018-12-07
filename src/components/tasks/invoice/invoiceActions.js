@@ -89,10 +89,20 @@ const updateLineFieldValue = item => {
 
 const updateInvoiceFieldValue = item => {
   return (dispatch, getState) => {
-    const invoice = selectInvoice(getState());
+    let invoice = selectInvoice(getState());
+    if (item.key === 'adjustedAmt' || item.key === 'discount') {
+      const value = parseFloat(item.value) || 0;
+      invoice = {...invoice, [item.key]: value};
+      invoice = {
+        ...invoice,
+        grandTotal: invoice.subTotalAmt + invoice.additionalAmt + invoice.adjustedAmt - invoice.discount
+      }
+    } else {
+      const value = item.value || '';
+      invoice = {...invoice, [item.key]: value};
+    }
     dispatch({
       type: invoiceActionTypes.UPDATE_INVOICE_FIELD_VALUE,
-      item,
       invoice,
     });
   };
@@ -179,7 +189,7 @@ const updateInvoice = (invoice, comments, submitType, history) => {
         requesterId: invoice.requesterId,
         poFrom: invoice.poFrom,
         paymentDays: invoice.paymentDays,
-        creditNotes: invoice.creditNotes,
+        creditNotes: null,
       }
     };
 

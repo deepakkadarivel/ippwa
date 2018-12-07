@@ -2,11 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Header from '../common/header/Header';
 import constants from '../../../shared/constants';
-import Line from '../common/line/Line';
 import Divider from '@material-ui/core/Divider/Divider';
 import Footer from '../common/footer/Footer';
-import Actions from '../common/actions/Actions';
-import PickUpLine from "../pickup/PickUpLine";
 import AssetLine from "./AssetLine";
 import Button from "@material-ui/core/Button/Button";
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
@@ -28,7 +25,7 @@ class AssetComponent extends Component {
     };
 
     return (
-      <div className="Asset container">
+      <div className="Asset">
         {promise.isPending && (<CircularProgress className="progress"/>)}
         {promise.isFulfilled && (
           <div>

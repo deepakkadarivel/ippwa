@@ -22,6 +22,9 @@ const invoiceReducer = (state = invoiceInitialState, action) => {
     case invoiceActionTypes.SET_INVOICE:
       return state.set('invoice', action.invoice);
 
+    case invoiceActionTypes.SET_INVOICE_APPROVAL_RESPONSE:
+      return state.set('invoiceApprovalResponse', action.invoice);
+
     case invoiceActionTypes.UPDATE_INVOICE_HEADER_FIELD_VALUE:
       const updatedHeader = action.invoice.header.map(x => {
         if (x.name === action.item.key) {
@@ -32,11 +35,7 @@ const invoiceReducer = (state = invoiceInitialState, action) => {
       return state.setIn(['invoice', 'header'], updatedHeader);
 
     case invoiceActionTypes.UPDATE_INVOICE_FIELD_VALUE:
-      const updateInvoice = {...action.invoice, [action.item.key]: parseFloat(action.item.value) || 0};
-      return state.set('invoice', {
-        ...updateInvoice,
-        grandTotal: updateInvoice.subTotalAmt + updateInvoice.additionalAmt + updateInvoice.adjustedAmt - updateInvoice.discount
-      });
+      return state.set('invoice', action.invoice);
 
     case invoiceActionTypes.UPDATE_INVOICE_LINE_FIELD_VALUE:
       const items = action.invoice.invoiceLineItems[action.item.index];

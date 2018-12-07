@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import Header from '../common/header/Header';
 import constants from '../../../shared/constants';
 import Divider from '@material-ui/core/Divider/Divider';
-import Footer from '../common/footer/Footer';
-import InvoiceLine from "./InvoiceLine";
-import InvoicePrice from "./InvoicePrice";
+import InvoiceLine from "./components/InvoiceLine";
+import InvoicePrice from "./components/InvoicePrice";
 import Button from "@material-ui/core/Button/Button";
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
+import InvoiceFooter from "./components/InvoiceFooter";
 
 class InvoiceComponent extends Component {
 
@@ -31,7 +31,7 @@ class InvoiceComponent extends Component {
     };
 
     return (
-      <div className="Invoice container">
+      <div className="Invoice">
         {promise.isPending && (<CircularProgress className="progress"/>)}
         {promise.isFulfilled && (
           <div>
@@ -49,7 +49,10 @@ class InvoiceComponent extends Component {
               invoice={invoice}
             />
             <Divider variant="inset"/>
-            <Footer items={invoice.footer}/>
+            <InvoiceFooter
+              handleChange={handleInvoiceUpdate}
+              invoice={invoice}
+            />
             <Divider variant="inset"/>
             <div className="Invoice--Actions">
               <Button size="medium" className="Actions-btn" onClick={() => history.goBack()}>

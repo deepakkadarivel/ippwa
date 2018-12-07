@@ -4,7 +4,6 @@ import Divider from '@material-ui/core/Divider/Divider';
 import Header from '../common/header/Header';
 import constants from '../../../shared/constants';
 import Footer from '../common/footer/Footer';
-import Actions from '../common/actions/Actions';
 import PickUpLine from './PickUpLine';
 import Button from "@material-ui/core/Button/Button";
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
