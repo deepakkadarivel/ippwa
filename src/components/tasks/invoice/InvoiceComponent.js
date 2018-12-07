@@ -59,11 +59,11 @@ class InvoiceComponent extends Component {
                 Cancel
               </Button>
               <Button variant="outlined" size="medium" color="secondary" className="Actions-btn"
-                      onClick={() => updateInvoice(invoice, '', 'approve', history)}>
+                      onClick={() => updateInvoice(constants.tasks.actions.APPROVE, history)}>
                 Complete Approval
               </Button>
               <Button variant="outlined" size="medium" color="error" className="Actions-btn"
-                      onClick={() => updateInvoice(invoice, '', 'reject', history)}>
+                      onClick={() => updateInvoice(constants.tasks.actions.REJECT, history)}>
                 Reject
               </Button>
             </div>

@@ -46,6 +46,9 @@ const assetReducer = (state = assetInitialState, action) => {
     case assetActionTypes.SET_ASSET_APPROVAL_RESPONSE:
       return state.set('assetApprovalResponse', action.asset);
 
+    case assetActionTypes.UPDATE_ASSET_FIELD_VALUE:
+      return state.set('asset', action.asset);
+
     default:
       return state;
   }

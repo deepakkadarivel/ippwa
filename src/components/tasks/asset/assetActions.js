@@ -87,6 +87,17 @@ const handleLineItemChange = item => {
   };
 };
 
+const updateAssetFieldValue = item => {
+  return (dispatch, getState) => {
+    let asset = selectAsset(getState());
+    asset = {...asset, [item.key]: item.value || ''};
+    dispatch({
+      type: assetActionTypes.UPDATE_ASSET_FIELD_VALUE,
+      asset,
+    });
+  };
+};
+
 const getAsset = task => {
   return (dispatch, getState) => {
     const assetUrl = apiService.endpoints.app.generateAssetUrl();
@@ -132,9 +143,11 @@ const getAsset = task => {
   };
 };
 
-const updateAsset = (asset, comments, submitType, history) => {
+const updateAsset = (submitType, history) => {
   return (dispatch, getState) => {
     const updateAssetUrl = apiService.endpoints.app.generateUpdateAssetUrl();
+    const asset = selectAsset(getState());
+
     dispatch(updateAssetPending());
 
     let payload = {
@@ -157,7 +170,7 @@ const updateAsset = (asset, comments, submitType, history) => {
         companyId: asset.companyId || 0,
         userId: parseInt(getValue(constants.LOCAL_STORAGE.USER_ID)) || constants.EMPTY_STRING,
         apiType: constants.API_TYPES.UPDATE_ASSET_TYPE_API,
-        comments,
+        comments: asset.comments,
         dynamicColumns: asset.dynamicColumns,
         itemJsonString: JSON.stringify(asset.assetLineItems),
         entityId: asset.entityId,
@@ -203,4 +216,4 @@ const updateAsset = (asset, comments, submitType, history) => {
   };
 };
 
-export {getAsset, updateFieldValue, handleLineItemChange, updateAsset};
+export {getAsset, updateFieldValue, handleLineItemChange, updateAsset, updateAssetFieldValue};

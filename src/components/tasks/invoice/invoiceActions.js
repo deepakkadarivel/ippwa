@@ -153,9 +153,10 @@ const getInvoice = task => {
   };
 };
 
-const updateInvoice = (invoice, comments, submitType, history) => {
+const updateInvoice = (submitType, history) => {
   return (dispatch, getState) => {
     const updateInvoiceUrl = apiService.endpoints.app.generateUpdateInvoiceUrl();
+    const invoice = selectInvoice(getState());
     dispatch(updateInvoicePending());
 
     let payload = {
@@ -177,7 +178,7 @@ const updateInvoice = (invoice, comments, submitType, history) => {
         companyId: invoice.companyId,
         userId: parseInt(getValue(constants.LOCAL_STORAGE.USER_ID)) || constants.EMPTY_STRING,
         apiType: constants.API_TYPES.UPDATE_INVOICE_TYPE_API,
-        comments,
+        comments: invoice.comments,
         itemJson: JSON.stringify(invoice.invoiceLineItems),
         subTotalAmt: invoice.subTotalAmt,
         additionalAmt: invoice.additionalAmt,
@@ -189,7 +190,7 @@ const updateInvoice = (invoice, comments, submitType, history) => {
         requesterId: invoice.requesterId,
         poFrom: invoice.poFrom,
         paymentDays: invoice.paymentDays,
-        creditNotes: null,
+        creditNotes: invoice.creditNotes.length ? invoice.creditNotes : null,
       }
     };
 
