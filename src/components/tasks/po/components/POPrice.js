@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './po.scss';
+import '../po.scss';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import { getIntString, getString } from '../../../shared/utils/string';
+import { getIntString, getString } from '../../../../shared/utils/string';
 
 const Price = props => {
   const { lines } = props;

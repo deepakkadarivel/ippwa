@@ -7,6 +7,9 @@ import {getValue} from '../../../shared/service/localStorage';
 import history from '../../../shared/service/history';
 import {selectPO, selectPOApprovalResponse} from './poSelector';
 import {setToast} from "../../home/homeActions";
+import {selectAsset} from "../asset/assetSelector";
+import assetActionTypes from "../asset/assetActionTypes";
+import {selectInvoice} from "../invoice/invoiceSelector";
 
 const poPending = () => {
   return {
@@ -87,6 +90,23 @@ const handleLineItemChange = item => {
   };
 };
 
+const updatePOFieldValue = item => {
+  return (dispatch, getState) => {
+    let po = selectPO(getState());
+    if (item.key === 'advancePayment') {
+      const value = parseFloat(item.value) || 0;
+      po = {...po, [item.key]: value};
+    } else {
+      const value = item.value || '';
+      po = {...po, [item.key]: value};
+    }
+    dispatch({
+      type: poActionTypes.UPDATE_PO_FIELD_VALUE,
+      po,
+    });
+  };
+};
+
 const getPO = task => {
   return (dispatch, getState) => {
     const poUrl = apiService.endpoints.app.generatePOUrl();
@@ -135,9 +155,14 @@ const getPO = task => {
   };
 };
 
-const updatePO = (po, comments, totalAmount, submitType, history) => {
+const updatePO = (submitType, history) => {
   return (dispatch, getState) => {
     const updatePOUrl = apiService.endpoints.app.generateUpdatePOUrl();
+    let po = selectPO(getState());
+    const totalAmount = po.poLineItems.reduce((acc, line) => {
+      return acc + line.totalAmount;
+    }, 0);
+
     dispatch(updatePOPending());
 
     let payload = {
@@ -163,7 +188,7 @@ const updatePO = (po, comments, totalAmount, submitType, history) => {
         companyId: po.companyId || 0,
         userId: parseInt(getValue(constants.LOCAL_STORAGE.USER_ID)) || constants.EMPTY_STRING,
         apiType: po.amendmentEdit ? constants.API_TYPES.UPDATE_PO_AMENDMENT_TYPE_API : constants.API_TYPES.UPDATE_PO_REQ_TYPE_API,
-        comments: comments || '',
+        comments: po.comments,
         dynamicColumns: po.dynamicColumns || '',
         itemJson: JSON.stringify(po.poLineItems),
         terms: po.terms,
@@ -228,4 +253,4 @@ const updatePO = (po, comments, totalAmount, submitType, history) => {
   };
 };
 
-export {getPO, updateFieldValue, handleLineItemChange, updatePO, setPOApprovalResponse};
+export {getPO, updateFieldValue, handleLineItemChange, updatePO, setPOApprovalResponse, updatePOFieldValue};

@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import './po.scss';
 import Header from '../common/header/Header';
 import constants from '../../../shared/constants';
-import POLine from './POLine';
-import POPrice from './POPrice';
+import POLine from './components/POLine';
+import POPrice from './components/POPrice';
 import Footer from '../common/footer/Footer';
 import Divider from '@material-ui/core/Divider/Divider';
 import Button from "@material-ui/core/Button/Button";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import POFooter from "./components/POFooter";
 
 class POComponent extends Component {
   componentDidMount() {
@@ -16,7 +17,7 @@ class POComponent extends Component {
   }
 
   render() {
-    const {po, promise, updateFieldValue, updateLineFieldValue, history, updatePO} = this.props;
+    const {po, promise, updateFieldValue, updateLineFieldValue, history, updatePO, updatePOFieldValue} = this.props;
 
     const handleChange = event => {
       updateFieldValue({key: event.target.name, value: event.target.value});
@@ -24,6 +25,10 @@ class POComponent extends Component {
 
     const handleLineItemChange = y => event => {
       updateLineFieldValue({index: y, key: event.target.name, value: event.target.value});
+    };
+
+    const handlePOUpdate = event => {
+      updatePOFieldValue({key: event.target.name, value: event.target.value});
     };
 
     return (
@@ -40,22 +45,18 @@ class POComponent extends Component {
             ))}
             <POPrice lines={po.poLineItems}/>
             <Divider variant="inset"/>
-            <Footer items={po.footer}/>
+            <POFooter po={po} handleChange={handlePOUpdate}/>
             <Divider variant="inset"/>
             <div className="Actions">
               <Button size="medium" className="Actions-btn" onClick={() => history.goBack()}>
                 Cancel
               </Button>
               <Button variant="outlined" size="medium" color="secondary" className="Actions-btn"
-                      onClick={() => updatePO(po, '', po.poLineItems.reduce((acc, line) => {
-                        return acc + line.totalAmount;
-                      }, 0), 'approve', history)}>
+                      onClick={() => updatePO(constants.tasks.actions.APPROVE, history)}>
                 Complete Approval
               </Button>
               <Button variant="outlined" size="medium" color="error" className="Actions-btn"
-                      onClick={() => updatePO(po, '', po.poLineItems.reduce((acc, line) => {
-                        return acc + line.totalAmount;
-                      }, 0), 'reject', history)}>
+                      onClick={() => updatePO(constants.tasks.actions.REJECT, history)}>
                 Reject
               </Button>
             </div>
@@ -71,6 +72,7 @@ POComponent.propTypes = {
   getPO: PropTypes.func.isRequired,
   updateFieldValue: PropTypes.func.isRequired,
   updateLineFieldValue: PropTypes.func.isRequired,
+  updatePOFieldValue: PropTypes.func.isRequired,
   updatePO: PropTypes.func.isRequired,
   selectedTask: PropTypes.object.isRequired,
   po: PropTypes.object.isRequired,

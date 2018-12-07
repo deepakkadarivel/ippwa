@@ -46,8 +46,8 @@ export default {
       status: 'Status'
     },
     actions: {
-      APPROVE: 'APPROVE',
-      REJECT: 'REJECT'
+      APPROVE: 'approve',
+      REJECT: 'reject'
     }
   },
   API_TYPES: {

@@ -35,7 +35,7 @@ const poReducer = (state = poInitialState, action) => {
     case poActionTypes.UPDATE_PO_HEADER_FIELD_VALUE:
       const updatedHeader = action.po.header.map(x => {
         if (x.name === action.item.key) {
-          return { ...x, value: action.item.value };
+          return {...x, value: action.item.value};
         }
         return x;
       });
@@ -62,6 +62,9 @@ const poReducer = (state = poInitialState, action) => {
 
     case poActionTypes.SET_PO_APPROVAL_RESPONSE:
       return state.set('poApprovalResponse', action.po);
+
+    case poActionTypes.UPDATE_PO_FIELD_VALUE:
+      return state.set('po', action.po);
 
     default:
       return state;

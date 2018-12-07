@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import POComponent from './POComponent';
 
-import { getPO, updateFieldValue, handleLineItemChange, updatePO } from './poActions';
+import { getPO, updateFieldValue, handleLineItemChange, updatePO, updatePOFieldValue } from './poActions';
 
 import { selectPO, selectPOPromise } from './poSelector';
 
@@ -25,9 +25,12 @@ const mapDispatchToProps = dispatch => {
     updateLineFieldValue(item) {
       dispatch(handleLineItemChange(item));
     },
-    updatePO(po, comments, totalAmount, submitType, history) {
-      dispatch(updatePO(po, comments, totalAmount, submitType, history));
-    }
+    updatePO(submitType, history) {
+      dispatch(updatePO(submitType, history));
+    },
+    updatePOFieldValue(item) {
+      dispatch(updatePOFieldValue(item));
+    },
   };
 };
 

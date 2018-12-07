@@ -4,10 +4,10 @@ import CardContent from '@material-ui/core/CardContent/CardContent';
 import Typography from '@material-ui/core/Typography/Typography';
 import Divider from '@material-ui/core/Divider/Divider';
 import Card from '@material-ui/core/Card/Card';
-import './po.scss';
+import '../po.scss';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import { getIntString, getString } from '../../../shared/utils/string';
+import { getIntString, getString } from '../../../../shared/utils/string';
 
 const renderLine = props => {
   const { line, handleLineItemChange } = props;
