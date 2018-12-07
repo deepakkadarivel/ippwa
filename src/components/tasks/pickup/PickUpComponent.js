@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider/Divider';
 import Header from '../common/header/Header';
 import constants from '../../../shared/constants';
-import Footer from '../common/footer/Footer';
-import PickUpLine from './PickUpLine';
+import PickUpLine from './components/PickUpLine';
 import Button from "@material-ui/core/Button/Button";
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
+import PickUpFooter from "./components/PickUpFooter";
 
 class PickUpComponent extends Component {
   componentDidMount() {
@@ -15,7 +15,7 @@ class PickUpComponent extends Component {
 
   render() {
     const {
-      pickUp, promise, updateFieldValue, updateLineFieldValue, history, updatePickUp,
+      pickUp, promise, updateFieldValue, updateLineFieldValue, history, updatePickUp, updatePickUpFieldValue,
     } = this.props;
 
     const handleChange = (event) => {
@@ -24,6 +24,10 @@ class PickUpComponent extends Component {
 
     const handleLineItemChange = y => (event) => {
       updateLineFieldValue({index: y, key: event.target.name, value: event.target.value});
+    };
+
+    const handlePickUpUpdate = event => {
+      updatePickUpFieldValue({key: event.target.name, value: event.target.value});
     };
 
     return (
@@ -40,18 +44,18 @@ class PickUpComponent extends Component {
               <PickUpLine key={y} line={x} handleLineItemChange={handleLineItemChange(y)}/>
             ))}
             <Divider variant="inset"/>
-            <Footer items={pickUp.footer}/>
+            <PickUpFooter pickUp={pickUp} handleChange={handlePickUpUpdate} />
             <Divider variant="inset"/>
             <div className="PickUp--Actions">
               <Button size="medium" className="Actions-btn" onClick={() => history.goBack()}>
                 Cancel
               </Button>
               <Button variant="outlined" size="medium" color="secondary" className="Actions-btn"
-                      onClick={() => updatePickUp(pickUp, '', 'approve', history)}>
+                      onClick={() => updatePickUp(constants.tasks.actions.APPROVE, history)}>
                 Complete Approval
               </Button>
               <Button variant="outlined" size="medium" color="error" className="Actions-btn"
-                      onClick={() => updatePickUp(pickUp, '', 'reject', history)}>
+                      onClick={() => updatePickUp(constants.tasks.actions.REJECT, history)}>
                 Reject
               </Button>
             </div>
@@ -65,6 +69,7 @@ class PickUpComponent extends Component {
 PickUpComponent.propTypes = {
   getPickUp: PropTypes.func.isRequired,
   updateFieldValue: PropTypes.func.isRequired,
+  updatePickUpFieldValue: PropTypes.func.isRequired,
   updateLineFieldValue: PropTypes.func.isRequired,
   updatePickUp: PropTypes.func.isRequired,
   selectedTask: PropTypes.object.isRequired,

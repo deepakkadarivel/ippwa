@@ -58,6 +58,9 @@ const pickUpReducer = (state = pickUpInitialState, action) => {
     case pickUpActionTypes.SET_PICK_UP_APPROVAL_RESPONSE:
       return state.set('pickUpApprovalResponse', action.pickUp);
 
+    case pickUpActionTypes.UPDATE_PICK_UP_FIELD_VALUE:
+      return state.set('pickUp', action.pickUp);
+
     default:
       return state;
   }

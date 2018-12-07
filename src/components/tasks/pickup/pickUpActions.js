@@ -1,12 +1,12 @@
 import 'whatwg-fetch'
 import axios from 'axios';
-import pickUpActionTypes from './pickUpActionTypes';
 import apiService from '../../../shared/service/apiService';
 import constants from '../../../shared/constants';
 import {getValue} from '../../../shared/service/localStorage';
 import history from "../../../shared/service/history";
 import {selectPickUp, selectPickUpApprovalResponse} from "./pickUpSelector";
 import {setToast} from "../../home/homeActions";
+import pickUpActionTypes from "./pickUpActionTypes";
 
 const pickUpPending = () => {
   return {
@@ -87,6 +87,17 @@ const handleLineItemChange = item => {
   };
 };
 
+const updatePickUpFieldValue = item => {
+  return (dispatch, getState) => {
+    let pickUp = selectPickUp(getState());
+    pickUp = {...pickUp, [item.key]: item.value || ''};
+    dispatch({
+      type: pickUpActionTypes.UPDATE_PICK_UP_FIELD_VALUE,
+      pickUp,
+    });
+  };
+};
+
 const getPickUp = task => {
   return (dispatch, getState) => {
     const pickUpUrl = apiService.endpoints.app.generatePickUpUrl();
@@ -132,9 +143,11 @@ const getPickUp = task => {
   };
 };
 
-const updatePickUp = (pickUp, comments, submitType, history) => {
+const updatePickUp = (submitType, history) => {
   return (dispatch, getState) => {
     const updatePickUpUrl = apiService.endpoints.app.generateUpdatePickUpUrl();
+    let pickUp = selectPickUp(getState());
+
     dispatch(updatePickUpPending());
 
     let payload = {
@@ -142,7 +155,7 @@ const updatePickUp = (pickUp, comments, submitType, history) => {
       loadBalancer: getValue(constants.LOCAL_STORAGE.LOADBALANCER) || constants.EMPTY_STRING,
       payload: {
         pickUpItemId: pickUp.pickUpItemId,
-        assetId: pickUp.assetId,
+        pickUpId: pickUp.pickUpId,
         workflowAuditId: pickUp.workflowAuditId,
         taskId: pickUp.taskId,
         seqFlow: pickUp.seqFlow,
@@ -157,7 +170,7 @@ const updatePickUp = (pickUp, comments, submitType, history) => {
         companyId: pickUp.companyId || 0,
         userId: parseInt(getValue(constants.LOCAL_STORAGE.USER_ID)) || constants.EMPTY_STRING,
         apiType: constants.API_TYPES.UPDATE_PICK_UP_TYPE_API,
-        comments,
+        comments: pickUp.comments,
         dynamicColumns: pickUp.dynamicColumns,
         itemJsonString: JSON.stringify(pickUp.pickUpLineItems),
         entityId: pickUp.entityId,
@@ -203,4 +216,4 @@ const updatePickUp = (pickUp, comments, submitType, history) => {
   };
 };
 
-export {getPickUp, updateFieldValue, handleLineItemChange, updatePickUp};
+export {getPickUp, updateFieldValue, handleLineItemChange, updatePickUp, updatePickUpFieldValue};
