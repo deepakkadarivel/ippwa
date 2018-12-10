@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="190px" height="60px" viewBox="0 0 190 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>logo</title>
+    <desc>Created with Sketch.</desc>
+    <g id="logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <text id="iPact" font-family="ArialRoundedMTBold, Arial Rounded MT Bold" font-size="48" font-weight="normal" letter-spacing="0.450000018" fill="#292929">
+            <tspan x="60" y="47">iPact</tspan>
+        </text>
+        <g transform="translate(10.000000, 5.000000)">
+            <path d="M0,0 L20,0 L20,30 C20,41.045695 11.045695,50 1.2246468e-15,50 L0,0 Z" id="Rectangle" fill="#8BC34A"></path>
+            <path d="M0,1 L40,1 L40,16 C40,24.2842712 33.2842712,31 25,31 L0,31 L0,1 Z" id="Rectangle-Copy" fill-opacity="0.1" fill="#000000"></path>
+            <path d="M0,0 L40,0 L40,15 C40,23.2842712 33.2842712,30 25,30 L0,30 L0,0 Z" id="Rectangle" fill="#699535"></path>
+            <path d="M0,0 L37,0 L37,15 C37,23.2842712 30.2842712,30 22,30 L0,30 L0,0 Z" id="Rectangle-Copy-2" fill="#8BC34A"></path>
+            <circle id="Oval" fill="#FFFFFF" cx="11" cy="15" r="8"></circle>
+        </g>
+    </g>
+</svg>
