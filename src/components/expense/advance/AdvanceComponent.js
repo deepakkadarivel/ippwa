@@ -5,14 +5,21 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Icon from '@material-ui/core/Icon';
+// import DateFnsUtils from '@date-io/date-fns';
+import DateFnsUtils from "material-ui-pickers/utils/date-fns-utils";
+import MomentUtils from '@date-io/moment';
+import {MuiPickersUtilsProvider, DatePicker} from 'material-ui-pickers';
+
 
 import './style.scss';
+import moment from "moment";
 
 const required = value => (value == null ? 'Required' : undefined);
 
 class AdvanceComponent extends Component {
 
   componentWillReceiveProps(props) {
+    console.log(props.needByDate);
     const {entityId, fetchEntityDetails} = this.props;
     if (props.entityId !== entityId && props.entityId !== '') {
       fetchEntityDetails();
@@ -23,8 +30,15 @@ class AdvanceComponent extends Component {
     this.props.setValue(event.target.name, event.target.value);
   };
 
+  handleDateChange = date => {
+    console.log(date);
+    // needByDate
+    // this.props.setValue(moment(date).format('DD-MM-YYYY'));
+    this.props.setValue('needByDate', date);
+  };
+
   renderForm = () => {
-    const {viewId, workflowId, currencyId, viewList, workflowList, currencies} = this.props;
+    const {viewId, workflowId, currencyId, needByDate, viewList, workflowList, currencies} = this.props;
     return (
       <div>
         <FormControl className='Advance__Form--control'>
@@ -67,8 +81,29 @@ class AdvanceComponent extends Component {
             }}
           >
             {currencies.map(currency => <MenuItem key={currency.currencyCode.currencyId}
-                                                    value={currency.currencyCode.currencyId}>{`${currency.currencyCode.symbol} ${currency.currencyCode.code}`}</MenuItem>)}
+                                                  value={currency.currencyCode.currencyId}>{`${currency.currencyCode.symbol} ${currency.currencyCode.code}`}</MenuItem>)}
           </Select>
+        </FormControl>
+
+        <FormControl className='Advance__Form--control'>
+          {/*<InputLabel>Need By Date</InputLabel>*/}
+          {/*<DatePicker*/}
+            {/*margin="normal"*/}
+            {/*// label="Date picker"*/}
+            {/*value={needByDate}*/}
+            {/*onChange={this.handleDateChange}*/}
+          {/*/>*/}
+
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <DatePicker
+            label="Need By Date"
+            // format={'DD-MM-YYYY'}
+            autoOk={true}
+            value={needByDate}
+            onChange={this.handleDateChange}
+            animateYearScrolling
+          />
+          </MuiPickersUtilsProvider>
         </FormControl>
 
       </div>
