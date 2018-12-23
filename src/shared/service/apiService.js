@@ -48,7 +48,11 @@ const apiService = {
       updateAsset: '/updateAsset',
       generateUpdateAssetUrl() {
         return `${baseUrl}${this.updateAsset}`;
-      }
+      },
+      fetchEntityDetails: '/entityDetails',
+      generateFetchEntityDetailsUrl() {
+        return `${baseUrl}${this.fetchEntityDetails}`;
+      },
     }
   }
 };

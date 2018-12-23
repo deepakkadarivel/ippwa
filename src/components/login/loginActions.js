@@ -57,6 +57,8 @@ const login = (userName, password) => {
       .then(response => {
         dispatch(loginFulfilled());
         dispatch(setAuth(response.data));
+        localStorage.setItem('entityList', JSON.stringify(response.data.entityList));
+        localStorage.setItem('currencies', JSON.stringify(response.data.user.orgUserMapping[0].orgCurrency));
         history.push('/home');
       })
       .catch(error => {

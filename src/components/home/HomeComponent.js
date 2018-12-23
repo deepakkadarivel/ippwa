@@ -5,7 +5,7 @@ import NavBar from '../common/navBar';
 import Drawer from '../common/SwipeableDrawer';
 import MyTasksContainer from '../tasks/myTasks/MyTasksContainer';
 import Reports from '../reports';
-import Expense from '../expense';
+import ExpenseComponent from '../expense/ExpenseComponent';
 import history from '../../shared/service/history';
 import POContainer from '../tasks/po/POContainer';
 import PickUpContainer from '../tasks/pickup/PickUpContainer';
@@ -13,6 +13,8 @@ import InvoiceContainer from '../tasks/invoice/InvoiceContainer';
 import AssetContainer from '../tasks/asset/AssetContainer';
 import './home.scss';
 import AppSnackBar from "../common/appSnackBar";
+import AdvanceContainer from "../expense/advance/AdvanceContainer";
+import ClaimComponent from "../expense/claim/ClaimComponent";
 
 class HomeComponent extends React.Component {
   constructor(props) {
@@ -59,7 +61,7 @@ class HomeComponent extends React.Component {
           <Route
             exacrt
             path={`${match.url}/expense`}
-            render={() => <Expense history={history} />}
+            render={() => <ExpenseComponent history={history} />}
           />
           <Route
             exacrt
@@ -80,6 +82,16 @@ class HomeComponent extends React.Component {
             exacrt
             path={`${match.url}/tasks/asset`}
             render={() => <AssetContainer history={history} />}
+          />
+          <Route
+            exacrt
+            path={`${match.url}/expense/advance`}
+            render={() => <AdvanceContainer history={history} />}
+          />
+          <Route
+            exacrt
+            path={`${match.url}/expense/claim`}
+            render={() => <ClaimComponent history={history} />}
           />
         </div>
       </div>

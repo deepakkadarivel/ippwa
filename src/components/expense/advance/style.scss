@@ -1,0 +1,16 @@
+.Advance {
+  &__Form {
+    margin: 20px;
+
+    &--header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &--control {
+      width: 100%;
+      margin-bottom: 24px !important;
+    }
+  }
+}

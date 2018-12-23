@@ -6,6 +6,7 @@ import pickUpReducer from '../../components/tasks/pickup/pickUpReducer';
 import invoiceReducer from '../../components/tasks/invoice/invoiceReducer';
 import assetReducer from '../../components/tasks/asset/assetReducer';
 import homeReducer from "../../components/home/homeReducer";
+import advanceReducer from "../../components/expense/advance/advanceReducer";
 
 const app = combineReducers({
   home: homeReducer,
@@ -15,6 +16,7 @@ const app = combineReducers({
   pickUp: pickUpReducer,
   invoice: invoiceReducer,
   asset: assetReducer,
+  advance: advanceReducer,
 });
 
 export default app;
