@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import AdvanceComponent from "./AdvanceComponent";
-import {setValue, fetchEntityDetails} from './advanceActions';
+import {setValue, fetchEntityDetails, shouldShowItems, fetchItemData} from './advanceActions';
 import {getEntityList, getCurrencies} from "../../login/authSelector";
 import {
   selectEntityId,
@@ -11,6 +11,10 @@ import {
   selectCurrencyId,
   selectNeedByDate,
   selectComments,
+  isItemsVisible,
+  isFetchingEntityDetails,
+  isFetchingItemData,
+  selectItemData,
 } from "./advanceSelector";
 
 const mapStateToProps = state => {
@@ -25,6 +29,10 @@ const mapStateToProps = state => {
     comments: selectComments(state),
     viewList: selectViewList(state),
     workflowList: selectWorkflowList(state),
+    isItemsVisible: isItemsVisible(state),
+    isFetchingEntityDetails: isFetchingEntityDetails(state),
+    isFetchingItemData:isFetchingItemData(state),
+    itemData:selectItemData(state),
   };
 };
 
@@ -35,6 +43,12 @@ const mapDispatchToProps = dispatch => {
     },
     fetchEntityDetails: () => {
       dispatch(fetchEntityDetails())
+    },
+    shouldShowItems: () => {
+      dispatch(shouldShowItems())
+    },
+    fetchItemData: () => {
+      dispatch(fetchItemData())
     }
   };
 };

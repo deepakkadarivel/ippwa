@@ -1,3 +1,4 @@
+@import '../../../shared/styles/colors';
 /*
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops
@@ -6,9 +7,23 @@
 @media (min-width: 1281px) {
 
   .Advance {
+    &__appbar {
+      position: relative;
+
+      &--flex {
+        flex: 1;
+      }
+    }
     margin: 20px;
     &__add {
-      color: #ffffff !important;
+
+      &--progress {
+        margin-left: -80px;
+      }
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: flex-start;
 
       &--leftIcon {
         margin-right: 12px;
@@ -41,9 +56,23 @@
 @media (min-width: 1025px) and (max-width: 1280px) {
 
   .Advance {
+    &__appbar {
+      position: relative;
+
+      &--flex {
+        flex: 1;
+      }
+    }
     margin: 20px;
     &__add {
-      color: #ffffff !important;
+
+      &--progress {
+        margin-left: -80px;
+      }
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: flex-start;
 
       &--leftIcon {
         margin-right: 12px;
@@ -76,9 +105,23 @@
 @media (min-width: 768px) and (max-width: 1024px) {
 
   .Advance {
+    &__appbar {
+      position: relative;
+
+      &--flex {
+        flex: 1;
+      }
+    }
     margin: 20px;
     &__add {
-      color: #ffffff !important;
+
+      &--progress {
+        margin-left: -80px;
+      }
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: flex-start;
 
       &--leftIcon {
         margin-right: 12px;
@@ -111,9 +154,23 @@
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
 
   .Advance {
+    &__appbar {
+      position: relative;
+
+      &--flex {
+        flex: 1;
+      }
+    }
     margin: 20px;
     &__add {
-      color: #ffffff !important;
+
+      &--progress {
+        margin-left: -80px;
+      }
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: flex-start;
 
       &--leftIcon {
         margin-right: 12px;
@@ -146,9 +203,23 @@
 @media (min-width: 481px) and (max-width: 767px) {
 
   .Advance {
+    &__appbar {
+      position: relative;
+
+      &--flex {
+        flex: 1;
+      }
+    }
     margin: 20px;
     &__add {
-      color: #ffffff !important;
+
+      &--progress {
+        margin-left: -80px;
+      }
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: flex-start;
 
       &--leftIcon {
         margin-right: 12px;
@@ -164,8 +235,16 @@
       }
 
       &--control {
-        margin-top: 16px !important;
-        margin-bottom: 16px !important;
+        margin-top: 8px !important;
+        margin-bottom: 8px !important;
+      }
+
+      &--control:first-child {
+        margin-top: 24px !important;
+      }
+
+      &--control:last-child {
+        margin-bottom: 24px !important;
       }
     }
 
@@ -181,9 +260,23 @@
 @media (min-width: 320px) and (max-width: 480px) {
 
   .Advance {
+    &__appbar {
+      position: relative;
+
+      &--flex {
+        flex: 1;
+      }
+    }
     margin: 20px;
     &__add {
-      color: #ffffff !important;
+
+      &--progress {
+        margin-left: -80px;
+      }
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: flex-start;
 
       &--leftIcon {
         margin-right: 12px;
@@ -199,8 +292,16 @@
       }
 
       &--control {
-        margin-top: 16px !important;
-        margin-bottom: 16px !important;
+        margin-top: 8px !important;
+        margin-bottom: 8px !important;
+      }
+
+      &--control:first-child {
+        margin-top: 24px !important;
+      }
+
+      &--control:last-child {
+        margin-bottom: 24px !important;
       }
     }
   }

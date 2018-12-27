@@ -53,6 +53,10 @@ const apiService = {
       generateFetchEntityDetailsUrl() {
         return `${baseUrl}${this.fetchEntityDetails}`;
       },
+      fetchItemData: '/itemData',
+      generateItemDataUrl() {
+        return `${baseUrl}${this.fetchItemData}`;
+      },
     }
   }
 };

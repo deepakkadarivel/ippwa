@@ -11,6 +11,9 @@ const advanceInitialState = seamlessImmutable({
   isFetchingEntityDetails: false,
   viewList: [],
   workflowList: [],
+  isItemsVisible: false,
+  isFetchingItemData: false,
+  itemData: {},
 });
 
 export default advanceInitialState;

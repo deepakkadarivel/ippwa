@@ -10,6 +10,12 @@ const advanceReducer = (state = advanceInitialState, action) => {
         .set('workflowList', action.entityDetails.workflowList);
     case advanceActionTypes.IS_FETCHING_ENTITY_DETAILS:
       return state.set('isFetchingEntityDetails', action.isFetchingEntityDetails);
+    case advanceActionTypes.IS_FETCHING_ITEM_DATA:
+      return state.set('isFetchingItemData', action.isFetchingItemData);
+    case advanceActionTypes.SHOULD_SHOW_ITEMS:
+      return state.set('isItemsVisible', action.isItemsVisible);
+    case advanceActionTypes.SET_ITEM_DATA:
+      return state.set('itemData', action.itemData);
     default:
       return state;
   }

@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import Icon from '@material-ui/core/Icon';
 import DateFnsUtils from "material-ui-pickers/utils/date-fns-utils";
 import {DatePicker, MuiPickersUtilsProvider} from 'material-ui-pickers';
 import TextField from '@material-ui/core/TextField';
@@ -12,17 +8,32 @@ import PlaylistAdd from '@material-ui/icons/PlaylistAdd';
 import AttachMoney from '@material-ui/icons/AttachMoney';
 import Button from '@material-ui/core/Button';
 import Chip from "@material-ui/core/Chip";
+import Dialog from '@material-ui/core/Dialog';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@material-ui/core/ListItem';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import Slide from '@material-ui/core/Slide';
+import Typography from '@material-ui/core/Typography';
+import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
 import './style.scss';
+import {default as Btn} from "@material-ui/core/Button/Button";
 
 const required = value => (value == null ? 'Required' : undefined);
 
 class AdvanceComponent extends Component {
 
   componentWillReceiveProps(props) {
-    console.log(props.needByDate);
     const {entityId, fetchEntityDetails} = this.props;
     if (props.entityId !== entityId && props.entityId !== '') {
       fetchEntityDetails();
+    }
+    if (props.isItemsVisible) {
+      // props.fetchItemData();
     }
   }
 
@@ -134,7 +145,45 @@ class AdvanceComponent extends Component {
   };
 
   render() {
-    const {entityId, entityList, viewList} = this.props;
+    const {entityId, itemData, entityList, viewList, isItemsVisible, isFetchingItemData, shouldShowItems, isFetchingEntityDetails, fetchItemData} = this.props;
+
+    function Transition(props) {
+      return <Slide direction="up" {...props} />;
+    }
+
+    const renderDialog = () => {
+      return (
+        <Dialog
+          fullScreen
+          open={isItemsVisible}
+          onClose={shouldShowItems}
+          TransitionComponent={Transition}
+        >
+          <AppBar className='Advance__appbar'>
+            <Toolbar>
+              <IconButton color="inherit" onClick={shouldShowItems} aria-label="Close">
+                <CloseIcon/>
+              </IconButton>
+              <Typography variant="h6" color="inherit" className='Advance__appbar--flex'>
+                Sound
+              </Typography>
+              <Button color="inherit" onClick={shouldShowItems}>
+                save
+              </Button>
+            </Toolbar>
+          </AppBar>
+          <List>
+            <ListItem button>
+              <ListItemText primary="Phone ringtone" secondary="Titania"/>
+            </ListItem>
+            <Divider/>
+            <ListItem button>
+              <ListItemText primary="Default notification ringtone" secondary="Tethys"/>
+            </ListItem>
+          </List>
+        </Dialog>
+      )
+    };
 
     const renderForm = () => {
       return (
@@ -171,10 +220,21 @@ class AdvanceComponent extends Component {
     return (
       <div className='Advance'>
         {renderForm()}
-        <Button variant="contained" color="primary" className='Advance__add'>
+        {isFetchingEntityDetails && (<CircularProgress className="progress"/>)}
+        {(entityId > 0 && !isFetchingEntityDetails) &&
+        <div className='Advance__add'><Button
+          variant="outlined"
+          color="primary"
+          // className='Advance__add'
+          onClick={fetchItemData}
+          disabled={isFetchingItemData}
+        >
           <PlaylistAdd className='Advance__add--leftIcon'/>
           Add Item
         </Button>
+          {isFetchingItemData && <CircularProgress size={24} className='Advance__add--progress'/>}
+        </div>}
+        {itemData && isItemsVisible && renderDialog()}
       </div>
     );
   }
@@ -187,8 +247,14 @@ AdvanceComponent.propTypes = {
   currencies: PropTypes.array.isRequired,
   viewList: PropTypes.array.isRequired,
   workflowList: PropTypes.array.isRequired,
+  itemData: PropTypes.array.isRequired,
+  isFetchingEntityDetails: PropTypes.bool.isRequired,
+  isFetchingItemData: PropTypes.bool.isRequired,
+  isItemsVisible: PropTypes.bool.isRequired,
+  shouldShowItems: PropTypes.func.isRequired,
+  fetchItemData: PropTypes.func.isRequired,
 
-  entityId: PropTypes.string.isRequired,
+  entityId: PropTypes.number.isRequired,
   viewId: PropTypes.number.isRequired,
   workflowId: PropTypes.number.isRequired,
   currencyId: PropTypes.number.isRequired,

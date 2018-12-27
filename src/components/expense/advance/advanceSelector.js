@@ -8,6 +8,10 @@ const selectNeedByDate = state => get(state, 'advance.needByDate');
 const selectComments = state => get(state, 'advance.comments');
 const selectViewList = state => get(state, 'advance.viewList');
 const selectWorkflowList = state => get(state, 'advance.workflowList');
+const isItemsVisible = state => get(state, 'advance.isItemsVisible');
+const isFetchingEntityDetails = state => get(state, 'advance.isFetchingEntityDetails');
+const isFetchingItemData = state => get(state, 'advance.isFetchingItemData');
+const selectItemData = state => get(state, 'advance.itemData');
 
 export {
   selectEntityId,
@@ -18,4 +22,8 @@ export {
   selectCurrencyId,
   selectNeedByDate,
   selectComments,
+  isItemsVisible,
+  isFetchingEntityDetails,
+  isFetchingItemData,
+  selectItemData,
 };
