@@ -25,7 +25,7 @@ class ExpenseComponent extends Component {
       <div>
         Expense
         <Fab
-          color="primary"
+          color="secondary"
           aria-label="Add"
           className='Expense__Add'
           aria-owns={anchorEl ? 'expense-menu' : undefined}

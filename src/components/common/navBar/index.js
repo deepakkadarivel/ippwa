@@ -56,7 +56,7 @@ class NavBar extends React.Component {
               aria-label="Open drawer"
               onClick={() => this.props.toggleDrawer(!this.props.isDrawerOpen)}
             >
-              <MenuIcon />
+              <MenuIcon className={classes.menu}/>
             </IconButton>
             <div className={classes.logo} />
             <div className={classes.grow} />

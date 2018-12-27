@@ -10,6 +10,7 @@ import {
   selectWorkflowId,
   selectCurrencyId,
   selectNeedByDate,
+  selectComments,
 } from "./advanceSelector";
 
 const mapStateToProps = state => {
@@ -21,6 +22,7 @@ const mapStateToProps = state => {
     workflowId: selectWorkflowId(state),
     currencyId: selectCurrencyId(state),
     needByDate: selectNeedByDate(state),
+    comments: selectComments(state),
     viewList: selectViewList(state),
     workflowList: selectWorkflowList(state),
   };

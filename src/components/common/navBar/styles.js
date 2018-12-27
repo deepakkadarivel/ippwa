@@ -1,10 +1,14 @@
-import logo from '../../../shared/images/ipact-logo.svg';
+import logo from '../../../shared/images/logo-white.svg';
+
 const styles = theme => ({
   root: {
-    width: '100%'
+    width: '100%',
   },
   grow: {
     flexGrow: 1
+  },
+  menu: {
+    color: '#ffffff !important',
   },
   menuButton: {
     marginLeft: -12,

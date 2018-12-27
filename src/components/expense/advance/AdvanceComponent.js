@@ -5,14 +5,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Icon from '@material-ui/core/Icon';
-// import DateFnsUtils from '@date-io/date-fns';
 import DateFnsUtils from "material-ui-pickers/utils/date-fns-utils";
-import MomentUtils from '@date-io/moment';
-import {MuiPickersUtilsProvider, DatePicker} from 'material-ui-pickers';
-
-
+import {DatePicker, MuiPickersUtilsProvider} from 'material-ui-pickers';
+import TextField from '@material-ui/core/TextField';
+import PlaylistAdd from '@material-ui/icons/PlaylistAdd';
+import AttachMoney from '@material-ui/icons/AttachMoney';
+import Button from '@material-ui/core/Button';
+import Chip from "@material-ui/core/Chip";
 import './style.scss';
-import moment from "moment";
 
 const required = value => (value == null ? 'Required' : undefined);
 
@@ -38,73 +38,96 @@ class AdvanceComponent extends Component {
   };
 
   renderForm = () => {
-    const {viewId, workflowId, currencyId, needByDate, viewList, workflowList, currencies} = this.props;
+    const {viewId, workflowId, currencyId, needByDate, comments, viewList, workflowList, currencies} = this.props;
     return (
-      <div>
-        <FormControl className='Advance__Form--control'>
-          <InputLabel htmlFor="demo-controlled-open-select">View</InputLabel>
-          <Select
-            value={viewId}
-            onChange={this.handleChange}
-            inputProps={{
-              name: 'viewId',
-              id: 'viewId',
-            }}
-          >
-            {viewList.map(view => <MenuItem key={view.viewId} value={view.viewId}>{view.viewName}</MenuItem>)}
-          </Select>
-        </FormControl>
+      <div className='Advance__Form--fields'>
+        <TextField
+          id='viewId'
+          name='viewId'
+          select
+          label="View"
+          className='Advance__Form--control'
+          value={viewId}
+          onChange={this.handleChange}
+          helperText="Choose a view type"
+          margin="normal"
+          variant="outlined"
+        >
+          {viewList.map(view => <MenuItem key={view.viewId} value={view.viewId}>{view.viewName}</MenuItem>)}
+        </TextField>
 
-        <FormControl className='Advance__Form--control'>
-          <InputLabel htmlFor="demo-controlled-open-select">Workflow</InputLabel>
-          <Select
-            value={workflowId}
-            onChange={this.handleChange}
-            inputProps={{
-              name: 'workflowId',
-              id: 'workflowId',
-            }}
-          >
-            {workflowList.map(workflow => <MenuItem key={workflow.workflowId}
-                                                    value={workflow.workflowId}>{workflow.workflowName}</MenuItem>)}
-          </Select>
-        </FormControl>
+        <TextField
+          id='workflowId'
+          name='workflowId'
+          select
+          label="Workflow"
+          className='Advance__Form--control'
+          value={workflowId}
+          onChange={this.handleChange}
+          helperText="Choose a workflow type"
+          margin="normal"
+          variant="outlined"
+        >
+          {workflowList.map(workflow => <MenuItem key={workflow.workflowId}
+                                                  value={workflow.workflowId}>{workflow.workflowName}</MenuItem>)}
+        </TextField>
 
-        <FormControl className='Advance__Form--control'>
-          <InputLabel htmlFor="demo-controlled-open-select">Currency</InputLabel>
-          <Select
-            value={currencyId}
-            onChange={this.handleChange}
-            inputProps={{
-              name: 'currencyId',
-              id: 'currencyId',
-            }}
-          >
-            {currencies.map(currency => <MenuItem key={currency.currencyCode.currencyId}
-                                                  value={currency.currencyCode.currencyId}>{`${currency.currencyCode.symbol} ${currency.currencyCode.code}`}</MenuItem>)}
-          </Select>
-        </FormControl>
+        <TextField
+          id='currencyId'
+          name='currencyId'
+          select
+          label="Currency"
+          className='Advance__Form--control'
+          value={currencyId}
+          onChange={this.handleChange}
+          helperText="Choose a currency"
+          margin="normal"
+          variant="outlined"
+        >
+          {currencies.map(currency => <MenuItem key={currency.currencyCode.currencyId}
+                                                value={currency.currencyCode.currencyId}>{`${currency.currencyCode.symbol} ${currency.currencyCode.code}`}</MenuItem>)}
+        </TextField>
 
-        <FormControl className='Advance__Form--control'>
-          {/*<InputLabel>Need By Date</InputLabel>*/}
-          {/*<DatePicker*/}
-            {/*margin="normal"*/}
-            {/*// label="Date picker"*/}
-            {/*value={needByDate}*/}
-            {/*onChange={this.handleDateChange}*/}
-          {/*/>*/}
-
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <DatePicker
             label="Need By Date"
+            className='Advance__Form--control'
             // format={'DD-MM-YYYY'}
             autoOk={true}
             value={needByDate}
             onChange={this.handleDateChange}
             animateYearScrolling
+            variant="outlined"
           />
-          </MuiPickersUtilsProvider>
-        </FormControl>
+        </MuiPickersUtilsProvider>
+
+        <TextField
+          id="comments"
+          name='comments'
+          label="Comments"
+          value={comments}
+          multiline
+          rows="4"
+          className='Advance__Form--control'
+          onChange={this.handleChange}
+          margin="normal"
+          variant="outlined"
+        />
+
+        <TextField
+          id="file"
+          name='file'
+          label="Upload"
+          // value={comments}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          className='Advance__Form--control'
+          // onChange={this.handleChange}
+          type='file'
+          margin="normal"
+          variant="outlined"
+        />
 
       </div>
     )
@@ -116,24 +139,30 @@ class AdvanceComponent extends Component {
     const renderForm = () => {
       return (
         <div className='Advance__Form'>
-
-          <div className='Advance__Form--header'>
-            <Icon>attach_money</Icon> Advance
-          </div>
-          <FormControl className='Advance__Form--control'>
-            <InputLabel htmlFor="demo-controlled-open-select">Entity</InputLabel>
-            <Select
+          <Chip color="secondary" icon={<AttachMoney/>} variant="outlined" label='Advance'/>
+          <div className='Advance__Form--fields'>
+            <TextField
+              id='entityId'
+              name='entityId'
+              select
+              label="Entity"
+              className='Advance__Form--control'
               value={entityId}
               onChange={this.handleChange}
-              inputProps={{
-                name: 'entityId',
-                id: 'entityId',
-              }}
+              helperText="Choose an entity"
+              margin="normal"
+              variant="outlined"
             >
-              {entityList.map(entity => <MenuItem key={entity.entityId}
-                                                  value={entity.entityId}>{entity.entityName}</MenuItem>)}
-            </Select>
-          </FormControl>
+              {entityList.map(entity =>
+                <MenuItem
+                  key={entity.entityId}
+
+                  value={entity.entityId}>
+                  {entity.entityName}
+                </MenuItem>
+              )}
+            </TextField>
+          </div>
           {viewList.length > 0 && this.renderForm()}
         </div>
       )
@@ -142,6 +171,10 @@ class AdvanceComponent extends Component {
     return (
       <div className='Advance'>
         {renderForm()}
+        <Button variant="contained" color="primary" className='Advance__add'>
+          <PlaylistAdd className='Advance__add--leftIcon'/>
+          Add Item
+        </Button>
       </div>
     );
   }
@@ -159,6 +192,7 @@ AdvanceComponent.propTypes = {
   viewId: PropTypes.number.isRequired,
   workflowId: PropTypes.number.isRequired,
   currencyId: PropTypes.number.isRequired,
+  comments: PropTypes.string.isRequired,
 };
 
 export default AdvanceComponent;

@@ -12,7 +12,7 @@
             <rect id="Rectangle-Copy" fill="#FFFFFF" x="0" y="11" width="10" height="10"></rect>
             <rect id="Rectangle-Copy-2" fill="#FFFFFF" x="0" y="22" width="10" height="10"></rect>
         </g>
-        <text id="iPact" font-family="Arial-BoldMT, Arial" font-size="46" font-weight="bold" letter-spacing="0.143750012" fill="#000000">
+        <text id="iPact" font-family="Arial-BoldMT, Arial" font-size="46" font-weight="bold" letter-spacing="0.143750012" fill="#ffffff">
             <tspan x="71" y="51">iPact</tspan>
         </text>
     </g>

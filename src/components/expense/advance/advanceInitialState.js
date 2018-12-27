@@ -6,6 +6,7 @@ const advanceInitialState = seamlessImmutable({
   workflowId: 0,
   currencyId: 0,
   needByDate: new Date(),
+  comments: '',
   advance: {},
   isFetchingEntityDetails: false,
   viewList: [],
