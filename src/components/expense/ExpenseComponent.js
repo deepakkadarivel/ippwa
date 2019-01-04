@@ -5,6 +5,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from 'prop-types';
 import './styles.scss';
+import ExpenseDesktop from './desktop';
 
 class ExpenseComponent extends Component {
   state = {
@@ -25,9 +26,10 @@ class ExpenseComponent extends Component {
 
   render() {
     const {anchorEl} = this.state;
-    const {history} = this.props;
+    const {history, expenseGrid, expensePromise} = this.props;
     return (
-      <div>
+      <div className='Expense'>
+        <ExpenseDesktop rows={expenseGrid.rows || []} promise={expensePromise}/>
         <Fab
           color="secondary"
           aria-label="Add"
@@ -46,7 +48,7 @@ class ExpenseComponent extends Component {
           onClose={this.handleClose}
         >
           <MenuItem onClick={() => history.push('/home/expense/advance')}>Advance</MenuItem>
-          <MenuItem onClick={() => history.push('/home/expense/claim')}>Claim</MenuItem>
+          <MenuItem onClick={() => history.push('/home/expense/advance')}>Claim</MenuItem>
         </Menu>
       </div>
     );
@@ -55,6 +57,8 @@ class ExpenseComponent extends Component {
 
 ExpenseComponent.propTypes = {
   fetchExpenseGrid: PropTypes.func.isRequired,
+  expenseGrid: PropTypes.object.isRequired,
+  expensePromise: PropTypes.object.isRequired,
 };
 
 export default ExpenseComponent;
