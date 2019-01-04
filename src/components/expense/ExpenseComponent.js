@@ -3,12 +3,17 @@ import Fab from "@material-ui/core/Fab";
 import AddIcon from '@material-ui/icons/Add';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import PropTypes from 'prop-types';
 import './styles.scss';
 
 class ExpenseComponent extends Component {
   state = {
     anchorEl: null,
   };
+
+  componentWillMount() {
+    this.props.fetchExpenseGrid();
+  }
 
   handleClick = event => {
     this.setState({anchorEl: event.currentTarget});
@@ -23,7 +28,6 @@ class ExpenseComponent extends Component {
     const {history} = this.props;
     return (
       <div>
-        Expense
         <Fab
           color="secondary"
           aria-label="Add"
@@ -48,5 +52,9 @@ class ExpenseComponent extends Component {
     );
   }
 }
+
+ExpenseComponent.propTypes = {
+  fetchExpenseGrid: PropTypes.func.isRequired,
+};
 
 export default ExpenseComponent;

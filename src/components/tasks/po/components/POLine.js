@@ -27,7 +27,7 @@ const renderLine = props => {
         }}
       />
       <TextField
-        id="lineItemId"
+        id="Item #"
         label="Line Item"
         value={getString(line.lineItemId)}
         name="lineItemId"
@@ -57,19 +57,6 @@ const renderLine = props => {
         label="Sub Category"
         value={getString(line.subCategoryDesc)}
         name="subCategoryDesc"
-        className="Form-Field Form-Field__line col-s-2 col-2 col-xs-3"
-        onChange={handleLineItemChange}
-        margin="normal"
-        InputProps={{
-          readOnly: true,
-          disableUnderline: true
-        }}
-      />
-      <TextField
-        id="lineItemId"
-        label="Line Item"
-        value={getString(line.lineItemId)}
-        name="lineItemId"
         className="Form-Field Form-Field__line col-s-2 col-2 col-xs-3"
         onChange={handleLineItemChange}
         margin="normal"

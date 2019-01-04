@@ -57,6 +57,10 @@ const apiService = {
       generateItemDataUrl() {
         return `${baseUrl}${this.fetchItemData}`;
       },
+      fetchExpenseGrid: '/expenseGrid',
+      generateExpenseGridUrl() {
+        return `${baseUrl}${this.fetchExpenseGrid}`;
+      },
     }
   }
 };

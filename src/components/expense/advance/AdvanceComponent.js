@@ -12,28 +12,61 @@ import Dialog from '@material-ui/core/Dialog';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import Slide from '@material-ui/core/Slide';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import './style.scss';
-import {default as Btn} from "@material-ui/core/Button/Button";
-
-const required = value => (value == null ? 'Required' : undefined);
+import Checkbox from '@material-ui/core/Checkbox';
 
 class AdvanceComponent extends Component {
+  state = {
+    checked: [0],
+    billableChecked: [0],
+  };
+
+  handleToggle = value => () => {
+    const {checked} = this.state;
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    this.setState({
+      checked: newChecked,
+    });
+  };
+
+  handleBillToggle = value => () => {
+    const {billableChecked} = this.state;
+    const currentIndex = billableChecked.indexOf(value);
+    const newChecked = [...billableChecked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    this.setState({
+      billableChecked: newChecked,
+    });
+  };
 
   componentWillReceiveProps(props) {
     const {entityId, fetchEntityDetails} = this.props;
     if (props.entityId !== entityId && props.entityId !== '') {
       fetchEntityDetails();
-    }
-    if (props.isItemsVisible) {
-      // props.fetchItemData();
     }
   }
 
@@ -43,8 +76,6 @@ class AdvanceComponent extends Component {
 
   handleDateChange = date => {
     console.log(date);
-    // needByDate
-    // this.props.setValue(moment(date).format('DD-MM-YYYY'));
     this.props.setValue('needByDate', date);
   };
 
@@ -146,40 +177,76 @@ class AdvanceComponent extends Component {
 
   render() {
     const {entityId, itemData, entityList, viewList, isItemsVisible, isFetchingItemData, shouldShowItems, isFetchingEntityDetails, fetchItemData} = this.props;
-
-    function Transition(props) {
-      return <Slide direction="up" {...props} />;
-    }
-
     const renderDialog = () => {
       return (
         <Dialog
           fullScreen
-          open={isItemsVisible}
+          open={itemData && isItemsVisible}
           onClose={shouldShowItems}
-          TransitionComponent={Transition}
         >
           <AppBar className='Advance__appbar'>
             <Toolbar>
               <IconButton color="inherit" onClick={shouldShowItems} aria-label="Close">
                 <CloseIcon/>
               </IconButton>
-              <Typography variant="h6" color="inherit" className='Advance__appbar--flex'>
-                Sound
+              <Typography variant="h6" className='Advance__appbar--flex'>
+                Add Items
               </Typography>
-              <Button color="inherit" onClick={shouldShowItems}>
+              <Button onClick={shouldShowItems}>
                 save
               </Button>
             </Toolbar>
           </AppBar>
-          <List>
-            <ListItem button>
-              <ListItemText primary="Phone ringtone" secondary="Titania"/>
-            </ListItem>
-            <Divider/>
-            <ListItem button>
-              <ListItemText primary="Default notification ringtone" secondary="Tethys"/>
-            </ListItem>
+          <List className='Advance__appbar--list'>
+            {itemData.rows.map(row => (
+              <ExpansionPanel>
+                <ExpansionPanelSummary>
+                  <ListItem key={row.ITEM_NO} role={undefined} dense button onClick={this.handleToggle(row.ITEM_NO)}>
+                    <Checkbox
+                      checked={this.state.checked.indexOf(row.ITEM_NO) !== -1}
+                      tabIndex={-1}
+                      disableRipple
+                    />
+                    <ListItemText primary={`#${row.ITEM_NO} - ${row.DESC1}`}/>
+                  </ListItem>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails className='Advance__appbar--list--fields'>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={this.state.billableChecked.indexOf(row.ITEM_NO) !== -1}
+                        tabIndex={-1}
+                        disableRipple
+                        onChange={this.handleBillToggle(row.ITEM_NO)}
+                      />}
+                    label="Billable"
+                  />
+                  <TextField
+                    id="amount"
+                    name='Amount'
+                    label="Amount"
+                    value=''
+                    className='Advance__Form--control'
+                    onChange={() => {}}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                  <TextField
+                    id="comments"
+                    name='comments'
+                    label="Comments"
+                    value=''
+                    multiline
+                    rows="4"
+                    className='Advance__Form--control'
+                    onChange={() => {}}
+                    margin="normal"
+                    variant="outlined"
+                  />
+
+                </ExpansionPanelDetails>
+              </ExpansionPanel>
+            ))}
           </List>
         </Dialog>
       )
