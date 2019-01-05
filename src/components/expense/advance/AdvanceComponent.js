@@ -24,6 +24,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import './style.scss';
 import Checkbox from '@material-ui/core/Checkbox';
+import AddItem from "./AddItem";
 
 class AdvanceComponent extends Component {
   state = {
@@ -177,80 +178,6 @@ class AdvanceComponent extends Component {
 
   render() {
     const {entityId, itemData, entityList, viewList, isItemsVisible, isFetchingItemData, shouldShowItems, isFetchingEntityDetails, fetchItemData} = this.props;
-    const renderDialog = () => {
-      return (
-        <Dialog
-          fullScreen
-          open={itemData && isItemsVisible}
-          onClose={shouldShowItems}
-        >
-          <AppBar className='Advance__appbar'>
-            <Toolbar>
-              <IconButton color="inherit" onClick={shouldShowItems} aria-label="Close">
-                <CloseIcon/>
-              </IconButton>
-              <Typography variant="h6" className='Advance__appbar--flex'>
-                Add Items
-              </Typography>
-              <Button onClick={shouldShowItems}>
-                save
-              </Button>
-            </Toolbar>
-          </AppBar>
-          <List className='Advance__appbar--list'>
-            {itemData.rows.map(row => (
-              <ExpansionPanel>
-                <ExpansionPanelSummary>
-                  <ListItem key={row.ITEM_NO} role={undefined} dense button onClick={this.handleToggle(row.ITEM_NO)}>
-                    <Checkbox
-                      checked={this.state.checked.indexOf(row.ITEM_NO) !== -1}
-                      tabIndex={-1}
-                      disableRipple
-                    />
-                    <ListItemText primary={`#${row.ITEM_NO} - ${row.DESC1}`}/>
-                  </ListItem>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails className='Advance__appbar--list--fields'>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={this.state.billableChecked.indexOf(row.ITEM_NO) !== -1}
-                        tabIndex={-1}
-                        disableRipple
-                        onChange={this.handleBillToggle(row.ITEM_NO)}
-                      />}
-                    label="Billable"
-                  />
-                  <TextField
-                    id="amount"
-                    name='Amount'
-                    label="Amount"
-                    value=''
-                    className='Advance__Form--control'
-                    onChange={() => {}}
-                    margin="normal"
-                    variant="outlined"
-                  />
-                  <TextField
-                    id="comments"
-                    name='comments'
-                    label="Comments"
-                    value=''
-                    multiline
-                    rows="4"
-                    className='Advance__Form--control'
-                    onChange={() => {}}
-                    margin="normal"
-                    variant="outlined"
-                  />
-
-                </ExpansionPanelDetails>
-              </ExpansionPanel>
-            ))}
-          </List>
-        </Dialog>
-      )
-    };
 
     const renderForm = () => {
       return (
@@ -301,7 +228,16 @@ class AdvanceComponent extends Component {
         </Button>
           {isFetchingItemData && <CircularProgress size={24} className='Advance__add--progress'/>}
         </div>}
-        {itemData && isItemsVisible && renderDialog()}
+        {itemData && isItemsVisible &&
+        <AddItem
+          itemData={itemData}
+          isItemsVisible={isItemsVisible}
+          shouldShowItems={shouldShowItems}
+          handleToggle={this.handleToggle}
+          checked={this.state.checked}
+          billableChecked={this.state.billableChecked}
+          handleBillToggle={this.handleBillToggle}
+        />}
       </div>
     );
   }
