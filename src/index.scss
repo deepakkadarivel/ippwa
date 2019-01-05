@@ -2,6 +2,7 @@
 
 * {
   //box-shadow: none !important;
+  outline: none;
 }
 
 body {
@@ -17,13 +18,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* material ui style override */
-label {
-  width: 125% !important;
+.container {
+  padding: 4vh 2vw;
 }
 
-.container {
-  padding: 20px !important;
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    padding: 4vh 4vw;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .container {
+    padding: 4vh 2vw;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .container {
+    padding: 2vh 4vw;
+  }
 }
 
 hr {

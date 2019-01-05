@@ -1,11 +1,29 @@
-$primary: #1eb980;
-$paper: #fff;
-$background: #f4f5fa;
-$border: #c9ced9;
+$primary: #0891D0;
+$secondary: #E23828;
+$default: #979797;
+$info: #7A6FB3;
+$success: #37BA93;
+$warning: #F3BA5E;
+$error: #F15D22;
+$black: #3C3C3C;
+$darkGrey1: #606061;
+$darkGrey2: #818182;
+$lightGrey1: #DFDFDE;
+$lightGrey2: #F2F2F2;
+$white: #FFFFFF;
 
 :export {
   $primary: $primary;
-  $paper: $paper;
-  $background: $background;
-  $border: $border;
+  $secondary: $secondary;
+  $default: $default;
+  $info: $info;
+  $success: $success;
+  $warning: $warning;
+  $error: $error;
+  $black: $black;
+  $darkGrey1: $darkGrey1;
+  $darkGrey2: $darkGrey2;
+  $lightGrey1: $lightGrey1;
+  $lightGrey2: $lightGrey2;
+  $white: $white;
 }

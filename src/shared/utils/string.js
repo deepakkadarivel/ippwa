@@ -11,3 +11,5 @@ export const getDateString = value => {
   }
   return '';
 };
+
+export const filterString = (filter, row) => (row[filter.id]).toLowerCase().includes(filter.value.toLowerCase());

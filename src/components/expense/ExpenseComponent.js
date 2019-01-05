@@ -27,8 +27,9 @@ class ExpenseComponent extends Component {
   render() {
     const {anchorEl} = this.state;
     const {history, expenseGrid, expensePromise} = this.props;
+
     return (
-      <div className='Expense'>
+      <div className='Expense container'>
         <ExpenseDesktop rows={expenseGrid.rows || []} promise={expensePromise}/>
         <Fab
           color="secondary"
