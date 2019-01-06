@@ -33,6 +33,13 @@
     font-size: 12px;
     letter-spacing: 0.1em;
   }
+  .pagination-bottom {
+    .-pagination {
+      font-family: 'Roboto', sans-serif;
+      color: $black;
+      font-size: 12px;
+    }
+  }
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
