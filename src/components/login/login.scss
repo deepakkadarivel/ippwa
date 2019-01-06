@@ -5,7 +5,8 @@
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
-  background: $primary url("../../shared/images/bg.svg");
+  //background: $primary url("../../shared/images/bg.svg");
+  background-color: $primary;
 
   &--logo {
     margin-top: 10%;

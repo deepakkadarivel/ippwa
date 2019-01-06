@@ -2,6 +2,7 @@
 
 .ReactTable {
   height: calc(100vh - 60px - 8vh);
+  background-color: $white;
   .rt-thead {
     .rt-th {
       min-height: 48px;

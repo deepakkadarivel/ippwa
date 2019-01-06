@@ -1,8 +1,9 @@
 @import "../../../shared/styles/colors";
 
 .PO {
+  background: $white url("../../../shared/images/card_bg.png");
   &__Line {
-    margin: 2em 0;
+    margin: 1em 0;
     &--edit {
       border-radius: 2px;
       border: 1px solid $lightGrey1;
@@ -13,5 +14,10 @@
 
   &__actions {
     margin: 2em 0;
+  }
+
+  &__footer {
+    border-bottom: 1px solid $lightGrey1;
+    margin-top: 1em;
   }
 }

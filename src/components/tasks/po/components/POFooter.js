@@ -7,7 +7,7 @@ import constants from "../../common/constants";
 const POFooter = props => {
   const {handleChange, po} = props;
   return (
-    <div className='Form--fields'>
+    <div className='Form--fields PO__footer'>
       <TextField
         id={constants.ids.advancePayment}
         label={constants.labels.advancePayment}

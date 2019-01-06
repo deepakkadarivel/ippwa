@@ -1,10 +1,14 @@
 @import '../../../shared/styles/colors';
 
 .Card {
+  margin: 1em 0;
   background: #fff;
   border-radius: 2px;
   display: block;
   padding: 1rem;
   position: relative;
-  box-shadow: 0px 2px 4px 0px $darkGrey2;
+  box-shadow: 0 0 2px 0 $darkGrey2;
+  //background: $white url("../../../shared/images/card_bg.png");
+  //opacity: 0.4;
+  //border: 1px solid $lightGrey1;
 }
