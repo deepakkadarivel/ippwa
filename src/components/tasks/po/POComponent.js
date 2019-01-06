@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './po.scss';
-import Header from '../common/header/Header';
 import constants from '../../../shared/constants';
 import POLine from './components/POLine';
 import POPrice from './components/POPrice';
-import Footer from '../common/footer/Footer';
-import Divider from '@material-ui/core/Divider/Divider';
 import Button from "@material-ui/core/Button/Button";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import POFooter from "./components/POFooter";
+import POHeader from "./components/POHeader";
+import Btn from "../../common/Button/Button";
 
 class POComponent extends Component {
   componentDidMount() {
@@ -23,8 +22,8 @@ class POComponent extends Component {
       updateFieldValue({key: event.target.name, value: event.target.value});
     };
 
-    const handleLineItemChange = y => event => {
-      updateLineFieldValue({index: y, key: event.target.name, value: event.target.value});
+    const handleLineItemChange = (y, name, value) => {
+      updateLineFieldValue({index: y, key: name, value: value});
     };
 
     const handlePOUpdate = event => {
@@ -32,33 +31,18 @@ class POComponent extends Component {
     };
 
     return (
-      <div className="PO">
+      <div className="PO container">
         {promise.isFulfilled && (
           <div>
-            <Header
-              header={po.header}
-              title={constants.TASK.PO_AMENDMENT_TITLE}
-              handleChange={handleChange}
-            />
-            {po.poLineItems.map((x, y) => (
-              <POLine key={y} line={x} handleLineItemChange={handleLineItemChange(y)}/>
-            ))}
+            <h4>PO Amendment</h4>
+            <POHeader po={po} handleChange={handleChange}/>
+            <POLine handleLineItemChange={handleLineItemChange} lines={po.poLineItems}/>
             <POPrice lines={po.poLineItems}/>
-            <Divider variant="inset"/>
             <POFooter po={po} handleChange={handlePOUpdate}/>
-            <Divider variant="inset"/>
-            <div className="Actions">
-              <Button size="medium" className="Actions-btn" onClick={() => history.goBack()}>
-                Cancel
-              </Button>
-              <Button variant="outlined" size="medium" color="secondary" className="Actions-btn"
-                      onClick={() => updatePO(constants.tasks.actions.APPROVE, history)}>
-                Complete Approval
-              </Button>
-              <Button variant="outlined" size="medium" color="error" className="Actions-btn"
-                      onClick={() => updatePO(constants.tasks.actions.REJECT, history)}>
-                Reject
-              </Button>
+            <div className="Form--fields PO__actions">
+              <Btn label='Cancel' onClick={() => history.goBack()} />
+              <Btn label='Reject' color='secondary' onClick={() => updatePO(constants.tasks.actions.REJECT, history)} />
+              <Btn label='Complete Approval' color='primary' onClick={() => updatePO(constants.tasks.actions.APPROVE, history)} />
             </div>
           </div>
         )}

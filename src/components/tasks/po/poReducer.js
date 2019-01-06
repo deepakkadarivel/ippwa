@@ -1,6 +1,7 @@
 import poActionTypes from './poActionTypes';
 import poInitialState from './poInitialState';
 import setPromiseState from '../../../shared/service/promiseState';
+import constants from "../common/constants";
 
 const poReducer = (state = poInitialState, action) => {
   switch (action.type) {
@@ -44,17 +45,25 @@ const poReducer = (state = poInitialState, action) => {
     case poActionTypes.UPDATE_PO_LINE_FIELD_VALUE:
       const poLineItems = action.po.poLineItems;
       const line = poLineItems[action.item.index];
-      const qty = parseInt(action.item.value);
-      const tax = parseFloat(((line.price * qty) / 100) * (line.sgst + line.cgst));
-      const netPrice = parseFloat(line.price * qty);
-      const totalAmount = parseFloat(netPrice + tax);
-      const updatedLine = {
-        ...line,
-        [action.item.key]: qty || 0,
-        tax: tax,
-        netPrice: netPrice,
-        totalAmount: totalAmount
-      };
+      let updatedLine;
+      if (action.item.key === constants.accessor.comments) {
+        updatedLine = {
+          ...line,
+          comments: action.item.value
+        }
+      } else {
+        const qty = parseInt(action.item.value);
+        const tax = parseFloat(((line.price * qty) / 100) * (line.sgst + line.cgst));
+        const netPrice = parseFloat(line.price * qty);
+        const totalAmount = parseFloat(netPrice + tax);
+        updatedLine = {
+          ...line,
+          [action.item.key]: qty || 0,
+          tax: tax,
+          netPrice: netPrice,
+          totalAmount: totalAmount
+        };
+      }
       const newLines = Object.assign([], poLineItems, {
         [action.item.index]: updatedLine
       });

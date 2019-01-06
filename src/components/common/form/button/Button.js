@@ -8,7 +8,8 @@ const Button = props => {
   return (
     <div className='Button'>
       <Btn
-        variant="outlined"
+        variant="contained"
+        color="background"
         className={`${props.className}`}
         onClick={props.onClick}
         fullWidth={props.fullWidth}

@@ -3,62 +3,63 @@ import PropTypes from 'prop-types';
 import '../po.scss';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import { getIntString, getString } from '../../../../shared/utils/string';
+import {getIntString} from '../../../../shared/utils/string';
+import constants from "../../common/constants";
 
 const Price = props => {
-  const { lines } = props;
+  const {lines} = props;
   return (
-    <div className="PO--Price">
+    <div className='Form--fields'>
       <TextField
-        id="poTotalNetPrice"
-        label="Total NetPrice"
+        id={constants.ids.poTotalNetPrice}
+        label={constants.labels.totalNetPrice}
+        name={constants.names.poTotalNetPrice}
+        className='Form--control'
+        margin="normal"
+        variant="outlined"
+        InputProps={{
+          readOnly: true,
+          startAdornment: <InputAdornment position="start">{constants.labels.rupees}</InputAdornment>
+        }}
         value={getIntString(
           lines.reduce((acc, line) => {
             return acc + line.netPrice;
           }, 0)
         )}
-        name="poTotalNetPrice"
-        className="Form-Field col-2 col-"
-        margin="normal"
-        InputProps={{
-          readOnly: true,
-          startAdornment: <InputAdornment position="start">₹</InputAdornment>
-        }}
-        variant="outlined"
       />
       <TextField
-        id="poTotalTax"
-        label="Total Tax"
+        id={constants.ids.poTotalTax}
+        label={constants.labels.totalTax}
+        name={constants.names.poTotalTax}
+        className='Form--control'
+        margin="normal"
+        variant="outlined"
+        InputProps={{
+          readOnly: true,
+          startAdornment: <InputAdornment position="start">{constants.labels.rupees}</InputAdornment>
+        }}
         value={getIntString(
           lines.reduce((acc, line) => {
             return acc + line.tax;
           }, 0)
         )}
-        name="poTotalTax"
-        className="Form-Field col-2 col-"
-        margin="normal"
-        InputProps={{
-          readOnly: true,
-          startAdornment: <InputAdornment position="start">₹</InputAdornment>
-        }}
-        variant="outlined"
       />
       <TextField
-        id="totalAmount"
-        label="Grand Total"
+        id={constants.ids.poTotalTax}
+        label={constants.labels.grandTotal}
+        name={constants.names.poTotalTax}
+        className='Form--control'
+        margin="normal"
+        variant="outlined"
+        InputProps={{
+          readOnly: true,
+          startAdornment: <InputAdornment position="start">{constants.labels.rupees}</InputAdornment>
+        }}
         value={getIntString(
           lines.reduce((acc, line) => {
             return acc + line.totalAmount;
           }, 0)
         )}
-        name="totalAmount"
-        className="Form-Field col-2 col-"
-        margin="normal"
-        InputProps={{
-          readOnly: true,
-          startAdornment: <InputAdornment position="start">₹</InputAdornment>
-        }}
-        variant="outlined"
       />
     </div>
   );

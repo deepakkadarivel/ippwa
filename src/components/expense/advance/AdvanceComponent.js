@@ -8,22 +8,8 @@ import PlaylistAdd from '@material-ui/icons/PlaylistAdd';
 import AttachMoney from '@material-ui/icons/AttachMoney';
 import Button from '@material-ui/core/Button';
 import Chip from "@material-ui/core/Chip";
-import Dialog from '@material-ui/core/Dialog';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItem from '@material-ui/core/ListItem';
-import List from '@material-ui/core/List';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import './style.scss';
-import Checkbox from '@material-ui/core/Checkbox';
 import AddItem from "./AddItem";
 
 class AdvanceComponent extends Component {

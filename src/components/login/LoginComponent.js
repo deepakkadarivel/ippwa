@@ -4,7 +4,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import InputAdornment from '@material-ui/core/InputAdornment/InputAdornment';
 import IconButton from '@material-ui/core/IconButton/IconButton';
-import logo from '../../shared/images/logo.svg';
+import logo from '../../shared/images/ipact-logo-light.svg';
 import PropTypes from 'prop-types';
 import FormInput from "../common/form/input/FormInput";
 import Button from "../common/form/button/Button";
@@ -64,7 +64,7 @@ class LoginComponent extends Component {
           />
         </div>
 
-        <Typography variant="caption" className='Login--footer' color="hint">
+        <Typography variant="caption" className='Login--footer'>
           © iPact 2018. All rights reserved.
         </Typography>
       </div>

@@ -2,66 +2,51 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../po.scss';
 import TextField from '@material-ui/core/TextField';
+import constants from "../../common/constants";
 
 const POFooter = props => {
   const {handleChange, po} = props;
   return (
-    <div className="PO--Footer">
+    <div className='Form--fields'>
       <TextField
-        id="advancePayment"
-        label="Advance Payment %"
+        id={constants.ids.advancePayment}
+        label={constants.labels.advancePayment}
         value={po.advancePayment}
-        name="advancePayment"
-        className="Form-Field col-2 col-"
+        name={constants.names.advancePayment}
+        className='Form--control'
         margin="normal"
-        rowsMax={5}
-        onChange={handleChange}
-        InputProps={{
-          readOnly: false,
-        }}
         variant="outlined"
+        onChange={handleChange}
       />
       <TextField
-        id="terms"
-        label="Terms"
+        id={constants.ids.terms}
+        label={constants.labels.terms}
         value={po.terms}
-        name="terms"
-        className="Form-Field col-2 col-"
+        name={constants.names.terms}
+        className='Form--control'
         margin="normal"
-        rowsMax={5}
-        onChange={handleChange}
-        InputProps={{
-          readOnly: false,
-        }}
         variant="outlined"
+        onChange={handleChange}
       />
       <TextField
-        id="paymentTerms"
-        label="Payment Terms"
+        id={constants.ids.paymentTerms}
+        label={constants.labels.paymentTerms}
         value={po.paymentTerms}
-        name="paymentTerms"
-        className="Form-Field col-2 col-"
+        name={constants.names.paymentTerms}
+        className='Form--control'
         margin="normal"
-        rowsMax={5}
-        onChange={handleChange}
-        InputProps={{
-          readOnly: false,
-        }}
         variant="outlined"
+        onChange={handleChange}
       />
       <TextField
-        id="comments"
-        label="Comments"
+        id={constants.ids.comments}
+        label={constants.labels.comments}
         value={po.comments}
-        name="comments"
-        className="Form-Field col-2 col-"
+        name={constants.names.comments}
+        className='Form--control'
         margin="normal"
-        rowsMax={5}
-        onChange={handleChange}
-        InputProps={{
-          readOnly: false,
-        }}
         variant="outlined"
+        onChange={handleChange}
       />
     </div>
   );

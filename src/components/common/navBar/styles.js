@@ -1,4 +1,4 @@
-import logo from '../../../shared/images/logo-white.svg';
+import logo from '../../../shared/images/ipact-logo-light.svg';
 
 const styles = theme => ({
   root: {
