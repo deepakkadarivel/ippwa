@@ -31,6 +31,11 @@ export default {
     terms: 'terms',
     paymentTerms: 'paymentTerms',
     comments: 'comments',
+    contactNo: 'contactNo',
+    tinNo: 'tinNo',
+    vatNo: 'vatNo',
+    deliveryAddress: 'deliveryAddress',
+    addressInput: 'addressInput',
   },
   labels: {
     rupees: '₹',
@@ -62,6 +67,11 @@ export default {
     totalAmount: 'Total',
     quantity: 'Qty',
     itemDescription: 'Item',
+    contactNo: 'Contact No',
+    tinNo: 'GSTIN',
+    vatNo: 'VAT #',
+    deliveryAddress: 'Delivery Address',
+    addressInput: 'Enter Shipping Address',
   },
   names: {
     entityName: 'entityName',
@@ -80,9 +90,15 @@ export default {
     terms: 'terms',
     paymentTerms: 'paymentTerms',
     comments: 'comments',
+    contactNo: 'contactNo',
+    tinNo: 'tinNo',
+    vatNo: 'vatNo',
+    deliveryAddress: 'deliveryAddress',
+    addressInput: 'addressInput',
   },
   helperText: {
     billingAddress: 'Choose a billing address',
     shipToAddress: 'Choose a shipping address',
+    tinNo: '(format: 00AAAAA0000A1Z0)',
   }
 }

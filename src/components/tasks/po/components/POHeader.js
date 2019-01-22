@@ -3,6 +3,8 @@ import Card from "../../../common/card/Card";
 import TextField from "@material-ui/core/TextField/TextField";
 import constants from "../../common/constants";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const POHeader = props => {
   const {po, handleChange} = props;
@@ -116,6 +118,56 @@ const POHeader = props => {
               </MenuItem>
             )}
           </TextField>
+          {po.addressInput &&
+          <FormControlLabel
+            control={<Checkbox
+              checked={po.addressInput}
+              // onChange={this.handleChange('checkedA')}
+              value="addressInput"
+              className='Form--control'
+            />}
+            name={constants.names.addressInput}
+            id={constants.ids.addressInput}
+            label={constants.labels.addressInput}
+            labelPlacement="start"
+          />}
+          {po.addressInput && <TextField
+            id={constants.ids.deliveryAddress}
+            name={constants.names.deliveryAddress}
+            label={constants.labels.deliveryAddress}
+            value={po.deliveryAddress}
+            className='Form--control'
+            margin="normal"
+            variant="outlined"
+          />}
+          {po.addressInput && <TextField
+            id={constants.ids.contactNo}
+            name={constants.names.contactNo}
+            label={constants.labels.contactNo}
+            value={po.contactNo}
+            className='Form--control'
+            margin="normal"
+            variant="outlined"
+          />}
+          {po.addressInput && <TextField
+            id={constants.ids.tinNo}
+            name={constants.names.tinNo}
+            label={constants.labels.tinNo}
+            value={po.tinNo}
+            helperText={constants.helperText.tinNo}
+            className='Form--control'
+            margin="normal"
+            variant="outlined"
+          />}
+          {po.addressInput && <TextField
+            id={constants.ids.vatNo}
+            name={constants.names.vatNo}
+            label={constants.labels.vatNo}
+            value={po.supplierName}
+            className='Form--control'
+            margin="normal"
+            variant="outlined"
+          />}
         </div>
       </div>
     </Card>
