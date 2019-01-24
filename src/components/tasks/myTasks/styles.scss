@@ -1,7 +1,15 @@
+@import "../../../shared/styles/colors";
+
 .MyTasks {
   &__mobile {
     margin: 20px 0;
     display: none;
+    box-shadow: 0 0 4px 2px $lightGrey2;
+
+    &--name {
+      color: $primary;
+      font-weight: bold;
+    }
   }
 
   &__desktop {

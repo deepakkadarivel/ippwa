@@ -179,7 +179,16 @@ class DesktopTable extends React.Component {
           fontWeight: "bold"
         }
       },
-      {Header: "Value", accessor: "value"}
+      {
+        Header: "Value",
+        accessor: "value",
+        Cell: ci => {
+          if (ci.original.property === headers.workflowTypeName) {
+            return <span className='MyTasks__mobile--name'>{ci.value}</span>
+          }
+          return ci.value;
+        }
+      }
     ];
 
     const getMobileData = (task) => {
@@ -190,10 +199,6 @@ class DesktopTable extends React.Component {
         {
           property: headers.supplierName,
           value: task.supplierName
-        },
-        {
-          property: headers.requestedBy,
-          value: task.requestedBy
         },
         {
           property: headers.requestedBy,
