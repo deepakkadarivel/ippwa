@@ -1,7 +1,7 @@
 @import "../../../shared/styles/colors";
 
 .ReactTable {
-  height: calc(100vh - 60px - 8vh);
+  height: calc(100vh - 70px - 8vh);
   background-color: $white;
   .rt-thead {
     .rt-th {
@@ -45,7 +45,7 @@
 
 @media (min-width: 320px) and (max-width: 480px) {
   .ReactTable {
-    height: calc(100vh - 60px - 4vh);
+    height: calc(100vh - 70px - 4vh);
   }
 }
 

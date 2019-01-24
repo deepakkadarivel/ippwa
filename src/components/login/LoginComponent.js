@@ -62,6 +62,7 @@ class LoginComponent extends Component {
             loading={promise.isPending}
             onClick={() => login(this.state.userName, this.state.password)}
           />
+          {errorMessage && <p className='Login--footer'>{errorMessage}</p>}
         </div>
 
         <Typography variant="caption" className='Login--footer'>
