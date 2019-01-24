@@ -73,6 +73,11 @@ export default {
     INVOICE_TITLE: 'Edit Invoice'
   },
 
+  TITLES: {
+    MY_TASKS: 'My Tasks',
+    LINE_ITEMS: 'Line Items',
+  },
+
   TOAST: {
     VARIANTS: {
       SUCCESS: 'success',

@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../po.scss';
 import {filterString} from '../../../../shared/utils/string';
+import globalConstants from '../../../../shared/constants';
 import constants from "../../common/constants";
 import Table from "../../../common/table/Table";
+import Typography from "@material-ui/core/Typography/Typography";
 
 const POLine = props => {
   const {handleLineItemChange, lines} = props;
@@ -19,6 +21,7 @@ const POLine = props => {
       />
     );
   };
+
   const columns = [
     {
       Header: constants.labels.lineItemId,
@@ -76,8 +79,84 @@ const POLine = props => {
       Cell: renderEditable
     },
   ];
+
+  const mobileColumns = [
+    {
+      Header: "Property",
+      accessor: "property",
+      Cell: ci => {
+        return `${ci.value}:`;
+      },
+      style: {
+        textAlign: "right",
+        fontWeight: "bold"
+      }
+    },
+    {
+      Header: "Value",
+      accessor: "value",
+      Cell: ci => {
+        // if (ci.original.property === constants.labels.quantity || ci.original.property === constants.labels.comments) {
+        //   return renderEditable(ci);
+        // }
+        return `${ci.value}`;
+      },
+    }
+  ];
+
+  const getMobileData = (line) => {
+    return [
+      {
+        property: constants.labels.lineItemId,
+        value: line.lineItemId,
+      }, {
+        property: constants.labels.itemDescription,
+        value: line.itemDescription,
+      }, {
+        property: constants.labels.category,
+        value: line.categoryDesc,
+      }, {
+        property: constants.labels.subCategory,
+        value: line.subCategoryDesc,
+      }, {
+        property: constants.labels.uom,
+        value: line.uom,
+      }, {
+        property: constants.labels.price,
+        value: line.price,
+      }, {
+        property: constants.labels.sgst,
+        value: line.sgst,
+      }, {
+        property: constants.labels.cgst,
+        value: line.cgst,
+      }, {
+        property: constants.labels.tax,
+        value: line.tax,
+      }, {
+        property: constants.labels.netPrice,
+        value: line.netPrice,
+      }, {
+        property: constants.labels.totalAmount,
+        value: line.totalAmount,
+      }, {
+        property: constants.labels.quantity,
+        value: line.quantity,
+        Cell: renderEditable
+      }, {
+        property: constants.labels.comments,
+        value: line.comments,
+        Cell: renderEditable
+      },
+    ];
+  };
+
   return (
     <div className='PO__Line'>
+      <Typography component="h5" variant="h5" color="primary">
+        {globalConstants.TITLES.LINE_ITEMS}
+      </Typography>
+      <div className='PO__Line--desktop'>
       <Table
         data={lines}
         columns={columns}
@@ -85,6 +164,17 @@ const POLine = props => {
         }}
         disableFooter={true}
       />
+      </div>
+      {lines.map(task => <div className='PO__Line--mobile'>
+          <Table
+            data={getMobileData(task)}
+            columns={mobileColumns}
+            pageSize={getMobileData(task).length}
+            onClick={() => {}}
+            disableHeader={true}
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -1,5 +1,34 @@
 .MyTasks {
-  &-Desktop {
-    padding: 20px;
+  &__mobile {
+    margin: 20px 0;
+    display: none;
+  }
+
+  &__desktop {
+    display: block;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .MyTasks {
+    &__mobile {
+      display: block;
+    }
+
+    &__desktop {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .MyTasks {
+    &__mobile {
+      display: block;
+    }
+
+    &__desktop {
+      display: none;
+    }
   }
 }

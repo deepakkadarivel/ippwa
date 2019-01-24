@@ -3,7 +3,7 @@ import './styles.scss';
 import ReactTable from "react-table";
 
 const Table = (props) => {
-  const {data, columns, filterable, onClick, disableFooter} = props;
+  const {data, columns, filterable, onClick, disableFooter, disableHeader} = props;
   return (
     <div>
       {disableFooter ? <ReactTable
@@ -12,6 +12,19 @@ const Table = (props) => {
         className={`${disableFooter ? 'lines -striped -highlight' : '-striped -highlight'}`}
         filterable={filterable}
         PaginationComponent={() => null}
+        defaultPageSize={data.length}
+        defaultFilterMethod={(filter, row) =>
+          String(row[filter.id]) === filter.value}
+        getTrProps={(state, rowInfo) => ({
+          onClick: () => onClick(rowInfo.original)
+        })}
+      /> : disableHeader ? <ReactTable
+        data={data}
+        columns={columns}
+        className={`${disableHeader ? 'lines' : '-striped -highlight'}`}
+        filterable={filterable}
+        PaginationComponent={() => null}
+        TheadComponent={() => null}
         defaultPageSize={data.length}
         defaultFilterMethod={(filter, row) =>
           String(row[filter.id]) === filter.value}

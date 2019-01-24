@@ -129,7 +129,7 @@ const POHeader = props => {
             name={constants.names.addressInput}
             id={constants.ids.addressInput}
             label={constants.labels.addressInput}
-            labelPlacement="start"
+            // labelPlacement="start"
           />}
           {po.addressInput && <TextField
             id={constants.ids.deliveryAddress}

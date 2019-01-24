@@ -10,6 +10,15 @@
       width: 100%;
       padding: 6px;
     }
+
+    &--mobile {
+      margin: 20px 0;
+      display: none;
+    }
+
+    &--desktop {
+      display: block;
+    }
   }
 
   &__actions {
@@ -19,5 +28,31 @@
   &__footer {
     border-bottom: 1px solid $lightGrey1;
     margin-top: 1em;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .PO {
+    &__Line {
+      &--mobile {
+        display: block;
+      }
+      &--desktop {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .PO {
+    &__Line {
+      &--mobile {
+        display: block;
+      }
+      &--desktop {
+        display: none;
+      }
+    }
   }
 }

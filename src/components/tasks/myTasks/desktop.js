@@ -4,6 +4,7 @@ import constants from '../../../shared/constants';
 import {filterString} from '../../../shared/utils/string';
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
 import Table from "../../common/table/Table";
+import './styles.scss';
 
 class DesktopTable extends React.Component {
   render() {
@@ -166,16 +167,69 @@ class DesktopTable extends React.Component {
       },
     ];
 
+    const mobileColumns = [
+      {
+        Header: "Property",
+        accessor: "property",
+        Cell: ci => {
+          return `${ci.value}:`;
+        },
+        style: {
+          textAlign: "right",
+          fontWeight: "bold"
+        }
+      },
+      {Header: "Value", accessor: "value"}
+    ];
+
+    const getMobileData = (task) => {
+      return [{
+        property: headers.workflowTypeName,
+        value: task.workflowTypeName
+      },
+        {
+          property: headers.supplierName,
+          value: task.supplierName
+        },
+        {
+          property: headers.requestedBy,
+          value: task.requestedBy
+        },
+        {
+          property: headers.requestedBy,
+          value: task.requestedBy
+        },
+        {
+          property: headers.createdDate,
+          value: task.createdDate
+        },
+        {
+          property: headers.stageName,
+          value: task.stageName
+        }];
+    };
+
     return (
       <div>
         {promise.isPending && (<CircularProgress className="progress"/>)}
-        {promise.isFulfilled && <Table
-          data={data}
-          columns={columns}
-          filterable
-          onClick={task => handleClick(task)}
-        />
-        }
+        {promise.isFulfilled && data.map(task => <div className='MyTasks__mobile'>
+            <Table
+              data={getMobileData(task)}
+              columns={mobileColumns}
+              pageSize={getMobileData(task).length}
+              onClick={() => handleClick(task)}
+              disableHeader={true}
+            />
+          </div>
+        )}
+        {promise.isFulfilled && <div className='MyTasks__desktop'>
+          <Table
+            data={data}
+            columns={columns}
+            filterable
+            onClick={task => handleClick(task)}
+          />
+        </div>}
       </div>
     );
   }

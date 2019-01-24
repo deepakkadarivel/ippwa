@@ -1,16 +1,9 @@
 import React, {Component} from 'react';
-import Responsive from 'react-responsive';
-import withStyles from '@material-ui/core/styles/withStyles';
 import DesktopTable from './desktop';
-import MobileTable from './mobile';
 import './styles.scss';
 import PropTypes from 'prop-types';
-import styles from './styles';
-
-const Desktop = props => <Responsive {...props} minWidth={992}/>;
-const Tablet = props => <Responsive {...props} minWidth={768} maxWidth={991}/>;
-const Mobile = props => <Responsive {...props} maxWidth={767}/>;
-const Default = props => <Responsive {...props} minWidth={768}/>;
+import Typography from '@material-ui/core/Typography';
+import constants from "../../../shared/constants";
 
 class MyTasks extends Component {
   componentWillMount() {
@@ -18,19 +11,13 @@ class MyTasks extends Component {
   }
 
   render() {
-    const {classes, tasks, history, setSelectedTask, promise} = this.props;
+    const {tasks, history, setSelectedTask, promise} = this.props;
     return (
       <div className='container'>
-        {/*<Desktop>*/}
+        <Typography component="h5" variant="h5" color="primary">
+          {constants.TITLES.MY_TASKS}
+        </Typography>
           <DesktopTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} promise={promise}/>
-        {/*</Desktop>*/}
-        {/*<Tablet>*/}
-          {/*<DesktopTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} promise={promise}/>*/}
-        {/*</Tablet>*/}
-        {/*<Mobile>*/}
-          {/*<MobileTable tasks={tasks} history={history} setSelectedTask={setSelectedTask} promise={promise}/>*/}
-        {/*</Mobile>*/}
-        {/*<Default><DesktopTable tasks={this.props.tasks}/></Default>*/}
       </div>
     );
   }
@@ -45,4 +32,4 @@ MyTasks.propTypes = {
   tasks: PropTypes.array.isRequired
 };
 
-export default withStyles(styles)(MyTasks);
+export default MyTasks;
